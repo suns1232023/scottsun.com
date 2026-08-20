@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,15 +6,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scott Sun | Independent Researcher | Information Theory & Complex Systems</title>
+<title>Scott Sun | Independent Researcher | Information, Geometry & Emergent Physics</title>
 
 <meta name="description"
-content="Official academic homepage of Scott Sun. Research in Information Theory, Complex Systems, Econophysics, Emergence, Foundations of Physics, and Quantum Gravity.">
+content="Official academic homepage of Scott Sun, an independent researcher working on structural information, mathematical foundations, emergent causality, geometry, complex systems, and theoretical physics.">
 
 <meta name="keywords"
-content="Scott Sun, Information Theory, Complex Systems, Emergence, Quantum Gravity, Econophysics, HTSIE, Fractal Folding Theory">
+content="Scott Sun, Structural Information Evolution, Information Theory, Emergence, Mathematical Physics, Complex Systems, Emergent Causality, Spectral Dimension, Quantum Gravity, Additive Combinatorics">
 
 <meta name="author" content="Scott Sun">
+
+<meta name="robots" content="index, follow">
 
 <meta name="google-site-verification"
 content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
@@ -25,139 +26,485 @@ content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
 <meta name="citation_publication_date" content="2026">
 <meta name="citation_orcid" content="0009-0002-1095-6228">
 
+<link rel="canonical" href="https://www.scottsun.com/">
+
 <link rel="me" href="https://orcid.org/0009-0002-1095-6228">
 
+<!-- Open Graph -->
+<meta property="og:type" content="profile">
+<meta property="og:title"
+content="Scott Sun | Independent Researcher | Information, Geometry & Emergent Physics">
+<meta property="og:description"
+content="Research in structural information, emergence, mathematical physics, causal structure, geometry, and complex systems.">
+<meta property="og:url" content="https://www.scottsun.com/">
+
+<!-- Schema.org -->
 <script type="application/ld+json">
 {
- "@context":"https://schema.org",
- "@type":"Person",
- "name":"Scott Sun",
- "url":"https://www.scottsun.com",
- "identifier":"https://orcid.org/0009-0002-1095-6228",
- "jobTitle":"Independent Researcher",
- "sameAs":[
-   "https://orcid.org/0009-0002-1095-6228",
-   "https://scholar.google.com/citations?user=bmVEc3wAAAAJ"
- ]
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Scott Sun",
+  "url": "https://www.scottsun.com/",
+  "identifier": "https://orcid.org/0009-0002-1095-6228",
+  "jobTitle": "Independent Researcher",
+  "knowsAbout": [
+    "Information Theory",
+    "Structural Information Evolution",
+    "Complex Systems",
+    "Mathematical Physics",
+    "Emergent Causality",
+    "Spectral-Dimension Dynamics",
+    "Geometry",
+    "Additive Combinatorics",
+    "Foundations of Physics"
+  ],
+  "sameAs": [
+    "https://orcid.org/0009-0002-1095-6228",
+    "https://scholar.google.com/citations?user=bmVEc3wAAAAJ",
+    "https://www.lens.org/lens/orcid/0009-0002-1095-6228"
+  ]
 }
 </script>
 
 <style>
 
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 :root{
---primary:#1e3a5f;
---secondary:#4f6b8a;
---light:#f7f9fc;
---border:#e3e8ef;
---text:#222;
+    --primary:#1e3a5f;
+    --primary-dark:#142b46;
+    --secondary:#4f6b8a;
+    --accent:#7b8fa8;
+    --light:#f6f8fb;
+    --lighter:#fbfcfe;
+    --border:#dfe6ee;
+    --text:#202830;
+    --muted:#667382;
+    --white:#ffffff;
+    --max-width:1120px;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-max-width:1100px;
-margin:auto;
-padding:0;
-background:#ffffff;
-color:var(--text);
-line-height:1.75;
-}
-
-.hero{
-padding:70px 40px;
-background:linear-gradient(135deg,#1e3a5f,#344f70);
-color:white;
-}
-
-.hero h1{
-font-size:3rem;
-margin-bottom:10px;
-}
-
-.hero p{
-font-size:1.15rem;
-max-width:800px;
-}
-
-.container{
-padding:40px;
-}
-
-.section{
-margin-bottom:55px;
-}
-
-.section h2{
-border-bottom:2px solid var(--border);
-padding-bottom:10px;
-color:var(--primary);
-}
-
-.identity-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-margin-top:20px;
-}
-
-.card{
-background:var(--light);
-padding:18px;
-border-radius:10px;
-border:1px solid var(--border);
-}
-
-.card a{
-text-decoration:none;
-color:var(--primary);
-font-weight:600;
-}
-
-.research-tags span{
-display:inline-block;
-background:#eef3f8;
-padding:6px 12px;
-margin:5px;
-border-radius:20px;
-font-size:0.9rem;
-}
-
-.publication{
-padding:20px;
-margin-bottom:18px;
-border-left:4px solid var(--primary);
-background:#fafbfd;
-}
-
-.publication-title{
-font-weight:600;
-font-size:1.05rem;
-margin-bottom:6px;
-}
-
-.publication-meta{
-font-size:0.95rem;
-color:#666;
-margin-bottom:10px;
-}
-
-.note{
-background:#f8fbff;
-border-left:4px solid #4f6b8a;
-padding:15px;
-margin-top:20px;
-}
-
-footer{
-margin-top:80px;
-padding:30px;
-text-align:center;
-font-size:0.9rem;
-color:#666;
-border-top:1px solid var(--border);
+    margin:0;
+    padding:0;
+    background:#ffffff;
+    color:var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+    line-height:1.75;
 }
 
 a{
-color:#1e3a5f;
+    color:var(--primary);
+}
+
+.container{
+    max-width:var(--max-width);
+    margin:auto;
+    padding:0 36px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav{
+    background:var(--primary-dark);
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.nav-inner{
+    max-width:var(--max-width);
+    margin:auto;
+    padding:12px 36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.nav-brand{
+    font-weight:700;
+    letter-spacing:0.3px;
+}
+
+.nav-links{
+    display:flex;
+    gap:22px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:0.92rem;
+    opacity:0.9;
+}
+
+.nav-links a:hover{
+    opacity:1;
+    text-decoration:underline;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    background:linear-gradient(135deg,#1e3a5f,#344f70);
+    color:white;
+    padding:78px 36px 72px;
+}
+
+.hero-inner{
+    max-width:var(--max-width);
+    margin:auto;
+}
+
+.hero h1{
+    font-size:3.2rem;
+    line-height:1.15;
+    margin:0 0 14px;
+    letter-spacing:-0.5px;
+}
+
+.hero-subtitle{
+    font-size:1.25rem;
+    font-weight:500;
+    margin-bottom:20px;
+    max-width:900px;
+}
+
+.hero-description{
+    max-width:850px;
+    font-size:1.05rem;
+    opacity:0.94;
+}
+
+.hero-links{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.hero-links a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    border:1px solid rgba(255,255,255,0.45);
+    padding:7px 14px;
+    border-radius:6px;
+    font-size:0.9rem;
+}
+
+.hero-links a:hover{
+    background:rgba(255,255,255,0.10);
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+    padding:56px 0 8px;
+}
+
+.section h2{
+    color:var(--primary);
+    font-size:1.75rem;
+    margin:0 0 22px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--border);
+}
+
+.section h3{
+    color:var(--primary);
+    margin-top:0;
+}
+
+.lead{
+    font-size:1.05rem;
+    max-width:920px;
+}
+
+/* =========================================================
+   RESEARCH PROGRAM
+========================================================= */
+
+.research-map{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+    margin-top:28px;
+}
+
+.research-card{
+    background:var(--light);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px;
+}
+
+.research-card h3{
+    margin-bottom:8px;
+    font-size:1.08rem;
+}
+
+.research-card p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.94rem;
+}
+
+.research-tags{
+    margin-top:24px;
+}
+
+.research-tags span{
+    display:inline-block;
+    background:#eef3f8;
+    color:var(--primary);
+    padding:6px 12px;
+    margin:4px 5px 4px 0;
+    border-radius:20px;
+    font-size:0.88rem;
+}
+
+/* =========================================================
+   CURRENT RESEARCH
+========================================================= */
+
+.current-box{
+    background:#f8fbff;
+    border:1px solid #dbe7f2;
+    border-left:5px solid var(--primary);
+    border-radius:7px;
+    padding:24px 26px;
+}
+
+.current-box strong{
+    color:var(--primary);
+}
+
+.status{
+    display:inline-block;
+    margin-left:8px;
+    padding:3px 9px;
+    border-radius:12px;
+    background:#e9f0f7;
+    color:var(--primary);
+    font-size:0.78rem;
+    font-weight:600;
+    vertical-align:middle;
+}
+
+/* =========================================================
+   RESEARCH STATUS
+========================================================= */
+
+.status-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+}
+
+.status-card{
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:18px 20px;
+    background:white;
+}
+
+.status-card .label{
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.7px;
+    color:var(--muted);
+    margin-bottom:5px;
+}
+
+.status-card h3{
+    font-size:1rem;
+    margin:0 0 6px;
+}
+
+.status-card p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.9rem;
+}
+
+/* =========================================================
+   IDENTITY
+========================================================= */
+
+.identity-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:var(--light);
+    padding:18px;
+    border-radius:9px;
+    border:1px solid var(--border);
+}
+
+.card strong{
+    color:var(--primary);
+}
+
+.card a{
+    text-decoration:none;
+    font-weight:600;
+}
+
+.card a:hover{
+    text-decoration:underline;
+}
+
+/* =========================================================
+   RESEARCH STATEMENT
+========================================================= */
+
+.statement{
+    max-width:900px;
+    font-size:1.02rem;
+}
+
+/* =========================================================
+   PUBLICATIONS
+========================================================= */
+
+.publication-group{
+    margin-top:34px;
+}
+
+.publication-group h3{
+    margin-bottom:16px;
+}
+
+.publication{
+    padding:21px 22px;
+    margin-bottom:16px;
+    border:1px solid var(--border);
+    border-left:4px solid var(--primary);
+    background:var(--lighter);
+    border-radius:0 8px 8px 0;
+}
+
+.publication-title{
+    font-weight:650;
+    font-size:1.04rem;
+    line-height:1.55;
+    margin-bottom:7px;
+}
+
+.publication-meta{
+    font-size:0.9rem;
+    color:var(--muted);
+    margin-bottom:9px;
+}
+
+.publication-status{
+    font-size:0.82rem;
+    color:var(--secondary);
+    margin-bottom:9px;
+}
+
+.publication a{
+    text-decoration:none;
+    font-weight:600;
+}
+
+.publication a:hover{
+    text-decoration:underline;
+}
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.note{
+    background:#f8fbff;
+    border-left:4px solid var(--secondary);
+    padding:18px 20px;
+    margin-top:26px;
+    border-radius:0 7px 7px 0;
+    color:#4d5b68;
+    font-size:0.93rem;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    margin-top:70px;
+    padding:32px 20px;
+    text-align:center;
+    font-size:0.88rem;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    .container{
+        padding:0 20px;
+    }
+
+    .nav-inner{
+        padding:11px 20px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding:55px 20px 50px;
+    }
+
+    .hero h1{
+        font-size:2.35rem;
+    }
+
+    .hero-subtitle{
+        font-size:1.08rem;
+    }
+
+    .hero-description{
+        font-size:0.98rem;
+    }
+
+    .section{
+        padding-top:42px;
+    }
+
 }
 
 </style>
@@ -166,68 +513,310 @@ color:#1e3a5f;
 
 <body>
 
+<!-- =======================================================
+     NAVIGATION
+======================================================== -->
+
+<nav class="nav">
+
+<div class="nav-inner">
+
+<div class="nav-brand">Scott Sun</div>
+
+<div class="nav-links">
+<a href="#research">Research</a>
+<a href="#current">Current Work</a>
+<a href="#identity">Academic Identity</a>
+<a href="#publications">Publications</a>
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- =======================================================
+     HERO
+======================================================== -->
+
 <header class="hero">
+
+<div class="hero-inner">
 
 <h1>Scott Sun</h1>
 
-<p>
-Independent Researcher working at the intersection of Information Theory,
-Complex Systems, Econophysics, Emergence, and Foundations of Physics.
-Current research explores structural information evolution, emergent causal structures,
-spectral-dimension dynamics, and theoretical approaches to quantum gravity.
-</p>
+<div class="hero-subtitle">
+Independent Researcher in Information, Geometry, Emergence, and Mathematical Physics
+</div>
+
+<div class="hero-description">
+
+Research explores how information-theoretic structure may give rise to
+geometry, causality, complexity, and emergent physical dynamics,
+with particular interests in Structural Information Evolution,
+emergent causal structure, spectral-dimension dynamics,
+and mathematical foundations of physics.
+
+</div>
+
+<div class="hero-links">
+
+<a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
+ORCID
+</a>
+
+<a href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ" target="_blank">
+Google Scholar
+</a>
+
+<a href="https://www.lens.org/lens/orcid/0009-0002-1095-6228" target="_blank">
+Lens
+</a>
+
+<a href="https://zenodo.org" target="_blank">
+Zenodo
+</a>
+
+</div>
+
+</div>
 
 </header>
 
-<div class="container">
 
-<section class="section">
+<main class="container">
+
+
+<!-- =======================================================
+     RESEARCH PROGRAM
+======================================================== -->
+
+<section class="section" id="research">
 
 <h2>Research Program</h2>
 
-<p>
-My current research investigates how information, geometry, and complexity interact
-across physical systems. A central objective is to understand whether spacetime,
-causality, and gravitational phenomena may emerge from deeper information-theoretic structures.
+<p class="lead">
+
+The central research programme investigates the relationship between
+<strong>information, structure, geometry, causality, and emergence</strong>.
+A guiding question is whether some features of physical reality can be
+understood as emergent consequences of deeper information-theoretic
+and structural dynamics.
+
 </p>
+
+<div class="research-map">
+
+<div class="research-card">
+
+<h3>01 — Structural Information Evolution</h3>
+
+<p>
+A framework for studying how information, entropy, and structural
+organization evolve across scales and how macroscopic structure may
+emerge from microscopic informational dynamics.
+</p>
+
+</div>
+
+<div class="research-card">
+
+<h3>02 — Emergent Geometry & Causality</h3>
+
+<p>
+Mathematical approaches to causal structure, Lorentzian geometry,
+light-cone algebra, quotient constructions, and pre-geometric models
+of spacetime.
+</p>
+
+</div>
+
+<div class="research-card">
+
+<h3>03 — Spectral & Geometric Dynamics</h3>
+
+<p>
+Studies of spectral dimension, scale-dependent geometry, irreversible
+flow, fractal structures, and possible connections between geometry
+and physical observables.
+</p>
+
+</div>
+
+<div class="research-card">
+
+<h3>04 — Mathematical Foundations</h3>
+
+<p>
+Independent mathematical research involving representation problems,
+additive combinatorics, gap geometry, global covering mechanisms,
+and computationally audited proof programmes.
+</p>
+
+</div>
+
+</div>
 
 <div class="research-tags">
 
-<span>Information Theory</span> <span>Complex Systems</span> <span>Econophysics</span> <span>Emergence</span> <span>Foundations of Physics</span> <span>Quantum Gravity</span> <span>AI Governance</span>
+<span>Information Theory</span>
+<span>Structural Information</span>
+<span>Complex Systems</span>
+<span>Emergence</span>
+<span>Mathematical Physics</span>
+<span>Foundations of Physics</span>
+<span>Geometry</span>
+<span>Causal Structure</span>
+<span>Spectral Dimension</span>
+<span>Additive Combinatorics</span>
 
 </div>
 
 </section>
 
+
+<!-- =======================================================
+     CURRENT RESEARCH
+======================================================== -->
+
+<section class="section" id="current">
+
+<h2>Current Research — August 2026</h2>
+
+<div class="current-box">
+
+<p>
+
+<strong>Mathematical Proof Programme — Sun's (2,4,6,8) Binomial Representation Conjecture</strong>
+
+<span class="status">Proof programme in progress</span>
+
+</p>
+
+<p>
+
+Current work focuses on the transition from local and gap-geometry
+estimates to a global covering theorem. The programme studies
+trajectory crossing, gap bounds, witness geometry, cover transfer,
+and the remaining first-hit problem, with complementary analytic
+investigation using Hardy–Littlewood / circle-method techniques.
+
+</p>
+
+<p>
+
+The research objective is a rigorous proof that every positive integer
+in the relevant domain admits the prescribed binomial representation.
+Computational verification is treated as an audit and discovery tool,
+not as a substitute for the final proof.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     RESEARCH STATUS
+======================================================== -->
+
 <section class="section">
+
+<h2>Research Status</h2>
+
+<div class="status-grid">
+
+<div class="status-card">
+
+<div class="label">Mathematical Research</div>
+
+<h3>(2,4,6,8) Representation Conjecture</h3>
+
+<p>
+Proof programme in progress; current focus on global covering
+and the remaining first-hit / transfer step.
+</p>
+
+</div>
+
+<div class="status-card">
+
+<div class="label">Theoretical Framework</div>
+
+<h3>Structural Information Evolution</h3>
+
+<p>
+Framework development connecting information, entropy,
+structure, geometry, and emergence.
+</p>
+
+</div>
+
+<div class="status-card">
+
+<div class="label">Foundations of Physics</div>
+
+<h3>Emergent Causality & Geometry</h3>
+
+<p>
+Theoretical development of pre-geometric and causal structures,
+including Lorentzian and quotient constructions.
+</p>
+
+</div>
+
+<div class="status-card">
+
+<div class="label">Exploratory Theory</div>
+
+<h3>Spectral & Fractal Dynamics</h3>
+
+<p>
+Ongoing investigation of spectral-dimension flow,
+fractal geometry, and scale-dependent structure.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     ACADEMIC IDENTITY
+======================================================== -->
+
+<section class="section" id="identity">
 
 <h2>Academic Identity</h2>
 
 <div class="identity-grid">
 
 <div class="card">
-ORCID<br>
+<strong>ORCID</strong><br>
 <a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
 0009-0002-1095-6228
 </a>
 </div>
 
 <div class="card">
-Google Scholar<br>
+<strong>Google Scholar</strong><br>
 <a href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ" target="_blank">
 Scholar Profile
 </a>
 </div>
 
 <div class="card">
-Lens.org<br>
+<strong>Lens.org</strong><br>
 <a href="https://www.lens.org/lens/orcid/0009-0002-1095-6228" target="_blank">
 Research Identity
 </a>
 </div>
 
 <div class="card">
-Zenodo<br>
+<strong>Zenodo</strong><br>
 <a href="https://zenodo.org" target="_blank">
 Research Archive
 </a>
@@ -237,113 +826,242 @@ Research Archive
 
 </section>
 
+
+<!-- =======================================================
+     RESEARCH STATEMENT
+======================================================== -->
+
 <section class="section">
 
 <h2>Research Statement</h2>
 
-<p>
-Recent work focuses on the Structural Information Evolution framework and related studies
-in emergent causality, spectral-dimension flow, and fractal geometric structures.
-These investigations seek to establish mathematically consistent links between information,
-entropy, geometry, and physical observables across scales.
+<p class="statement">
+
+The research programme explores whether information-theoretic and
+structural principles can provide a mathematically coherent description
+of how geometry, causality, and physical organization emerge across
+scales.
+
+</p>
+
+<p class="statement">
+
+The work combines mathematical analysis, information-theoretic ideas,
+complex-systems perspectives, geometric structures, and computational
+auditing. Particular emphasis is placed on explicit definitions,
+testable mathematical consequences, reproducible computation,
+and clear separation between established results, verified
+computational observations, and open theoretical hypotheses.
+
 </p>
 
 </section>
 
-<section class="section">
 
-<h2>Selected Publications (2026)</h2>
+<!-- =======================================================
+     PUBLICATIONS
+======================================================== -->
 
-<div class="publication">
+<section class="section" id="publications">
 
-    <div class="publication-title">
-    Proof Framework for Sun's (2,4,6,8) Conjecture (Version 13.1): 
-     Computationally Audited Framework and Open Trajectory-Crossing Program
-    </div>
+<h2>Selected Research Outputs — 2026</h2>
 
-    <div class="publication-meta">
-    Scott Sun (2026) • Zenodo Preprint
-</div>
 
-    <a href="https://doi.org/10.5281/zenodo.21973304" target="_blank">
-     DOI
-    </a>
+<!-- MATHEMATICAL FOUNDATIONS -->
 
-</div>
- 
- <div class="publication">
+<div class="publication-group">
 
-    <div class="publication-title">
-    Möbius–Lorentz Quotients and Null Pin Holonomy:
-    Affine Normal Forms, Null-Displacement Loci, Mapping-Torus Topology, Pin Lifts, and Mirror-Residue Pairing
-    </div>
-
-    <div class="publication-meta">
-    Scott Sun (2026) • Zenodo Preprint
-  </div>
-
-<a href="https://doi.org/10.5281/zenodo.22019535" target="_blank">DOI</a>
-
-</div>
+<h3>Mathematical Foundations</h3>
 
 <div class="publication">
 
 <div class="publication-title">
+
+Proof Framework for Sun's (2,4,6,8) Conjecture (Version 13.1):
+Computationally Audited Framework and Open Trajectory-Crossing Program
+
+</div>
+
+<div class="publication-meta">
+Scott Sun (2026) • Zenodo Preprint
+</div>
+
+<div class="publication-status">
+Status: Proof programme in progress
+</div>
+
+<a href="https://doi.org/10.5281/zenodo.21973304"
+target="_blank">
+DOI
+</a>
+
+</div>
+
+</div>
+
+
+<!-- GEOMETRY / FOUNDATIONS -->
+
+<div class="publication-group">
+
+<h3>Geometry, Causality & Foundations of Physics</h3>
+
+<div class="publication">
+
+<div class="publication-title">
+
+Möbius–Lorentz Quotients and Null Pin Holonomy:
+Affine Normal Forms, Null-Displacement Loci, Mapping-Torus Topology,
+Pin Lifts, and Mirror-Residue Pairing
+
+</div>
+
+<div class="publication-meta">
+Scott Sun (2026) • Zenodo Preprint
+</div>
+
+<div class="publication-status">
+Status: Theoretical development
+</div>
+
+<a href="https://doi.org/10.5281/zenodo.22019535"
+target="_blank">
+DOI
+</a>
+
+</div>
+
+
+<div class="publication">
+
+<div class="publication-title">
+
 Invariant Light-Cone Algebra and Emergent Causal Structure:
 A Pre-Geometric Research Programme
+
 </div>
 
 <div class="publication-meta">
 Scott Sun (2026) • Zenodo Preprint
 </div>
 
-<a href="https://doi.org/10.5281/zenodo.20483898" target="_blank">DOI</a>
+<div class="publication-status">
+Status: Theoretical framework
+</div>
+
+<a href="https://doi.org/10.5281/zenodo.20483898"
+target="_blank">
+DOI
+</a>
 
 </div>
+
+</div>
+
+
+<!-- STRUCTURAL INFORMATION -->
+
+<div class="publication-group">
+
+<h3>Structural Information & Spectral Dynamics</h3>
 
 <div class="publication">
 
 <div class="publication-title">
+
+The Hidden Thread of Structural Information Evolution:
+A Comparative Study of Condensed Matter, Quantum Plasma and Black Hole Systems
+
+</div>
+
+<div class="publication-meta">
+Scott Sun (2026) • Zenodo Preprint
+</div>
+
+<div class="publication-status">
+Status: Structural Information Evolution programme
+</div>
+
+<a href="https://doi.org/10.5281/zenodo.20792832"
+target="_blank">
+DOI
+</a>
+
+</div>
+
+
+<div class="publication">
+
+<div class="publication-title">
+
+Time as Irreversible Spectral-Dimension Flow
+with a One-Third Power Law
+
+</div>
+
+<div class="publication-meta">
+Scott Sun (2026) • Zenodo Preprint
+</div>
+
+<div class="publication-status">
+Status: Exploratory theoretical model
+</div>
+
+<a href="https://doi.org/10.5281/zenodo.21524285"
+target="_blank">
+DOI
+</a>
+
+</div>
+
+
+<div class="publication">
+
+<div class="publication-title">
+
 Fractal Folding Theory:
 From the Kakeya Conjecture to Quantum Gravity Observations
+
 </div>
 
 <div class="publication-meta">
 Scott Sun (2026) • Zenodo Preprint
 </div>
 
-<a href="https://doi.org/10.5281/zenodo.20373606" target="_blank">DOI</a>
+<div class="publication-status">
+Status: Exploratory research
+</div>
+
+<a href="https://doi.org/10.5281/zenodo.20373606"
+target="_blank">
+DOI
+</a>
 
 </div>
 
-<div class="publication">
-
-<div class="publication-title">
-Time as Irreversible Spectral-Dimension Flow with a One-Third Power Law
 </div>
 
-<div class="publication-meta">
-Scott Sun (2026) • Zenodo Preprint
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.21524285" target="_blank">DOI</a>
-
-</div>
 
 <div class="note">
 
-<strong>Research Visibility Note</strong><br><br>
+<strong>Research and Versioning Policy</strong><br><br>
 
-Selected works have been archived through Zenodo and connected with persistent
-research identifiers including DOI and ORCID. Research outputs are discoverable
-through scholarly indexing ecosystems such as Lens.org, Google Scholar,
-OpenAlex, and related academic databases.
+Research outputs are archived through persistent scholarly identifiers
+including DOI and ORCID. Current research versions may evolve beyond
+their archived preprint versions. The website distinguishes between
+formal archived publications, ongoing proof programmes, computational
+audits, theoretical frameworks, and exploratory research.
 
 </div>
 
 </section>
 
-</div>
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================== -->
 
 <footer>
 
@@ -351,9 +1069,19 @@ OpenAlex, and related academic databases.
 
 <br><br>
 
-Independent Researcher | Information Theory • Complex Systems • Foundations of Physics
+Independent Researcher<br>
+
+Information • Geometry • Emergence • Mathematical Physics
+
+<br><br>
+
+ORCID:
+<a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
+0009-0002-1095-6228
+</a>
 
 </footer>
 
 </body>
+
 </html>

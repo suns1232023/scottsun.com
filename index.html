@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -10,13 +9,12 @@
 <title>Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations</title>
 
 <meta name="description"
-content="Official academic homepage of Scott Sun, an independent researcher working on structural information, geometry, emergence, mathematical physics, complex systems, mathematical foundations, and computational mathematics.">
+content="Official academic homepage of Scott Sun, an independent researcher working across structural information, geometry, emergence, mathematical physics, mathematical foundations, and computational mathematics.">
 
 <meta name="keywords"
-content="Scott Sun, Structural Information Evolution, Information Theory, Emergence, Mathematical Physics, Complex Systems, Emergent Causality, Spectral Dimension, Geometry, Additive Combinatorics, Computational Mathematics">
+content="Scott Sun, Structural Information Evolution, Information Theory, Emergence, Mathematical Physics, Complex Systems, Geometry, Emergent Causality, Spectral Dimension, Additive Combinatorics, Computational Mathematics">
 
 <meta name="author" content="Scott Sun">
-
 <meta name="robots" content="index, follow">
 
 <meta name="google-site-verification"
@@ -28,7 +26,6 @@ content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
 <meta name="citation_orcid" content="0009-0002-1095-6228">
 
 <link rel="canonical" href="https://www.scottsun.com/">
-
 <link rel="me" href="https://orcid.org/0009-0002-1095-6228">
 
 <!-- Open Graph -->
@@ -39,11 +36,40 @@ content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
 content="Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations">
 
 <meta property="og:description"
-content="Research in structural information, geometry, emergence, mathematical physics, complex systems, mathematical foundations, and computational mathematics.">
+content="Independent research across structural information, geometry, emergence, mathematical physics, mathematical foundations, and computational mathematics.">
 
 <meta property="og:url" content="https://www.scottsun.com/">
 
-<!-- Schema.org -->
+<!-- =====================================================
+     MathJax
+===================================================== -->
+
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']]
+    },
+    options: {
+        skipHtmlTags: [
+            'script',
+            'noscript',
+            'style',
+            'textarea',
+            'pre',
+            'code'
+        ]
+    }
+};
+</script>
+
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- =====================================================
+     Schema.org
+===================================================== -->
 
 <script type="application/ld+json">
 {
@@ -53,18 +79,21 @@ content="Research in structural information, geometry, emergence, mathematical p
   "url": "https://www.scottsun.com/",
   "identifier": "https://orcid.org/0009-0002-1095-6228",
   "jobTitle": "Independent Researcher",
+
   "knowsAbout": [
     "Information Theory",
     "Structural Information Evolution",
     "Complex Systems",
     "Mathematical Physics",
-    "Emergent Causality",
-    "Spectral-Dimension Dynamics",
+    "Emergence",
     "Geometry",
+    "Emergent Causality",
+    "Spectral Dimension",
     "Additive Combinatorics",
     "Computational Mathematics",
     "Foundations of Physics"
   ],
+
   "sameAs": [
     "https://orcid.org/0009-0002-1095-6228",
     "https://scholar.google.com/citations?user=bmVEc3wAAAAJ",
@@ -73,25 +102,44 @@ content="Research in structural information, geometry, emergence, mathematical p
 }
 </script>
 
+
 <style>
+
+/* =========================================================
+   DESIGN SYSTEM
+========================================================= */
+
+:root{
+
+    --primary:#1e3a5f;
+    --primary-dark:#142b46;
+    --primary-light:#eef3f8;
+
+    --secondary:#526b86;
+
+    --light:#f6f8fb;
+    --lighter:#fbfcfe;
+
+    --border:#dfe6ee;
+
+    --text:#202830;
+    --muted:#667382;
+
+    --white:#ffffff;
+
+    --success-bg:#eef6f0;
+    --success-text:#356347;
+
+    --warning-bg:#f7f3e8;
+    --warning-text:#725d2d;
+
+    --max-width:1120px;
+}
+
 
 /* =========================================================
    GLOBAL
 ========================================================= */
-
-:root{
-    --primary:#1e3a5f;
-    --primary-dark:#142b46;
-    --secondary:#4f6b8a;
-    --accent:#7b8fa8;
-    --light:#f6f8fb;
-    --lighter:#fbfcfe;
-    --border:#dfe6ee;
-    --text:#202830;
-    --muted:#667382;
-    --white:#ffffff;
-    --max-width:1120px;
-}
 
 *{
     box-sizing:border-box;
@@ -102,10 +150,14 @@ html{
 }
 
 body{
+
     margin:0;
     padding:0;
+
     background:#ffffff;
+
     color:var(--text);
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -113,6 +165,7 @@ body{
         Roboto,
         Arial,
         sans-serif;
+
     line-height:1.75;
 }
 
@@ -121,358 +174,627 @@ a{
 }
 
 .container{
+
     max-width:var(--max-width);
+
     margin:auto;
+
     padding:0 36px;
 }
+
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
 .nav{
+
     background:var(--primary-dark);
+
     color:white;
+
     position:sticky;
+
     top:0;
+
     z-index:1000;
-    border-bottom:1px solid rgba(255,255,255,0.12);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.12);
 }
 
 .nav-inner{
+
     max-width:var(--max-width);
+
     margin:auto;
+
     padding:12px 36px;
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 }
 
 .nav-brand{
+
     font-weight:700;
+
     letter-spacing:0.3px;
 }
 
 .nav-links{
+
     display:flex;
+
     gap:22px;
 }
 
 .nav-links a{
+
     color:white;
+
     text-decoration:none;
+
     font-size:0.92rem;
+
     opacity:0.9;
 }
 
 .nav-links a:hover{
+
     opacity:1;
+
     text-decoration:underline;
 }
+
 
 /* =========================================================
    HERO
 ========================================================= */
 
 .hero{
-    background:linear-gradient(135deg,#1e3a5f,#344f70);
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e3a5f,
+            #344f70
+        );
+
     color:white;
-    padding:78px 36px 72px;
+
+    padding:
+        78px 36px
+        72px;
 }
 
 .hero-inner{
+
     max-width:var(--max-width);
+
     margin:auto;
 }
 
 .hero h1{
+
     font-size:3.2rem;
+
     line-height:1.15;
+
     margin:0 0 14px;
+
     letter-spacing:-0.5px;
 }
 
 .hero-subtitle{
-    font-size:1.25rem;
+
+    font-size:1.28rem;
+
     font-weight:500;
+
     margin-bottom:20px;
+
     max-width:900px;
 }
 
 .hero-description{
+
     max-width:850px;
+
     font-size:1.05rem;
+
     opacity:0.94;
 }
 
 .hero-links{
+
     margin-top:28px;
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:12px;
 }
 
 .hero-links a{
+
     display:inline-block;
+
     color:white;
+
     text-decoration:none;
-    border:1px solid rgba(255,255,255,0.45);
+
+    border:
+        1px solid rgba(255,255,255,0.45);
+
     padding:7px 14px;
+
     border-radius:6px;
+
     font-size:0.9rem;
 }
 
 .hero-links a:hover{
-    background:rgba(255,255,255,0.10);
+
+    background:
+        rgba(255,255,255,0.10);
 }
 
+
 /* =========================================================
-   SECTIONS
+   SECTION
 ========================================================= */
 
 .section{
+
     padding:56px 0 8px;
 }
 
 .section h2{
+
     color:var(--primary);
+
     font-size:1.75rem;
-    margin:0 0 22px;
+
+    margin:
+        0 0 22px;
+
     padding-bottom:10px;
-    border-bottom:2px solid var(--border);
+
+    border-bottom:
+        2px solid var(--border);
 }
 
 .section h3{
+
     color:var(--primary);
+
     margin-top:0;
 }
 
 .lead{
+
     font-size:1.05rem;
+
     max-width:920px;
 }
+
 
 /* =========================================================
    RESEARCH PROGRAM
 ========================================================= */
 
 .research-map{
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px,1fr)
+        );
+
     gap:18px;
+
     margin-top:28px;
 }
 
 .research-card{
+
     background:var(--light);
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:10px;
+
     padding:22px;
 }
 
 .research-card h3{
+
     margin-bottom:8px;
+
     font-size:1.08rem;
 }
 
 .research-card p{
+
     margin:0;
+
     color:var(--muted);
+
     font-size:0.94rem;
 }
 
 .research-tags{
+
     margin-top:24px;
 }
 
 .research-tags span{
+
     display:inline-block;
+
     background:#eef3f8;
+
     color:var(--primary);
+
     padding:6px 12px;
-    margin:4px 5px 4px 0;
+
+    margin:
+        4px 5px
+        4px 0;
+
     border-radius:20px;
+
     font-size:0.88rem;
 }
+
 
 /* =========================================================
    CURRENT RESEARCH
 ========================================================= */
 
 .current-box{
+
     background:#f8fbff;
-    border:1px solid #dbe7f2;
-    border-left:5px solid var(--primary);
+
+    border:
+        1px solid #dbe7f2;
+
+    border-left:
+        5px solid var(--primary);
+
     border-radius:7px;
-    padding:24px 26px;
+
+    padding:
+        24px 26px;
 }
 
 .current-box strong{
+
     color:var(--primary);
 }
 
 .status{
+
     display:inline-block;
+
     margin-left:8px;
-    padding:3px 9px;
+
+    padding:
+        3px 9px;
+
     border-radius:12px;
-    background:#e9f0f7;
-    color:var(--primary);
+
+    background:
+        var(--warning-bg);
+
+    color:
+        var(--warning-text);
+
     font-size:0.78rem;
+
     font-weight:600;
+
     vertical-align:middle;
 }
 
+
 /* =========================================================
-   RESEARCH STATUS
+   STATUS GRID
 ========================================================= */
 
 .status-grid{
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px,1fr)
+        );
+
     gap:16px;
 }
 
 .status-card{
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:9px;
-    padding:18px 20px;
+
+    padding:
+        18px 20px;
+
     background:white;
 }
 
 .status-card .label{
-    font-size:0.8rem;
+
+    font-size:0.78rem;
+
     text-transform:uppercase;
+
     letter-spacing:0.7px;
+
     color:var(--muted);
+
     margin-bottom:5px;
 }
 
 .status-card h3{
+
     font-size:1rem;
-    margin:0 0 6px;
+
+    margin:
+        0 0 6px;
 }
 
 .status-card p{
+
     margin:0;
+
     color:var(--muted);
+
     font-size:0.9rem;
 }
+
+
+/* =========================================================
+   METHODOLOGY
+========================================================= */
+
+.methodology{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(230px,1fr)
+        );
+
+    gap:16px;
+}
+
+.method-card{
+
+    padding:
+        20px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:9px;
+
+    background:var(--lighter);
+}
+
+.method-card h3{
+
+    font-size:1rem;
+
+    margin-bottom:7px;
+}
+
+.method-card p{
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:0.9rem;
+}
+
 
 /* =========================================================
    IDENTITY
 ========================================================= */
 
 .identity-grid{
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(210px,1fr)
+        );
+
     gap:15px;
 }
 
 .card{
+
     background:var(--light);
+
     padding:18px;
+
     border-radius:9px;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
 }
 
 .card strong{
+
     color:var(--primary);
 }
 
 .card a{
+
     text-decoration:none;
+
     font-weight:600;
 }
 
 .card a:hover{
+
     text-decoration:underline;
 }
+
 
 /* =========================================================
    RESEARCH STATEMENT
 ========================================================= */
 
 .statement{
+
     max-width:900px;
+
     font-size:1.02rem;
 }
+
 
 /* =========================================================
    PUBLICATIONS
 ========================================================= */
 
 .publication-group{
+
     margin-top:34px;
 }
 
 .publication-group h3{
+
     margin-bottom:16px;
 }
 
 .publication{
-    padding:21px 22px;
+
+    padding:
+        21px 22px;
+
     margin-bottom:16px;
-    border:1px solid var(--border);
-    border-left:4px solid var(--primary);
-    background:var(--lighter);
-    border-radius:0 8px 8px 0;
+
+    border:
+        1px solid var(--border);
+
+    border-left:
+        4px solid var(--primary);
+
+    background:
+        var(--lighter);
+
+    border-radius:
+        0 8px 8px 0;
 }
 
 .publication-title{
+
     font-weight:650;
+
     font-size:1.04rem;
+
     line-height:1.55;
+
     margin-bottom:7px;
 }
 
 .publication-meta{
+
     font-size:0.9rem;
+
     color:var(--muted);
+
     margin-bottom:9px;
 }
 
 .publication-status{
+
     font-size:0.82rem;
+
     color:var(--secondary);
+
     margin-bottom:9px;
 }
 
 .publication a{
+
     text-decoration:none;
+
     font-weight:600;
 }
 
 .publication a:hover{
+
     text-decoration:underline;
 }
 
+
 /* =========================================================
-   NOTE
+   RESEARCH POLICY NOTE
 ========================================================= */
 
 .note{
+
     background:#f8fbff;
-    border-left:4px solid var(--secondary);
-    padding:18px 20px;
+
+    border-left:
+        4px solid var(--secondary);
+
+    padding:
+        18px 20px;
+
     margin-top:26px;
-    border-radius:0 7px 7px 0;
+
+    border-radius:
+        0 7px 7px 0;
+
     color:#4d5b68;
+
     font-size:0.93rem;
 }
+
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 footer{
+
     margin-top:70px;
-    padding:32px 20px;
+
+    padding:
+        32px 20px;
+
     text-align:center;
+
     font-size:0.88rem;
+
     color:var(--muted);
-    border-top:1px solid var(--border);
+
+    border-top:
+        1px solid var(--border);
 }
+
 
 /* =========================================================
    MOBILE
@@ -481,34 +803,46 @@ footer{
 @media(max-width:700px){
 
     .container{
-        padding:0 20px;
+
+        padding:
+            0 20px;
     }
 
     .nav-inner{
-        padding:11px 20px;
+
+        padding:
+            11px 20px;
     }
 
     .nav-links{
+
         display:none;
     }
 
     .hero{
-        padding:55px 20px 50px;
+
+        padding:
+            55px 20px
+            50px;
     }
 
     .hero h1{
+
         font-size:2.35rem;
     }
 
     .hero-subtitle{
+
         font-size:1.08rem;
     }
 
     .hero-description{
+
         font-size:0.98rem;
     }
 
     .section{
+
         padding-top:42px;
     }
 
@@ -518,67 +852,105 @@ footer{
 
 </head>
 
+
 <body>
 
-<!-- =======================================================
+
+<!-- =====================================================
      NAVIGATION
-======================================================== -->
+===================================================== -->
 
 <nav class="nav">
 
 <div class="nav-inner">
 
-<div class="nav-brand">Scott Sun</div>
+<div class="nav-brand">
+Scott Sun
+</div>
 
 <div class="nav-links">
-<a href="#research">Research</a>
-<a href="#current">Current Work</a>
-<a href="#identity">Academic Identity</a>
-<a href="#publications">Publications</a>
+
+<a href="#research">
+Research
+</a>
+
+<a href="#current">
+Current Status
+</a>
+
+<a href="#methodology">
+Methodology
+</a>
+
+<a href="#identity">
+Academic Identity
+</a>
+
+<a href="#publications">
+Publications
+</a>
+
 </div>
 
 </div>
 
 </nav>
 
-<!-- =======================================================
+
+<!-- =====================================================
      HERO
-======================================================== -->
+===================================================== -->
 
 <header class="hero">
 
 <div class="hero-inner">
 
-<h1>Scott Sun</h1>
+<h1>
+Scott Sun
+</h1>
 
 <div class="hero-subtitle">
+
 Independent Researcher in Information, Geometry, Emergence, and Mathematical Foundations
+
 </div>
 
 <div class="hero-description">
 
 Independent research spanning structural information,
-emergent geometry and causality, spectral dynamics,
+emergent geometry and causality, spectral and geometric dynamics,
 mathematical foundations, and computational mathematics.
 
 </div>
 
 <div class="hero-links">
 
-<a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
+<a
+href="https://orcid.org/0009-0002-1095-6228"
+target="_blank"
+rel="noopener">
 ORCID
 </a>
 
-<a href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ" target="_blank">
+<a
+href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ"
+target="_blank"
+rel="noopener">
 Google Scholar
 </a>
 
-<a href="https://www.lens.org/lens/orcid/0009-0002-1095-6228" target="_blank">
+<a
+href="https://www.lens.org/lens/orcid/0009-0002-1095-6228"
+target="_blank"
+rel="noopener">
 Lens
 </a>
 
-<a href="https://zenodo.org" target="_blank">
-Zenodo
+<a
+href="https://doi.org/10.17605/OSF.IO/CAQXH"
+target="_blank"
+rel="noopener">
+OSF Hub
 </a>
 
 </div>
@@ -587,93 +959,141 @@ Zenodo
 
 </header>
 
+
 <main class="container">
 
-<!-- =======================================================
+
+<!-- =====================================================
      RESEARCH PROGRAM
-======================================================== -->
+===================================================== -->
 
-<section class="section" id="research">
+<section
+class="section"
+id="research">
 
-<h2>Research Program</h2>
+<h2>
+Research Program
+</h2>
 
 <p class="lead">
 
-The research programme is organized around four complementary
-areas investigating how mathematical structure, information,
-geometry, and physical organization may be related.
+The research programme investigates relationships among
+<strong>information, mathematical structure, geometry, causality,
+complexity, and emergence</strong>. The programme combines
+mathematical analysis, theoretical modelling, and computational
+investigation across several complementary areas.
 
 </p>
+
 
 <div class="research-map">
 
+
 <div class="research-card">
 
-<h3>01 — Structural Information Evolution</h3>
+<h3>
+01 — Structural Information Evolution
+</h3>
 
 <p>
-Study of information, entropy, and structural organization across
-scales, with an emphasis on how macroscopic organization may emerge
-from underlying informational dynamics.
+
+Study of information, entropy, and structural organization
+across scales, with emphasis on how macroscopic organization
+may emerge from underlying informational dynamics.
+
 </p>
 
 </div>
 
+
 <div class="research-card">
 
-<h3>02 — Emergent Geometry & Causality</h3>
+<h3>
+02 — Emergent Geometry &amp; Causality
+</h3>
 
 <p>
+
 Mathematical approaches to causal structure, Lorentzian geometry,
 light-cone algebra, quotient constructions, and pre-geometric
 descriptions of spacetime.
+
 </p>
 
 </div>
 
+
 <div class="research-card">
 
-<h3>03 — Spectral & Geometric Dynamics</h3>
+<h3>
+03 — Spectral &amp; Geometric Dynamics
+</h3>
 
 <p>
+
 Investigation of spectral dimension, scale-dependent geometry,
 irreversible flow, fractal structures, and related geometric
 dynamics.
+
 </p>
 
 </div>
+
 
 <div class="research-card">
 
-<h3>04 — Mathematical Foundations & Computation</h3>
+<h3>
+04 — Mathematical Foundations &amp; Computation
+</h3>
 
 <p>
-Research in representation problems, additive combinatorics,
-gap geometry, computational enumeration, and reproducible
-computational analysis of mathematical conjectures.
+
+Research in mathematical representation problems, additive
+combinatorics, gap geometry, computational enumeration, and
+reproducible computational analysis.
+
 </p>
 
 </div>
 
+
 </div>
+
 
 <div class="research-tags">
 
-<span>Information Theory</span> <span>Structural Information</span> <span>Complex Systems</span> <span>Emergence</span> <span>Mathematical Physics</span> <span>Foundations of Physics</span> <span>Geometry</span> <span>Causal Structure</span> <span>Spectral Dimension</span> <span>Additive Combinatorics</span> <span>Computational Mathematics</span>
+<span>Information Theory</span>
+<span>Structural Information</span>
+<span>Complex Systems</span>
+<span>Emergence</span>
+<span>Mathematical Physics</span>
+<span>Foundations of Physics</span>
+<span>Geometry</span>
+<span>Causal Structure</span>
+<span>Spectral Dimension</span>
+<span>Additive Combinatorics</span>
+<span>Computational Mathematics</span>
 
 </div>
 
 </section>
 
-<!-- =======================================================
-     CURRENT RESEARCH
-======================================================== -->
 
-<section class="section" id="current">
+<!-- =====================================================
+     CURRENT RESEARCH STATUS
+===================================================== -->
 
-<h2>Current Research — August 2026</h2>
+<section
+class="section"
+id="current">
+
+<h2>
+Current Research Status — August 2026
+</h2>
+
 
 <div class="current-box">
+
 
 <p>
 
@@ -687,16 +1107,19 @@ V23.4 Completed
 
 </p>
 
+
 <p>
 
-The V23.4 phase completed an exhaustive computational audit of the
-candidate
+The V23.4 phase completed an exhaustive computational
+investigation of the candidate
 
-<strong>n = 896,315,812,331,399</strong>
+<strong>
+\(n^* = 896,315,812,331,399\)
+</strong>
 
 for the representation
 
-$$
+\[
 n =
 \binom{w}{2}
 +
@@ -705,269 +1128,539 @@ n =
 \binom{y}{6}
 +
 \binom{z}{8}.
-$$
-
-Explicit finite parameter bounds were established and the resulting
-search domain was evaluated using exact integer arithmetic.
+\]
 
 </p>
+
 
 <p>
 
-The computation examined
+Explicit finite parameter bounds were established, and the
+resulting search domain was evaluated using exact integer
+arithmetic. The computation examined
 
-<strong>2,818,953,028 admissible (z,y,x) triples</strong>
+<strong>
+2,818,953,028 admissible \((z,y,x)\) triples
+</strong>
 
-and found no representation of the candidate within the certified
-search domain.
+and found no representation of the candidate within the
+certified search domain.
 
 </p>
+
 
 <p>
 
-The result is currently classified as a <strong>computational counterexample candidate</strong>,
-pending independent replication and further mathematical audit.
-The original proof programme has therefore been concluded at V23.4
-rather than continued under the original conjecture.
+The result is currently classified as a
+
+<strong>
+computational counterexample candidate
+</strong>,
+
+rather than a confirmed mathematical counterexample.
+Independent replication and further mathematical audit remain
+necessary before a stronger conclusion can be made.
 
 </p>
+
 
 <p>
 
-The V23.4 investigation also produced additional modular,
-Cantor-Pascal, and scale-structure diagnostics. These results are
-retained as mathematical observations and possible starting points
-for subsequent research, but are not presented as proofs of
-non-representability.
+The original proof programme has therefore been
+
+<strong>
+concluded at V23.4
+</strong>,
+
+and is not being continued under the original conjectural
+assumption.
 
 </p>
+
+
+<p>
+
+The V23.4 investigation also established the modular result
+
+\[
+\mathcal{D}_3 \pmod{231}
+=
+\mathbb{Z}/231\mathbb{Z},
+\]
+
+which rules out a local residue obstruction at that modulus.
+Additional Cantor–Pascal and scale-structure observations are
+retained as exploratory mathematical diagnostics.
+
+</p>
+
 
 </div>
 
 </section>
 
-<!-- =======================================================
+
+<!-- =====================================================
      RESEARCH STATUS
-========================================================= -->
+===================================================== -->
 
 <section class="section">
 
-<h2>Research Status</h2>
+<h2>
+Research Status
+</h2>
+
 
 <div class="status-grid">
 
+
 <div class="status-card">
 
-<div class="label">Completed Phase</div>
+<div class="label">
+Mathematical Research
+</div>
 
-<h3>(2,4,6,8) Representation Programme</h3>
+<h3>
+(2,4,6,8) Representation Programme
+</h3>
 
 <p>
-V23.4 completed. The original proof programme is currently closed
-pending independent verification and further analysis.
+
+V23.4 completed. The original proof programme is closed
+pending independent verification and further mathematical
+analysis of the computational candidate.
+
 </p>
 
 </div>
 
+
 <div class="status-card">
 
-<div class="label">Mathematical Computation</div>
+<div class="label">
+Computational Mathematics
+</div>
 
-<h3>Computational Counterexample Candidate</h3>
+<h3>
+Exhaustive Computational Audit
+</h3>
 
 <p>
-A candidate obstruction has been identified through exhaustive
-finite computation and is undergoing independent verification.
+
+A finite, exact computational search has been completed for
+the V23.4 candidate. The result requires independent
+reproduction before being treated as a confirmed obstruction.
+
 </p>
 
 </div>
 
+
 <div class="status-card">
 
-<div class="label">Theoretical Framework</div>
+<div class="label">
+Theoretical Framework
+</div>
 
-<h3>Structural Information Evolution</h3>
+<h3>
+Structural Information Evolution
+</h3>
 
 <p>
-Ongoing development of a framework relating information, entropy,
-structure, geometry, and emergence.
+
+Ongoing development of a framework relating information,
+entropy, structure, geometry, and emergence across physical
+systems.
+
 </p>
 
 </div>
 
+
 <div class="status-card">
 
-<div class="label">Foundations of Physics</div>
+<div class="label">
+Foundations of Physics
+</div>
 
-<h3>Emergent Causality & Geometry</h3>
+<h3>
+Emergent Causality &amp; Geometry
+</h3>
 
 <p>
+
 Ongoing theoretical work on pre-geometric, causal, Lorentzian,
 and quotient-based structures.
+
 </p>
 
 </div>
+
 
 <div class="status-card">
 
-<div class="label">Exploratory Theory</div>
+<div class="label">
+Exploratory Theory
+</div>
 
-<h3>Spectral & Fractal Dynamics</h3>
+<h3>
+Spectral &amp; Fractal Dynamics
+</h3>
 
 <p>
-Exploratory investigation of spectral-dimension flow, fractal
-geometry, and scale-dependent structural dynamics.
+
+Exploratory investigation of spectral-dimension flow,
+fractal geometry, and scale-dependent structural dynamics.
+
 </p>
 
 </div>
+
 
 <div class="status-card">
 
-<div class="label">Methodology</div>
+<div class="label">
+Research Practice
+</div>
 
-<h3>Reproducible Research</h3>
+<h3>
+Reproducible Mathematical Computation
+</h3>
 
 <p>
-Emphasis on explicit definitions, exact computation, independent
-verification, reproducibility, and separation of proof from
-computational evidence and hypothesis.
+
+Emphasis on explicit definitions, finite bounds, exact
+arithmetic, independent verification, reproducibility,
+and transparent evidence classification.
+
 </p>
 
 </div>
+
 
 </div>
 
 </section>
 
-<!-- =======================================================
+
+<!-- =====================================================
+     METHODOLOGY
+===================================================== -->
+
+<section
+class="section"
+id="methodology">
+
+<h2>
+Research Methodology
+</h2>
+
+<p class="lead">
+
+The programme places particular emphasis on distinguishing
+what has been mathematically proved, computationally verified,
+theoretically constructed, and provisionally hypothesized.
+
+</p>
+
+
+<div class="methodology">
+
+
+<div class="method-card">
+
+<h3>
+01 — Explicit Definitions
+</h3>
+
+<p>
+
+Mathematical objects, assumptions, parameter domains, and
+logical dependencies are stated explicitly whenever possible.
+
+</p>
+
+</div>
+
+
+<div class="method-card">
+
+<h3>
+02 — Exact Computation
+</h3>
+
+<p>
+
+Computational experiments use exact arithmetic and finite
+search bounds where the mathematical problem permits.
+
+</p>
+
+</div>
+
+
+<div class="method-card">
+
+<h3>
+03 — Independent Verification
+</h3>
+
+<p>
+
+Important computational claims are treated as provisional
+until independently reproduced and audited.
+
+</p>
+
+</div>
+
+
+<div class="method-card">
+
+<h3>
+04 — Evidence Separation
+</h3>
+
+<p>
+
+Proofs, computational observations, theoretical constructions,
+and exploratory hypotheses are kept conceptually distinct.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
      ACADEMIC IDENTITY
-======================================================== -->
+===================================================== -->
 
-<section class="section" id="identity">
+<section
+class="section"
+id="identity">
 
-<h2>Academic Identity</h2>
+<h2>
+Academic Identity
+</h2>
+
 
 <div class="identity-grid">
 
+
 <div class="card">
 
-<strong>ORCID</strong><br>
+<strong>
+ORCID
+</strong>
 
-<a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
+<br>
+
+<a
+href="https://orcid.org/0009-0002-1095-6228"
+target="_blank"
+rel="noopener">
+
 0009-0002-1095-6228
+
 </a>
 
 </div>
 
+
 <div class="card">
 
-<strong>Google Scholar</strong><br>
+<strong>
+Google Scholar
+</strong>
 
-<a href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ" target="_blank">
+<br>
+
+<a
+href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ"
+target="_blank"
+rel="noopener">
+
 Scholar Profile
+
 </a>
 
 </div>
 
+
 <div class="card">
 
-<strong>Lens.org</strong><br>
+<strong>
+Lens.org
+</strong>
 
-<a href="https://www.lens.org/lens/orcid/0009-0002-1095-6228" target="_blank">
+<br>
+
+<a
+href="https://www.lens.org/lens/orcid/0009-0002-1095-6228"
+target="_blank"
+rel="noopener">
+
 Research Identity
+
 </a>
 
 </div>
+
 
 <div class="card">
 
-<strong>Zenodo</strong><br>
+<strong>
+OSF Repository
+</strong>
 
-<a href="https://zenodo.org" target="_blank">
-Research Archive
+<br>
+
+<a
+href="https://doi.org/10.17605/OSF.IO/CAQXH"
+target="_blank"
+rel="noopener">
+
+OSF Project Hub
+
 </a>
 
 </div>
+
 
 </div>
 
 </section>
 
-<!-- =======================================================
+
+<!-- =====================================================
      RESEARCH STATEMENT
-======================================================== -->
+===================================================== -->
 
 <section class="section">
 
-<h2>Research Statement</h2>
+<h2>
+Research Statement
+</h2>
+
 
 <p class="statement">
 
-The research approach emphasizes mathematical structure,
-explicit definitions, testable consequences, and reproducible
-investigation across mathematics and theoretical physics.
+The research programme explores whether information-theoretic
+and structural principles can provide mathematically coherent
+descriptions of how geometry, causality, complexity, and
+physical organization emerge across scales.
 
 </p>
 
+
 <p class="statement">
 
-Different levels of evidence are kept conceptually separate:
-established mathematical results, computational observations,
-theoretical constructions, and exploratory hypotheses are not
-treated as equivalent forms of evidence.
+The work combines mathematical analysis, information-theoretic
+ideas, complex-systems perspectives, geometric structures,
+theoretical modelling, and computational methods.
 
 </p>
 
+
 <p class="statement">
 
-Computational work is used both as a discovery mechanism and as
-an independent audit of mathematical claims. When new evidence
-contradicts a conjecture or exposes a limitation in a proof
-programme, the appropriate response is to verify the result,
-revise the claim, and reassess the underlying mathematical structure.
+A central methodological principle is to maintain a clear
+distinction between established mathematical results,
+verified computational observations, theoretical constructions,
+and open hypotheses.
+
+</p>
+
+
+<p class="statement">
+
+When computational or mathematical evidence challenges an
+existing conjecture, the research process treats verification,
+revision, and reassessment as integral parts of mathematical
+investigation.
 
 </p>
 
 </section>
 
-<!-- =======================================================
+
+<!-- =====================================================
      PUBLICATIONS
-======================================================== -->
+===================================================== -->
 
-<section class="section" id="publications">
+<section
+class="section"
+id="publications">
 
-<h2>Selected Research Outputs — 2026</h2>
+<h2>
+Selected Research Outputs — 2026
+</h2>
 
-<!-- MATHEMATICAL FOUNDATIONS -->
+
+<!-- =====================================================
+     MATHEMATICAL FOUNDATIONS
+===================================================== -->
 
 <div class="publication-group">
 
-<h3>Mathematical Foundations & Computational Mathematics</h3>
+<h3>
+Mathematical Foundations &amp; Computational Mathematics
+</h3>
+
 
 <div class="publication">
 
 <div class="publication-title">
 
-A Computational Audit of a Candidate Counterexample to Sun's
-(2,4,6,8) Conjecture — Version 23.4:
+A Computational Audit of a Candidate Counterexample to
+Sun's (2,4,6,8) Conjecture — Version 23.4 (Final):
 Exhaustive Verification and Cantor-Pascal Diagnostics
 
 </div>
 
+
 <div class="publication-meta">
-Scott Sun (2026) • Zenodo Preprint
+
+Scott Sun (2026) • OSF / Zenodo Preprint
+
 </div>
+
 
 <div class="publication-status">
+
 Status: V23.4 completed • Computational counterexample candidate
 • Independent replication pending
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.22139197"
-target="_blank">
-DOI </a>
 
 </div>
+
+
+<a
+href="https://doi.org/10.17605/OSF.IO/CAQXH"
+target="_blank"
+rel="noopener">
+
+OSF DOI
+
+</a>
+
+&nbsp; | &nbsp;
+
+<a
+href="https://doi.org/10.5281/zenodo.22139197"
+target="_blank"
+rel="noopener">
+
+Zenodo Archive
+
+</a>
+
+</div>
+
 
 <div class="publication">
 
@@ -978,48 +1671,74 @@ Computational and Additive-Combinatorial Investigations
 
 </div>
 
+
 <div class="publication-meta">
+
 Scott Sun (2026) • Research Programme
+
 </div>
+
 
 <div class="publication-status">
-Status: Research programme concluded at V23.4 pending
-verification and further mathematical analysis
-</div>
+
+Status: Programme concluded at V23.4 pending verification
+and further mathematical analysis
 
 </div>
 
 </div>
 
-<!-- GEOMETRY / FOUNDATIONS -->
+
+</div>
+
+
+<!-- =====================================================
+     GEOMETRY
+===================================================== -->
 
 <div class="publication-group">
 
-<h3>Geometry, Causality & Foundations of Physics</h3>
+<h3>
+Geometry, Causality &amp; Foundations of Physics
+</h3>
+
 
 <div class="publication">
 
 <div class="publication-title">
 
 Möbius–Lorentz Quotients and Null Pin Holonomy:
-Affine Normal Forms, Null-Displacement Loci, Mapping-Torus Topology,
-Pin Lifts, and Mirror-Residue Pairing
+Affine Normal Forms, Null-Displacement Loci,
+Mapping-Torus Topology, Pin Lifts, and Mirror-Residue Pairing
 
 </div>
+
 
 <div class="publication-meta">
+
 Scott Sun (2026) • Zenodo Preprint
+
 </div>
+
 
 <div class="publication-status">
+
 Status: Theoretical development
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.22019535"
-target="_blank">
-DOI </a>
 
 </div>
+
+
+<a
+href="https://doi.org/10.5281/zenodo.22019535"
+target="_blank"
+rel="noopener">
+
+DOI: 10.5281/zenodo.22019535
+
+</a>
+
+</div>
+
 
 <div class="publication">
 
@@ -1030,50 +1749,83 @@ A Pre-Geometric Research Programme
 
 </div>
 
+
 <div class="publication-meta">
+
 Scott Sun (2026) • Zenodo Preprint
+
 </div>
+
 
 <div class="publication-status">
+
 Status: Theoretical framework
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.20483898"
-target="_blank">
-DOI </a>
 
 </div>
 
+
+<a
+href="https://doi.org/10.5281/zenodo.20483898"
+target="_blank"
+rel="noopener">
+
+DOI: 10.5281/zenodo.20483898
+
+</a>
+
 </div>
 
-<!-- STRUCTURAL INFORMATION -->
+
+</div>
+
+
+<!-- =====================================================
+     STRUCTURAL INFORMATION
+===================================================== -->
 
 <div class="publication-group">
 
-<h3>Structural Information & Spectral Dynamics</h3>
+<h3>
+Structural Information &amp; Spectral Dynamics
+</h3>
+
 
 <div class="publication">
 
 <div class="publication-title">
 
 The Hidden Thread of Structural Information Evolution:
-A Comparative Study of Condensed Matter, Quantum Plasma and Black Hole Systems
+A Comparative Study of Condensed Matter, Quantum Plasma
+and Black Hole Systems
 
 </div>
+
 
 <div class="publication-meta">
+
 Scott Sun (2026) • Zenodo Preprint
+
 </div>
+
 
 <div class="publication-status">
+
 Status: Structural Information Evolution programme
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.20792832"
-target="_blank">
-DOI </a>
 
 </div>
+
+
+<a
+href="https://doi.org/10.5281/zenodo.20792832"
+target="_blank"
+rel="noopener">
+
+DOI: 10.5281/zenodo.20792832
+
+</a>
+
+</div>
+
 
 <div class="publication">
 
@@ -1084,19 +1836,32 @@ with a One-Third Power Law
 
 </div>
 
+
 <div class="publication-meta">
+
 Scott Sun (2026) • Zenodo Preprint
+
 </div>
+
 
 <div class="publication-status">
+
 Status: Exploratory theoretical model
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.21524285"
-target="_blank">
-DOI </a>
 
 </div>
+
+
+<a
+href="https://doi.org/10.5281/zenodo.21524285"
+target="_blank"
+rel="noopener">
+
+DOI: 10.5281/zenodo.21524285
+
+</a>
+
+</div>
+
 
 <div class="publication">
 
@@ -1107,52 +1872,79 @@ From the Kakeya Conjecture to Quantum Gravity Observations
 
 </div>
 
+
 <div class="publication-meta">
+
 Scott Sun (2026) • Zenodo Preprint
+
 </div>
+
 
 <div class="publication-status">
+
 Status: Exploratory research
-</div>
-
-<a href="https://doi.org/10.5281/zenodo.20373606"
-target="_blank">
-DOI </a>
 
 </div>
 
+
+<a
+href="https://doi.org/10.5281/zenodo.20373606"
+target="_blank"
+rel="noopener">
+
+DOI: 10.5281/zenodo.20373606
+
+</a>
+
 </div>
 
-<!-- =======================================================
-     RESEARCH AND VERSIONING POLICY
-======================================================== -->
+
+</div>
+
+
+<!-- =====================================================
+     VERSIONING POLICY
+===================================================== -->
 
 <div class="note">
 
-<strong>Research and Versioning Policy</strong><br><br>
+<strong>
+Research and Versioning Policy
+</strong>
+
+<br><br>
 
 Research outputs are archived through persistent scholarly
-identifiers including DOI and ORCID. Research versions may evolve
-as mathematical and computational results are independently examined.
+identifiers including DOI and ORCID. Research versions may
+evolve as mathematical and computational results are
+independently examined.
 
-The website distinguishes between established mathematical results,
-computational audits, candidate counterexamples, theoretical
-frameworks, and exploratory research.
+<br><br>
 
-A computational candidate is not described as a confirmed
-mathematical counterexample until the underlying computation has
-been independently reproduced and the relevant mathematical
-assumptions and search bounds have been fully audited.
+The website distinguishes between established mathematical
+results, computational audits, candidate counterexamples,
+theoretical frameworks, and exploratory research.
+
+<br><br>
+
+In particular, a computational candidate is not described
+as a confirmed mathematical counterexample until the
+underlying computation has been independently reproduced
+and the relevant mathematical assumptions and search bounds
+have been fully audited.
 
 </div>
 
+
 </section>
+
 
 </main>
 
-<!-- =======================================================
+
+<!-- =====================================================
      FOOTER
-======================================================== -->
+===================================================== -->
 
 <footer>
 
@@ -1160,7 +1952,9 @@ assumptions and search bounds have been fully audited.
 
 <br><br>
 
-Independent Researcher<br>
+Independent Researcher
+
+<br>
 
 Information • Geometry • Emergence • Mathematical Foundations
 
@@ -1168,11 +1962,17 @@ Information • Geometry • Emergence • Mathematical Foundations
 
 ORCID:
 
-<a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
+<a
+href="https://orcid.org/0009-0002-1095-6228"
+target="_blank"
+rel="noopener">
+
 0009-0002-1095-6228
+
 </a>
 
 </footer>
+
 
 </body>
 

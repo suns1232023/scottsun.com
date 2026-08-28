@@ -6,13 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scott Sun | Independent Researcher | Information, Geometry & Emergent Physics</title>
+<title>Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations</title>
 
 <meta name="description"
-content="Official academic homepage of Scott Sun, an independent researcher working on structural information, mathematical foundations, emergent causality, geometry, complex systems, and theoretical physics.">
+content="Official academic homepage of Scott Sun, an independent researcher working on structural information, mathematical foundations, emergent causality, geometry, complex systems, and theoretical physics. Current work includes computational audits of mathematical conjectures and structural studies of information, geometry, and emergence.">
 
 <meta name="keywords"
-content="Scott Sun, Structural Information Evolution, Information Theory, Emergence, Mathematical Physics, Complex Systems, Emergent Causality, Spectral Dimension, Quantum Gravity, Additive Combinatorics">
+content="Scott Sun, Structural Information Evolution, Information Theory, Emergence, Mathematical Physics, Complex Systems, Emergent Causality, Spectral Dimension, Quantum Gravity, Additive Combinatorics, Computational Mathematics">
 
 <meta name="author" content="Scott Sun">
 
@@ -31,14 +31,19 @@ content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
 <link rel="me" href="https://orcid.org/0009-0002-1095-6228">
 
 <!-- Open Graph -->
+
 <meta property="og:type" content="profile">
+
 <meta property="og:title"
-content="Scott Sun | Independent Researcher | Information, Geometry & Emergent Physics">
+content="Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations">
+
 <meta property="og:description"
-content="Research in structural information, emergence, mathematical physics, causal structure, geometry, and complex systems.">
+content="Independent research in structural information, emergence, mathematical physics, geometry, causality, complex systems, and computational mathematics.">
+
 <meta property="og:url" content="https://www.scottsun.com/">
 
 <!-- Schema.org -->
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,6 +61,7 @@ content="Research in structural information, emergence, mathematical physics, ca
     "Spectral-Dimension Dynamics",
     "Geometry",
     "Additive Combinatorics",
+    "Computational Mathematics",
     "Foundations of Physics"
   ],
   "sameAs": [
@@ -546,7 +552,7 @@ footer{
 <h1>Scott Sun</h1>
 
 <div class="hero-subtitle">
-Independent Researcher in Information, Geometry, Emergence, and Mathematical Physics
+Independent Researcher in Information, Geometry, Emergence, and Mathematical Foundations
 </div>
 
 <div class="hero-description">
@@ -555,7 +561,7 @@ Research explores how information-theoretic structure may give rise to
 geometry, causality, complexity, and emergent physical dynamics,
 with particular interests in Structural Information Evolution,
 emergent causal structure, spectral-dimension dynamics,
-and mathematical foundations of physics.
+mathematical foundations, and computational mathematics.
 
 </div>
 
@@ -598,7 +604,7 @@ Zenodo
 <p class="lead">
 
 The central research programme investigates the relationship between
-<strong>information, structure, geometry, causality, and emergence</strong>.
+<strong>information, structure, geometry, causality, complexity, and emergence</strong>.
 A guiding question is whether some features of physical reality can be
 understood as emergent consequences of deeper information-theoretic
 and structural dynamics.
@@ -619,6 +625,7 @@ emerge from microscopic informational dynamics.
 
 </div>
 
+
 <div class="research-card">
 
 <h3>02 — Emergent Geometry & Causality</h3>
@@ -630,6 +637,7 @@ of spacetime.
 </p>
 
 </div>
+
 
 <div class="research-card">
 
@@ -643,14 +651,15 @@ and physical observables.
 
 </div>
 
+
 <div class="research-card">
 
-<h3>04 — Mathematical Foundations</h3>
+<h3>04 — Mathematical Foundations & Computation</h3>
 
 <p>
 Independent mathematical research involving representation problems,
-additive combinatorics, gap geometry, global covering mechanisms,
-and computationally audited proof programmes.
+additive combinatorics, gap geometry, computational enumeration,
+and reproducible computational audits of mathematical conjectures.
 </p>
 
 </div>
@@ -669,6 +678,7 @@ and computationally audited proof programmes.
 <span>Causal Structure</span>
 <span>Spectral Dimension</span>
 <span>Additive Combinatorics</span>
+<span>Computational Mathematics</span>
 
 </div>
 
@@ -687,28 +697,64 @@ and computationally audited proof programmes.
 
 <p>
 
-<strong>Mathematical Proof Programme — Sun's (2,4,6,8) Binomial Representation Conjecture</strong>
+<strong>
+Sun's (2,4,6,8) Binomial Representation Conjecture
+</strong>
 
-<span class="status">Proof programme in progress</span>
-
-</p>
-
-<p>
-
-Current work focuses on the transition from local and gap-geometry
-estimates to a global covering theorem. The programme studies
-trajectory crossing, gap bounds, witness geometry, cover transfer,
-and the remaining first-hit problem, with complementary analytic
-investigation using Hardy–Littlewood / circle-method techniques.
+<span class="status">
+V23.4 Completed
+</span>
 
 </p>
 
 <p>
 
-The research objective is a rigorous proof that every positive integer
-in the relevant domain admits the prescribed binomial representation.
-Computational verification is treated as an audit and discovery tool,
-not as a substitute for the final proof.
+A major computational phase of the research programme has now been
+completed. The V23.4 study investigated the candidate
+
+<strong>n = 896,315,812,331,399</strong>
+
+for the representation
+
+\[
+n =
+\binom{w}{2}
++
+\binom{x}{4}
++
+\binom{y}{6}
++
+\binom{z}{8}.
+\]
+
+Explicit finite parameter bounds were established and the resulting
+search domain was exhaustively enumerated using exact integer
+arithmetic. The computation evaluated
+
+<strong>2,818,953,028 admissible (z,y,x) triples</strong>
+
+and found no representation of the candidate.
+
+</p>
+
+<p>
+
+The result is currently classified as a
+<strong>computational counterexample candidate</strong>,
+pending independent replication in an alternative implementation.
+Accordingly, the original proof programme has been placed on hold
+at V23.4 while the computational result and its mathematical
+implications are evaluated.
+
+</p>
+
+<p>
+
+The V23.4 work also established a local modular result showing that
+the auxiliary difference set used in the analysis is surjective
+modulo 231. Additional Cantor-Pascal and scale-structure observations
+are retained as exploratory diagnostics rather than as proofs of
+non-representability.
 
 </p>
 
@@ -719,13 +765,14 @@ not as a substitute for the final proof.
 
 <!-- =======================================================
      RESEARCH STATUS
-======================================================== -->
+========================================================= -->
 
 <section class="section">
 
 <h2>Research Status</h2>
 
 <div class="status-grid">
+
 
 <div class="status-card">
 
@@ -734,11 +781,28 @@ not as a substitute for the final proof.
 <h3>(2,4,6,8) Representation Conjecture</h3>
 
 <p>
-Proof programme in progress; current focus on global covering
-and the remaining first-hit / transfer step.
+V23.4 completed. A computational counterexample candidate has been
+identified at n = 896,315,812,331,399. Independent replication remains
+the next certification step.
 </p>
 
 </div>
+
+
+<div class="status-card">
+
+<div class="label">Computational Mathematics</div>
+
+<h3>Exhaustive Computational Audit</h3>
+
+<p>
+Finite parameter bounds and an exact exhaustive search have been
+completed for the V23.4 candidate. The computation found zero
+representations in the certified search domain.
+</p>
+
+</div>
+
 
 <div class="status-card">
 
@@ -747,11 +811,12 @@ and the remaining first-hit / transfer step.
 <h3>Structural Information Evolution</h3>
 
 <p>
-Framework development connecting information, entropy,
-structure, geometry, and emergence.
+Ongoing framework development connecting information, entropy,
+structure, geometry, and emergence across physical systems.
 </p>
 
 </div>
+
 
 <div class="status-card">
 
@@ -766,6 +831,7 @@ including Lorentzian and quotient constructions.
 
 </div>
 
+
 <div class="status-card">
 
 <div class="label">Exploratory Theory</div>
@@ -773,8 +839,23 @@ including Lorentzian and quotient constructions.
 <h3>Spectral & Fractal Dynamics</h3>
 
 <p>
-Ongoing investigation of spectral-dimension flow,
-fractal geometry, and scale-dependent structure.
+Ongoing investigation of spectral-dimension flow, fractal geometry,
+and scale-dependent structural dynamics.
+</p>
+
+</div>
+
+
+<div class="status-card">
+
+<div class="label">Research Methodology</div>
+
+<h3>Reproducible Mathematical Computation</h3>
+
+<p>
+Emphasis on explicit definitions, finite bounds, exact arithmetic,
+independent verification, reproducible computation, and separation
+between proof, computation, and exploratory hypotheses.
 </p>
 
 </div>
@@ -795,31 +876,46 @@ fractal geometry, and scale-dependent structure.
 <div class="identity-grid">
 
 <div class="card">
+
 <strong>ORCID</strong><br>
+
 <a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
 0009-0002-1095-6228
 </a>
+
 </div>
 
+
 <div class="card">
+
 <strong>Google Scholar</strong><br>
+
 <a href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ" target="_blank">
 Scholar Profile
 </a>
+
 </div>
 
+
 <div class="card">
+
 <strong>Lens.org</strong><br>
+
 <a href="https://www.lens.org/lens/orcid/0009-0002-1095-6228" target="_blank">
 Research Identity
 </a>
+
 </div>
 
+
 <div class="card">
+
 <strong>Zenodo</strong><br>
+
 <a href="https://zenodo.org" target="_blank">
 Research Archive
 </a>
+
 </div>
 
 </div>
@@ -839,8 +935,8 @@ Research Archive
 
 The research programme explores whether information-theoretic and
 structural principles can provide a mathematically coherent description
-of how geometry, causality, and physical organization emerge across
-scales.
+of how geometry, causality, complexity, and physical organization
+emerge across scales.
 
 </p>
 
@@ -848,10 +944,20 @@ scales.
 
 The work combines mathematical analysis, information-theoretic ideas,
 complex-systems perspectives, geometric structures, and computational
-auditing. Particular emphasis is placed on explicit definitions,
+methods. Particular emphasis is placed on explicit definitions,
 testable mathematical consequences, reproducible computation,
-and clear separation between established results, verified
-computational observations, and open theoretical hypotheses.
+and clear separation between established mathematical results,
+verified computational observations, and open theoretical hypotheses.
+
+</p>
+
+<p class="statement">
+
+An important part of this methodology is the willingness to revise
+or suspend a proof programme when computational evidence challenges
+its underlying conjecture. The current transition from the
+V23.4 binomial-representation study toward independent verification
+and new mathematical questions is part of this research process.
 
 </p>
 
@@ -871,13 +977,15 @@ computational observations, and open theoretical hypotheses.
 
 <div class="publication-group">
 
-<h3>Mathematical Foundations</h3>
+<h3>Mathematical Foundations & Computational Mathematics</h3>
+
 
 <div class="publication">
 
 <div class="publication-title">
 
-A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture(Version 23.4): 
+A Computational Audit of a Candidate Counterexample to Sun's
+(2,4,6,8) Conjecture — Version 23.4:
 Exhaustive Verification and Cantor-Pascal Diagnostics
 
 </div>
@@ -887,13 +995,35 @@ Scott Sun (2026) • Zenodo Preprint
 </div>
 
 <div class="publication-status">
-Status: Proof programme in progress
+Status: V23.4 completed • Computational counterexample candidate
+• Independent replication pending
 </div>
 
 <a href="https://doi.org/10.5281/zenodo.22139197"
 target="_blank">
 DOI
 </a>
+
+</div>
+
+
+<div class="publication">
+
+<div class="publication-title">
+
+Sun's (2,4,6,8) Binomial Representation Programme:
+Computational and Additive-Combinatorial Investigations
+
+</div>
+
+<div class="publication-meta">
+Scott Sun (2026) • Research Programme
+</div>
+
+<div class="publication-status">
+Status: Proof programme concluded at V23.4 pending verification
+and further mathematical analysis
+</div>
 
 </div>
 
@@ -905,6 +1035,7 @@ DOI
 <div class="publication-group">
 
 <h3>Geometry, Causality & Foundations of Physics</h3>
+
 
 <div class="publication">
 
@@ -964,6 +1095,7 @@ DOI
 <div class="publication-group">
 
 <h3>Structural Information & Spectral Dynamics</h3>
+
 
 <div class="publication">
 
@@ -1042,15 +1174,26 @@ DOI
 </div>
 
 
+<!-- =======================================================
+     RESEARCH NOTE
+======================================================== -->
+
 <div class="note">
 
 <strong>Research and Versioning Policy</strong><br><br>
 
 Research outputs are archived through persistent scholarly identifiers
-including DOI and ORCID. Current research versions may evolve beyond
-their archived preprint versions. The website distinguishes between
-formal archived publications, ongoing proof programmes, computational
-audits, theoretical frameworks, and exploratory research.
+including DOI and ORCID. Research versions may evolve as mathematical
+and computational results are independently examined.
+
+The website distinguishes between formal mathematical results,
+computational audits, candidate counterexamples, theoretical
+frameworks, and exploratory research.
+
+In particular, a computational candidate is not described as a
+confirmed mathematical counterexample until the underlying result
+has been independently reproduced and its mathematical assumptions
+have been fully audited.
 
 </div>
 
@@ -1071,11 +1214,12 @@ audits, theoretical frameworks, and exploratory research.
 
 Independent Researcher<br>
 
-Information • Geometry • Emergence • Mathematical Physics
+Information • Geometry • Emergence • Mathematical Foundations
 
 <br><br>
 
 ORCID:
+
 <a href="https://orcid.org/0009-0002-1095-6228" target="_blank">
 0009-0002-1095-6228
 </a>

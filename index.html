@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,9 @@ content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
 <link rel="canonical" href="https://www.scottsun.com/">
 <link rel="me" href="https://orcid.org/0009-0002-1095-6228">
 
-<!-- Open Graph -->
+<!-- =====================================================
+     Open Graph
+===================================================== -->
 
 <meta property="og:type" content="profile">
 
@@ -40,17 +43,30 @@ content="Independent research across structural information, geometry, emergence
 
 <meta property="og:url" content="https://www.scottsun.com/">
 
+
 <!-- =====================================================
      MathJax
 ===================================================== -->
 
 <script>
+
 window.MathJax = {
+
     tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]'], ['$$', '$$']]
+
+        inlineMath: [
+            ['\\(', '\\)']
+        ],
+
+        displayMath: [
+            ['\\[', '\\]'],
+            ['$$', '$$']
+        ]
+
     },
+
     options: {
+
         skipHtmlTags: [
             'script',
             'noscript',
@@ -59,28 +75,40 @@ window.MathJax = {
             'pre',
             'code'
         ]
+
     }
+
 };
+
 </script>
 
 <script async
 src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
 
+
 <!-- =====================================================
      Schema.org
 ===================================================== -->
 
 <script type="application/ld+json">
+
 {
   "@context": "https://schema.org",
   "@type": "Person",
+
   "name": "Scott Sun",
+
   "url": "https://www.scottsun.com/",
-  "identifier": "https://orcid.org/0009-0002-1095-6228",
-  "jobTitle": "Independent Researcher",
+
+  "identifier":
+    "https://orcid.org/0009-0002-1095-6228",
+
+  "jobTitle":
+    "Independent Researcher",
 
   "knowsAbout": [
+
     "Information Theory",
     "Structural Information Evolution",
     "Complex Systems",
@@ -92,14 +120,21 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
     "Additive Combinatorics",
     "Computational Mathematics",
     "Foundations of Physics"
+
   ],
 
   "sameAs": [
+
     "https://orcid.org/0009-0002-1095-6228",
+
     "https://scholar.google.com/citations?user=bmVEc3wAAAAJ",
+
     "https://www.lens.org/lens/orcid/0009-0002-1095-6228"
+
   ]
+
 }
+
 </script>
 
 
@@ -133,7 +168,11 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
     --warning-bg:#f7f3e8;
     --warning-text:#725d2d;
 
+    --candidate-bg:#f7f3e8;
+    --candidate-text:#725d2d;
+
     --max-width:1120px;
+
 }
 
 
@@ -142,16 +181,21 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 ========================================================= */
 
 *{
+
     box-sizing:border-box;
+
 }
 
 html{
+
     scroll-behavior:smooth;
+
 }
 
 body{
 
     margin:0;
+
     padding:0;
 
     background:#ffffff;
@@ -167,10 +211,26 @@ body{
         sans-serif;
 
     line-height:1.75;
+
 }
 
 a{
+
     color:var(--primary);
+
+}
+
+code{
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+
+    font-size:0.9em;
+
 }
 
 .container{
@@ -180,6 +240,7 @@ a{
     margin:auto;
 
     padding:0 36px;
+
 }
 
 
@@ -201,6 +262,7 @@ a{
 
     border-bottom:
         1px solid rgba(255,255,255,0.12);
+
 }
 
 .nav-inner{
@@ -216,6 +278,7 @@ a{
     justify-content:space-between;
 
     align-items:center;
+
 }
 
 .nav-brand{
@@ -223,6 +286,7 @@ a{
     font-weight:700;
 
     letter-spacing:0.3px;
+
 }
 
 .nav-links{
@@ -230,6 +294,7 @@ a{
     display:flex;
 
     gap:22px;
+
 }
 
 .nav-links a{
@@ -241,6 +306,7 @@ a{
     font-size:0.92rem;
 
     opacity:0.9;
+
 }
 
 .nav-links a:hover{
@@ -248,6 +314,7 @@ a{
     opacity:1;
 
     text-decoration:underline;
+
 }
 
 
@@ -269,6 +336,7 @@ a{
     padding:
         78px 36px
         72px;
+
 }
 
 .hero-inner{
@@ -276,6 +344,7 @@ a{
     max-width:var(--max-width);
 
     margin:auto;
+
 }
 
 .hero h1{
@@ -287,6 +356,7 @@ a{
     margin:0 0 14px;
 
     letter-spacing:-0.5px;
+
 }
 
 .hero-subtitle{
@@ -298,6 +368,7 @@ a{
     margin-bottom:20px;
 
     max-width:900px;
+
 }
 
 .hero-description{
@@ -307,6 +378,7 @@ a{
     font-size:1.05rem;
 
     opacity:0.94;
+
 }
 
 .hero-links{
@@ -318,6 +390,7 @@ a{
     flex-wrap:wrap;
 
     gap:12px;
+
 }
 
 .hero-links a{
@@ -336,12 +409,14 @@ a{
     border-radius:6px;
 
     font-size:0.9rem;
+
 }
 
 .hero-links a:hover{
 
     background:
         rgba(255,255,255,0.10);
+
 }
 
 
@@ -352,6 +427,7 @@ a{
 .section{
 
     padding:56px 0 8px;
+
 }
 
 .section h2{
@@ -367,6 +443,7 @@ a{
 
     border-bottom:
         2px solid var(--border);
+
 }
 
 .section h3{
@@ -374,6 +451,7 @@ a{
     color:var(--primary);
 
     margin-top:0;
+
 }
 
 .lead{
@@ -381,6 +459,7 @@ a{
     font-size:1.05rem;
 
     max-width:920px;
+
 }
 
 
@@ -401,6 +480,7 @@ a{
     gap:18px;
 
     margin-top:28px;
+
 }
 
 .research-card{
@@ -413,6 +493,7 @@ a{
     border-radius:10px;
 
     padding:22px;
+
 }
 
 .research-card h3{
@@ -420,6 +501,7 @@ a{
     margin-bottom:8px;
 
     font-size:1.08rem;
+
 }
 
 .research-card p{
@@ -429,11 +511,13 @@ a{
     color:var(--muted);
 
     font-size:0.94rem;
+
 }
 
 .research-tags{
 
     margin-top:24px;
+
 }
 
 .research-tags span{
@@ -453,6 +537,7 @@ a{
     border-radius:20px;
 
     font-size:0.88rem;
+
 }
 
 
@@ -474,11 +559,13 @@ a{
 
     padding:
         24px 26px;
+
 }
 
 .current-box strong{
 
     color:var(--primary);
+
 }
 
 .status{
@@ -503,6 +590,301 @@ a{
     font-weight:600;
 
     vertical-align:middle;
+
+}
+
+
+/* =========================================================
+   RESEARCH ATTENTION DASHBOARD
+========================================================= */
+
+.attention-intro{
+
+    max-width:920px;
+
+    color:var(--muted);
+
+    font-size:0.96rem;
+
+    margin-bottom:22px;
+
+}
+
+.attention-dashboard{
+
+    border:
+        1px solid var(--border);
+
+    border-radius:10px;
+
+    background:var(--lighter);
+
+    overflow:hidden;
+
+}
+
+.attention-header{
+
+    padding:
+        22px 24px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+.attention-header h3{
+
+    margin:
+        0 0 5px;
+
+    font-size:1.12rem;
+
+}
+
+.attention-header p{
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:0.9rem;
+
+}
+
+.attention-status{
+
+    display:inline-block;
+
+    padding:
+        5px 10px;
+
+    border-radius:14px;
+
+    background:
+        var(--candidate-bg);
+
+    color:
+        var(--candidate-text);
+
+    font-size:0.76rem;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+.attention-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:1px;
+
+    background:var(--border);
+
+}
+
+.attention-card{
+
+    background:white;
+
+    padding:
+        22px 15px;
+
+    text-align:center;
+
+}
+
+.attention-label{
+
+    font-size:0.74rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:0.7px;
+
+    color:var(--muted);
+
+    margin-bottom:7px;
+
+}
+
+.attention-value{
+
+    font-size:1.8rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    color:var(--primary);
+
+}
+
+.attention-description{
+
+    margin-top:7px;
+
+    font-size:0.76rem;
+
+    color:var(--muted);
+
+}
+
+.attention-funnel{
+
+    padding:
+        20px 24px;
+
+    background:var(--light);
+
+}
+
+.funnel-title{
+
+    font-size:0.84rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:0.7px;
+
+    color:var(--muted);
+
+    margin-bottom:9px;
+
+    font-weight:700;
+
+}
+
+.funnel-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:8px 0;
+
+    border-bottom:
+        1px solid var(--border);
+
+    font-size:0.9rem;
+
+}
+
+.funnel-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.funnel-row strong{
+
+    color:var(--primary);
+
+}
+
+.evidence-panel{
+
+    padding:
+        20px 24px;
+
+    background:white;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+.evidence-panel h4{
+
+    margin:
+        0 0 12px;
+
+    color:var(--primary);
+
+    font-size:0.94rem;
+
+}
+
+.evidence-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+}
+
+.evidence-item{
+
+    padding:
+        12px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:7px;
+
+    background:var(--lighter);
+
+}
+
+.evidence-item .evidence-label{
+
+    display:block;
+
+    font-size:0.72rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:0.5px;
+
+    color:var(--muted);
+
+    margin-bottom:4px;
+
+}
+
+.evidence-item strong{
+
+    font-size:0.9rem;
+
+    color:var(--primary);
+
+}
+
+.attention-footer{
+
+    padding:
+        12px 20px;
+
+    border-top:
+        1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:0.75rem;
+
+    line-height:1.6;
+
 }
 
 
@@ -521,6 +903,7 @@ a{
         );
 
     gap:16px;
+
 }
 
 .status-card{
@@ -534,6 +917,7 @@ a{
         18px 20px;
 
     background:white;
+
 }
 
 .status-card .label{
@@ -547,6 +931,7 @@ a{
     color:var(--muted);
 
     margin-bottom:5px;
+
 }
 
 .status-card h3{
@@ -555,6 +940,7 @@ a{
 
     margin:
         0 0 6px;
+
 }
 
 .status-card p{
@@ -564,6 +950,7 @@ a{
     color:var(--muted);
 
     font-size:0.9rem;
+
 }
 
 
@@ -582,6 +969,7 @@ a{
         );
 
     gap:16px;
+
 }
 
 .method-card{
@@ -595,6 +983,7 @@ a{
     border-radius:9px;
 
     background:var(--lighter);
+
 }
 
 .method-card h3{
@@ -602,6 +991,7 @@ a{
     font-size:1rem;
 
     margin-bottom:7px;
+
 }
 
 .method-card p{
@@ -611,6 +1001,7 @@ a{
     color:var(--muted);
 
     font-size:0.9rem;
+
 }
 
 
@@ -629,6 +1020,7 @@ a{
         );
 
     gap:15px;
+
 }
 
 .card{
@@ -641,11 +1033,13 @@ a{
 
     border:
         1px solid var(--border);
+
 }
 
 .card strong{
 
     color:var(--primary);
+
 }
 
 .card a{
@@ -653,11 +1047,13 @@ a{
     text-decoration:none;
 
     font-weight:600;
+
 }
 
 .card a:hover{
 
     text-decoration:underline;
+
 }
 
 
@@ -670,6 +1066,7 @@ a{
     max-width:900px;
 
     font-size:1.02rem;
+
 }
 
 
@@ -680,11 +1077,13 @@ a{
 .publication-group{
 
     margin-top:34px;
+
 }
 
 .publication-group h3{
 
     margin-bottom:16px;
+
 }
 
 .publication{
@@ -705,6 +1104,7 @@ a{
 
     border-radius:
         0 8px 8px 0;
+
 }
 
 .publication-title{
@@ -716,6 +1116,7 @@ a{
     line-height:1.55;
 
     margin-bottom:7px;
+
 }
 
 .publication-meta{
@@ -725,6 +1126,7 @@ a{
     color:var(--muted);
 
     margin-bottom:9px;
+
 }
 
 .publication-status{
@@ -734,6 +1136,7 @@ a{
     color:var(--secondary);
 
     margin-bottom:9px;
+
 }
 
 .publication a{
@@ -741,11 +1144,13 @@ a{
     text-decoration:none;
 
     font-weight:600;
+
 }
 
 .publication a:hover{
 
     text-decoration:underline;
+
 }
 
 
@@ -771,6 +1176,7 @@ a{
     color:#4d5b68;
 
     font-size:0.93rem;
+
 }
 
 
@@ -793,6 +1199,7 @@ footer{
 
     border-top:
         1px solid var(--border);
+
 }
 
 
@@ -800,23 +1207,44 @@ footer{
    MOBILE
 ========================================================= */
 
+@media(max-width:800px){
+
+    .attention-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .evidence-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
 @media(max-width:700px){
 
     .container{
 
         padding:
             0 20px;
+
     }
 
     .nav-inner{
 
         padding:
             11px 20px;
+
     }
 
     .nav-links{
 
         display:none;
+
     }
 
     .hero{
@@ -824,26 +1252,84 @@ footer{
         padding:
             55px 20px
             50px;
+
     }
 
     .hero h1{
 
         font-size:2.35rem;
+
     }
 
     .hero-subtitle{
 
         font-size:1.08rem;
+
     }
 
     .hero-description{
 
         font-size:0.98rem;
+
     }
 
     .section{
 
         padding-top:42px;
+
+    }
+
+    .attention-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+    .attention-funnel{
+
+        padding:
+            16px 18px;
+
+    }
+
+    .evidence-panel{
+
+        padding:
+            18px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .attention-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+    .attention-card{
+
+        padding:
+            18px 8px;
+
+    }
+
+    .attention-value{
+
+        font-size:1.45rem;
+
+    }
+
+    .evidence-grid{
+
+        grid-template-columns:
+            1fr;
+
     }
 
 }
@@ -876,6 +1362,10 @@ Research
 
 <a href="#current">
 Current Status
+</a>
+
+<a href="#attention">
+Attention
 </a>
 
 <a href="#methodology">
@@ -929,28 +1419,36 @@ mathematical foundations, and computational mathematics.
 href="https://orcid.org/0009-0002-1095-6228"
 target="_blank"
 rel="noopener">
+
 ORCID
+
 </a>
 
 <a
 href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ"
 target="_blank"
 rel="noopener">
+
 Google Scholar
+
 </a>
 
 <a
 href="https://www.lens.org/lens/orcid/0009-0002-1095-6228"
 target="_blank"
 rel="noopener">
+
 Lens
+
 </a>
 
 <a
 href="https://doi.org/10.17605/OSF.IO/CAQXH"
 target="_blank"
 rel="noopener">
+
 OSF Hub
+
 </a>
 
 </div>
@@ -1088,7 +1586,7 @@ class="section"
 id="current">
 
 <h2>
-Current Research Status — August 2026
+Current Research Status — September 2026
 </h2>
 
 
@@ -1170,7 +1668,7 @@ The original proof programme has therefore been
 
 <strong>
 concluded at V23.4
-</strong>,
+</strong>
 
 and is not being continued under the original conjectural
 assumption.
@@ -1193,6 +1691,315 @@ Additional Cantor–Pascal and scale-structure observations are
 retained as exploratory mathematical diagnostics.
 
 </p>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RESEARCH ATTENTION & VERIFICATION DASHBOARD
+===================================================== -->
+
+<section
+class="section"
+id="attention">
+
+<h2>
+Research Attention &amp; Verification
+</h2>
+
+
+<p class="attention-intro">
+
+This dashboard reports observable research-engagement signals
+associated with the computational audit of Sun's (2,4,6,8)
+Conjecture. The metrics describe platform events and research
+actions; they should not be interpreted as verified counts of
+individual researchers or as measures of scientific validity.
+
+</p>
+
+
+<div class="attention-dashboard">
+
+
+<div class="attention-header">
+
+<div>
+
+<h3>
+Sun's (2,4,6,8) Conjecture Audit
+</h3>
+
+<p>
+
+Candidate
+<code>n* = 896,315,812,331,399</code>
+•
+OEIS A306477
+
+</p>
+
+</div>
+
+
+<span class="attention-status">
+
+Computational Candidate
+
+</span>
+
+</div>
+
+
+<!-- =================================================
+     KEY INDICATORS
+================================================= -->
+
+<div class="attention-grid">
+
+
+<div class="attention-card">
+
+<div class="attention-label">
+Reach
+</div>
+
+<div
+class="attention-value"
+id="reach-value">
+—
+</div>
+
+<div class="attention-description">
+Views / reads
+</div>
+
+</div>
+
+
+<div class="attention-card">
+
+<div class="attention-label">
+Engagement
+</div>
+
+<div
+class="attention-value"
+id="engagement-value">
+—
+</div>
+
+<div class="attention-description">
+Unique visitors
+</div>
+
+</div>
+
+
+<div class="attention-card">
+
+<div class="attention-label">
+Verification
+</div>
+
+<div
+class="attention-value"
+id="verification-value">
+—
+</div>
+
+<div class="attention-description">
+Downloads / clones / forks
+</div>
+
+</div>
+
+
+<div class="attention-card">
+
+<div class="attention-label">
+Validation
+</div>
+
+<div
+class="attention-value"
+id="validation-value">
+—
+</div>
+
+<div class="attention-description">
+Citations / replications
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =================================================
+     ATTENTION FUNNEL
+================================================= -->
+
+<div class="attention-funnel">
+
+<div class="funnel-title">
+Observable Research-Engagement Funnel
+</div>
+
+
+<div class="funnel-row">
+
+<span>
+Reach
+</span>
+
+<strong id="reach-count">
+—
+</strong>
+
+</div>
+
+
+<div class="funnel-row">
+
+<span>
+Engagement
+</span>
+
+<strong id="engagement-count">
+—
+</strong>
+
+</div>
+
+
+<div class="funnel-row">
+
+<span>
+Verification
+</span>
+
+<strong id="verification-count">
+—
+</strong>
+
+</div>
+
+
+<div class="funnel-row">
+
+<span>
+Peer Validation
+</span>
+
+<strong id="validation-count">
+Pending independent replication
+</strong>
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     EVIDENCE CLASSIFICATION
+================================================= -->
+
+<div class="evidence-panel">
+
+<h4>
+Evidence Classification
+</h4>
+
+
+<div class="evidence-grid">
+
+
+<div class="evidence-item">
+
+<span class="evidence-label">
+Mathematical Proof
+</span>
+
+<strong id="proof-status">
+Not established
+</strong>
+
+</div>
+
+
+<div class="evidence-item">
+
+<span class="evidence-label">
+Computational Audit
+</span>
+
+<strong id="computation-status">
+Completed
+</strong>
+
+</div>
+
+
+<div class="evidence-item">
+
+<span class="evidence-label">
+Independent Replication
+</span>
+
+<strong id="replication-status">
+Pending
+</strong>
+
+</div>
+
+
+<div class="evidence-item">
+
+<span class="evidence-label">
+Peer Validation
+</span>
+
+<strong id="peer-status">
+Pending
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     FOOTNOTE
+================================================= -->
+
+<div class="attention-footer">
+
+Data source:
+<code>data/attention.json</code>
+
+<br>
+
+Last updated:
+<span id="attention-updated">
+—
+</span>
+
+<br>
+
+Metrics represent observable platform events and research
+actions. Views, reads, downloads, clones, forks, and visitor
+counts are not equivalent to verified numbers of individual
+researchers.
+
+</div>
 
 
 </div>
@@ -1354,6 +2161,7 @@ id="methodology">
 <h2>
 Research Methodology
 </h2>
+
 
 <p class="lead">
 
@@ -1974,6 +2782,293 @@ rel="noopener">
 </footer>
 
 
+<!-- =====================================================
+     ATTENTION DASHBOARD DATA ENGINE
+===================================================== -->
+
+<script>
+
+async function loadAttentionData(){
+
+    try{
+
+        const response =
+            await fetch(
+                "data/attention.json",
+                {
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Unable to load attention data."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /* ==============================================
+           REACH
+        ============================================== */
+
+        const reach =
+
+            Number(
+                data.reach?.researchgate_reads || 0
+            )
+
+            +
+
+            Number(
+                data.reach?.github_views || 0
+            )
+
+            +
+
+            Number(
+                data.reach?.zenodo_views || 0
+            );
+
+
+        /* ==============================================
+           ENGAGEMENT
+        ============================================== */
+
+        const engagement =
+
+            Number(
+                data.engagement?.unique_visitors || 0
+            );
+
+
+        /* ==============================================
+           VERIFICATION
+        ============================================== */
+
+        const verification =
+
+            Number(
+                data.verification?.github_clones || 0
+            )
+
+            +
+
+            Number(
+                data.verification?.github_forks || 0
+            )
+
+            +
+
+            Number(
+                data.verification?.downloads || 0
+            );
+
+
+        /* ==============================================
+           VALIDATION
+        ============================================== */
+
+        const citations =
+
+            Number(
+                data.validation?.citations || 0
+            );
+
+
+        const replications =
+
+            Number(
+                data.validation?.independent_replications || 0
+            );
+
+
+        const validation =
+            citations + replications;
+
+
+        /* ==============================================
+           FORMATTER
+        ============================================== */
+
+        const formatNumber =
+            value =>
+                Number(value).toLocaleString();
+
+
+        /* ==============================================
+           MAIN INDICATORS
+        ============================================== */
+
+        document.getElementById(
+            "reach-value"
+        ).textContent =
+            formatNumber(reach);
+
+
+        document.getElementById(
+            "engagement-value"
+        ).textContent =
+            formatNumber(engagement);
+
+
+        document.getElementById(
+            "verification-value"
+        ).textContent =
+            formatNumber(verification);
+
+
+        document.getElementById(
+            "validation-value"
+        ).textContent =
+            formatNumber(validation);
+
+
+        /* ==============================================
+           FUNNEL
+        ============================================== */
+
+        document.getElementById(
+            "reach-count"
+        ).textContent =
+            formatNumber(reach)
+            + " observable events";
+
+
+        document.getElementById(
+            "engagement-count"
+        ).textContent =
+            formatNumber(engagement)
+            + " unique";
+
+
+        document.getElementById(
+            "verification-count"
+        ).textContent =
+            formatNumber(verification)
+            + " actions";
+
+
+        document.getElementById(
+            "validation-count"
+        ).textContent =
+
+            replications > 0
+
+                ? formatNumber(replications)
+                  + " independent replication(s)"
+
+                : "Pending independent replication";
+
+
+        /* ==============================================
+           EVIDENCE STATUS
+        ============================================== */
+
+        if(
+            data.evidence &&
+            data.evidence.computational_audit
+        ){
+
+            document.getElementById(
+                "computation-status"
+            ).textContent =
+                data.evidence.computational_audit;
+
+        }
+
+
+        if(
+            data.evidence &&
+            data.evidence.mathematical_proof
+        ){
+
+            document.getElementById(
+                "proof-status"
+            ).textContent =
+                data.evidence.mathematical_proof;
+
+        }
+
+
+        if(
+            data.evidence &&
+            data.evidence.independent_replication
+        ){
+
+            document.getElementById(
+                "replication-status"
+            ).textContent =
+                data.evidence.independent_replication;
+
+        }
+
+
+        if(
+            data.evidence &&
+            data.evidence.peer_validation
+        ){
+
+            document.getElementById(
+                "peer-status"
+            ).textContent =
+                data.evidence.peer_validation;
+
+        }
+
+
+        /* ==============================================
+           LAST UPDATED
+        ============================================== */
+
+        if(data.last_verified){
+
+            document.getElementById(
+                "attention-updated"
+            ).textContent =
+                data.last_verified;
+
+        }
+
+
+    }
+
+    catch(error){
+
+        console.warn(
+            "Research attention dashboard:",
+            error.message
+        );
+
+
+        /*
+         * Keep the dashboard functional even when
+         * the external JSON data source is unavailable.
+         */
+
+        document.getElementById(
+            "attention-updated"
+        ).textContent =
+            "Data source unavailable";
+
+
+    }
+
+}
+
+
+loadAttentionData();
+
+</script>
+
+
 </body>
 
 </html>
+```

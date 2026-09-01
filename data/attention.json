@@ -1,0 +1,30 @@
+{
+  "updated": "2026-09-01",
+  "candidate": {
+    "name": "Sun's (2,4,6,8) Conjecture Audit",
+    "target": "n* = 896,315,812,331,399",
+    "oeis": "A306477",
+    "status": "[COMP_VERIF_CANDIDATE]"
+  },
+  "reach": {
+    "researchgate_reads": 1200,
+    "github_views": 900,
+    "zenodo_views": 310
+  },
+  "engagement": {
+    "github_unique_visitors": 420,
+    "zenodo_unique_views": 310
+  },
+  "verification": {
+    "github_unique_cloners": 70,
+    "zenodo_downloads": 120,
+    "github_stars": 35,
+    "github_forks": 8
+  },
+  "validation": {
+    "rg_recommendations": 12,
+    "citations": 0,
+    "independent_replications": 0
+  },
+  "last_verified": "2026-09-01"
+}

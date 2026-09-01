@@ -1,4 +1,5 @@
 {
+  "schema_version": "1.0",
   "updated": "2026-09-01",
 
   "candidate": {
@@ -8,33 +9,138 @@
     "status": "Computational Counterexample Candidate"
   },
 
-  "reach": {
-    "researchgate_reads": 0,
-    "github_views": 0,
-    "zenodo_views": 0
+  "github": {
+
+    "repositories": [
+
+      {
+        "name": "IFG-Theoretical-Foundations",
+        "url": "https://github.com/suns1232023/IFG-Theoretical-Foundations",
+
+        "views": 0,
+        "unique_visitors": 0,
+
+        "clones": 0,
+        "unique_cloners": 0,
+
+        "forks": 0,
+        "stars": 0
+      }
+
+    ],
+
+    "totals": {
+
+      "views": 0,
+      "unique_visitors": 0,
+
+      "clones": 0,
+      "unique_cloners": 0,
+
+      "forks": 0,
+      "stars": 0
+    },
+
+    "data_window": "rolling_14_days",
+
+    "lifetime_archive": true
+
   },
 
-  "engagement": {
-    "unique_visitors": 0
+
+  "researchgate": {
+
+    "publications": [
+
+      {
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture",
+        "reads": 0
+      }
+
+    ],
+
+    "total_reads": 0
+
   },
 
-  "verification": {
-    "github_clones": 0,
-    "github_forks": 0,
-    "downloads": 0
+
+  "zenodo": {
+
+    "records": [
+
+      {
+        "doi": "10.5281/zenodo.22139197",
+        "title": "A Computational Audit of a Candidate Counterexample",
+        "unique_views": 0,
+        "total_views": 0,
+        "unique_downloads": 0,
+        "total_downloads": 0
+      }
+
+    ],
+
+    "totals": {
+
+      "unique_views": 0,
+      "total_views": 0,
+      "unique_downloads": 0,
+      "total_downloads": 0
+
+    }
+
   },
+
+
+  "osf": {
+
+    "projects": [
+
+      {
+        "doi": "10.17605/OSF.IO/CAQXH",
+        "title": "Sun's (2,4,6,8) Conjecture Audit",
+        "views": 0,
+        "downloads": 0
+      }
+
+    ],
+
+    "totals": {
+
+      "views": 0,
+      "downloads": 0
+
+    }
+
+  },
+
 
   "validation": {
+
     "citations": 0,
     "independent_replications": 0
+
   },
 
+
   "evidence": {
+
     "mathematical_proof": "Not established",
     "computational_audit": "Completed",
     "independent_replication": "Pending",
     "peer_validation": "Pending"
+
   },
+
+
+  "attention": {
+
+    "reach_events": 0,
+    "engagement_events": 0,
+    "verification_events": 0,
+    "validation_events": 0
+
+  },
+
 
   "last_verified": "2026-09-01"
 }

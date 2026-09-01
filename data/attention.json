@@ -1,30 +1,42 @@
+```json
 {
   "updated": "2026-09-01",
+
   "candidate": {
-    "name": "Sun's (2,4,6,8) Conjecture Audit",
-    "target": "n* = 896,315,812,331,399",
+    "name": "Sun's (2,4,6,8) Conjecture",
+    "number": "896315812331399",
     "oeis": "A306477",
-    "status": "[COMP_VERIF_CANDIDATE]"
+    "status": "Computational Counterexample Candidate"
   },
+
   "reach": {
-    "researchgate_reads": 1200,
-    "github_views": 900,
-    "zenodo_views": 310
+    "researchgate_reads": 0,
+    "github_views": 0,
+    "zenodo_views": 0
   },
+
   "engagement": {
-    "github_unique_visitors": 420,
-    "zenodo_unique_views": 310
+    "unique_visitors": 0
   },
+
   "verification": {
-    "github_unique_cloners": 70,
-    "zenodo_downloads": 120,
-    "github_stars": 35,
-    "github_forks": 8
+    "github_clones": 0,
+    "github_forks": 0,
+    "downloads": 0
   },
+
   "validation": {
-    "rg_recommendations": 12,
     "citations": 0,
     "independent_replications": 0
   },
+
+  "evidence": {
+    "mathematical_proof": "Not established",
+    "computational_audit": "Completed",
+    "independent_replication": "Pending",
+    "peer_validation": "Pending"
+  },
+
   "last_verified": "2026-09-01"
 }
+```

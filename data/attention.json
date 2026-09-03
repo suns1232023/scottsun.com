@@ -1,222 +1,172 @@
 {
-"schema_version": "1.1",
-"updated": "2026-09-02",
-"last_verified": "2026-09-02",
-
-"candidate": {
-"name": "Sun's (2,4,6,8) Conjecture",
-"number": "896315812331399",
-"oeis": "A306477",
-"status": "Computational Counterexample Candidate",
-"claim_level": "Unconfirmed",
-"description": "A candidate counterexample identified by computational exhaustive search. Independent replication and peer validation remain pending."
-},
-
-"github": {
-"repositories": [
-{
-"name": "IFG-Theoretical-Foundations",
-"url": "https://github.com/suns1232023/IFG-Theoretical-Foundations",
-
-```
-    "traffic": {
+  "schema_version": "1.1",
+  "updated": "2026-09-02",
+  "last_verified": "2026-09-02",
+  "candidate": {
+    "name": "Sun's (2,4,6,8) Conjecture",
+    "number": "896315812331399",
+    "oeis": "A306477",
+    "status": "Computational Counterexample Candidate",
+    "claim_level": "Unconfirmed",
+    "description": "A candidate counterexample identified by computational exhaustive search. Independent replication and peer validation remain pending."
+  },
+  "github": {
+    "repositories": [
+      {
+        "name": "IFG-Theoretical-Foundations",
+        "url": "[https://github.com/suns1232023/IFG-Theoretical-Foundations](https://github.com/suns1232023/IFG-Theoretical-Foundations)",
+        "traffic": {
+          "views": 114,
+          "unique_visitors": 5,
+          "clones": 66,
+          "unique_cloners": 37
+        },
+        "engagement": {
+          "forks": 0,
+          "stars": 0
+        }
+      }
+    ],
+    "totals": {
       "views": 114,
       "unique_visitors": 5,
       "clones": 66,
-      "unique_cloners": 37
-    },
-
-    "engagement": {
+      "unique_cloners": 37,
       "forks": 0,
       "stars": 0
+    },
+    "data_window": "rolling_14_days",
+    "archive": {
+      "enabled": false,
+      "type": "daily_snapshot",
+      "description": "Historical GitHub traffic is not yet archived in this JSON file. GitHub traffic itself is limited to a rolling 14-day window."
     }
-  }
-],
-
-"totals": {
-  "views": 114,
-  "unique_visitors": 5,
-  "clones": 66,
-  "unique_cloners": 37,
-  "forks": 0,
-  "stars": 0
-},
-
-"data_window": "rolling_14_days",
-
-"archive": {
-  "enabled": false,
-  "type": "daily_snapshot",
-  "description": "Historical GitHub traffic is not yet archived in this JSON file. GitHub traffic itself is limited to a rolling 14-day window."
-}
-```
-
-},
-
-"researchgate": {
-"publications": [
-{
-"title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-"reads": 32,
-"recommendations": 1,
-"research_interest_score": 1.3
-}
-],
-
-```
-"total_reads": 32,
-
-"data_status": "Manual",
-"api_status": "No_public_official_api"
-```
-
-},
-
-"zenodo": {
-"records": [
-{
-"doi": "10.5281/zenodo.22139197",
-"title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-
-```
-    "unique_views": 118,
-    "total_views": 118,
-
-    "unique_downloads": 10,
-    "total_downloads": 10
-  }
-],
-
-"totals": {
-  "unique_views": 118,
-  "total_views": 118,
-  "unique_downloads": 10,
-  "total_downloads": 10
-},
-
-"data_status": "API"
-```
-
-},
-
-"osf": {
-"projects": [
-{
-"doi": "10.17605/OSF.IO/CAQXH",
-"title": "Sun's (2,4,6,8) Conjecture Audit",
-"views": 0,
-"downloads": 0
-}
-],
-
-```
-"totals": {
-  "views": 0,
-  "downloads": 0
-},
-
-"data_status": "API"
-```
-
-},
-
-"validation": {
-"citations": 0,
-"independent_replications": 0
-},
-
-"evidence": {
-"mathematical_proof": "Not established",
-"computational_audit": "Completed",
-"independent_replication": "Pending",
-"peer_validation": "Pending"
-},
-
-"attention": {
-"reach_events": 264,
-"engagement_events": 6,
-"verification_events": 76,
-"validation_events": 0,
-
-```
-"components": {
-  "reach": {
-    "github_views": 114,
-    "researchgate_reads": 32,
-    "zenodo_views": 118,
-    "osf_views": 0,
-    "calculated_total": 264
   },
-
-  "engagement": {
-    "github_unique_visitors": 5,
-    "researchgate_recommendations": 1,
-    "calculated_total": 6
+  "researchgate": {
+    "publications": [
+      {
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        "reads": 32,
+        "recommendations": 1,
+        "research_interest_score": 1.3
+      }
+    ],
+    "total_reads": 32,
+    "data_status": "Manual",
+    "api_status": "No_public_official_api"
   },
-
-  "research_actions": {
-    "github_clones": 66,
-    "github_forks": 0,
-    "zenodo_downloads": 10,
-    "osf_downloads": 0,
-    "calculated_total": 76
+  "zenodo": {
+    "records": [
+      {
+        "doi": "10.5281/zenodo.22139197",
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        "unique_views": 118,
+        "total_views": 118,
+        "unique_downloads": 10,
+        "total_downloads": 10
+      }
+    ],
+    "totals": {
+      "unique_views": 118,
+      "total_views": 118,
+      "unique_downloads": 10,
+      "total_downloads": 10
+    },
+    "data_status": "API"
   },
-
+  "osf": {
+    "projects": [
+      {
+        "doi": "10.17605/OSF.IO/CAQXH",
+        "title": "Sun's (2,4,6,8) Conjecture Audit",
+        "views": 0,
+        "downloads": 0
+      }
+    ],
+    "totals": {
+      "views": 0,
+      "downloads": 0
+    },
+    "data_status": "API"
+  },
   "validation": {
     "citations": 0,
-    "independent_replications": 0,
-    "calculated_total": 0
+    "independent_replications": 0
+  },
+  "evidence": {
+    "mathematical_proof": "Not established",
+    "computational_audit": "Completed",
+    "independent_replication": "Pending",
+    "peer_validation": "Pending"
+  },
+  "attention": {
+    "reach_events": 264,
+    "engagement_events": 6,
+    "verification_events": 76,
+    "validation_events": 0,
+    "components": {
+      "reach": {
+        "github_views": 114,
+        "researchgate_reads": 32,
+        "zenodo_views": 118,
+        "osf_views": 0,
+        "calculated_total": 264
+      },
+      "engagement": {
+        "github_unique_visitors": 5,
+        "researchgate_recommendations": 1,
+        "calculated_total": 6
+      },
+      "research_actions": {
+        "github_clones": 66,
+        "github_forks": 0,
+        "zenodo_downloads": 10,
+        "osf_downloads": 0,
+        "calculated_total": 76
+      },
+      "validation": {
+        "citations": 0,
+        "independent_replications": 0,
+        "calculated_total": 0
+      }
+    }
+  },
+  "methodology": {
+    "reach_events": {
+      "definition": "Platform-level access events reported by the respective platforms.",
+      "formula": "GitHub views + ResearchGate reads + Zenodo views + OSF views",
+      "interpretation": "These are platform events and must not be interpreted as unique researchers."
+    },
+    "engagement_events": {
+      "definition": "Selected observable interaction signals.",
+      "formula": "GitHub unique visitors + ResearchGate recommendations",
+      "interpretation": "This is an event-based engagement indicator, not a deduplicated count of individuals."
+    },
+    "verification_events": {
+      "definition": "Research-related actions indicating activity beyond passive viewing.",
+      "formula": "GitHub clones + GitHub forks + Zenodo downloads + OSF downloads",
+      "interpretation": "These actions do not constitute independent scientific verification."
+    },
+    "validation_events": {
+      "definition": "Evidence providing stronger external confirmation of the research claim.",
+      "formula": "Citations + independent replications",
+      "interpretation": "Only independently documented validation events are included."
+    },
+    "deduplication": {
+      "status": "Not_available",
+      "description": "Cross-platform users cannot currently be deduplicated. Therefore platform-level events are reported rather than unique individuals."
+    },
+    "github_traffic": {
+      "window": "rolling_14_days",
+      "historical_status": "Not_archived",
+      "description": "GitHub traffic metrics represent the platform's available rolling traffic window and should not be interpreted as lifetime traffic."
+    }
+  },
+  "data_quality": {
+    "source_level_consistency": true,
+    "attention_totals_verified": true,
+    "cross_platform_deduplication": false,
+    "independent_validation": false,
+    "last_checked": "2026-09-02"
   }
-}
-```
-
-},
-
-"methodology": {
-"reach_events": {
-"definition": "Platform-level access events reported by the respective platforms.",
-"formula": "GitHub views + ResearchGate reads + Zenodo views + OSF views",
-"interpretation": "These are platform events and must not be interpreted as unique researchers."
-},
-
-```
-"engagement_events": {
-  "definition": "Selected observable interaction signals.",
-  "formula": "GitHub unique visitors + ResearchGate recommendations",
-  "interpretation": "This is an event-based engagement indicator, not a deduplicated count of individuals."
-},
-
-"verification_events": {
-  "definition": "Research-related actions indicating activity beyond passive viewing.",
-  "formula": "GitHub clones + GitHub forks + Zenodo downloads + OSF downloads",
-  "interpretation": "These actions do not constitute independent scientific verification."
-},
-
-"validation_events": {
-  "definition": "Evidence providing stronger external confirmation of the research claim.",
-  "formula": "Citations + independent replications",
-  "interpretation": "Only independently documented validation events are included."
-},
-
-"deduplication": {
-  "status": "Not_available",
-  "description": "Cross-platform users cannot currently be deduplicated. Therefore platform-level events are reported rather than unique individuals."
-},
-
-"github_traffic": {
-  "window": "rolling_14_days",
-  "historical_status": "Not_archived",
-  "description": "GitHub traffic metrics represent the platform's available rolling traffic window and should not be interpreted as lifetime traffic."
-}
-```
-
-},
-
-"data_quality": {
-"source_level_consistency": true,
-"attention_totals_verified": true,
-"cross_platform_deduplication": false,
-"independent_validation": false,
-"last_checked": "2026-09-02"
-}
 }

@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1203,6 +1203,64 @@ footer{
 }
 
 
+
+/* =========================================================
+   ATTENTION DATA QUALITY & META
+========================================================= */
+
+.attention-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+
+.attention-meta span{
+    display:inline-flex;
+    align-items:center;
+    padding:4px 9px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--lighter);
+    color:var(--muted);
+    font-size:0.74rem;
+}
+
+.attention-meta .live{
+    color:var(--success-text);
+    background:var(--success-bg);
+}
+
+.metric-source{
+    margin-top:8px;
+    font-size:0.72rem;
+    color:var(--muted);
+}
+
+.data-quality{
+    margin-top:12px;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:7px;
+    background:var(--lighter);
+    color:var(--muted);
+    font-size:0.76rem;
+    line-height:1.55;
+}
+
+.data-quality.warning{
+    background:var(--warning-bg);
+    color:var(--warning-text);
+}
+
+.dashboard-error{
+    padding:18px 20px;
+    color:var(--warning-text);
+    background:var(--warning-bg);
+    border-top:1px solid var(--border);
+    font-size:0.86rem;
+}
+
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -1707,17 +1765,16 @@ class="section"
 id="attention">
 
 <h2>
-Research Attention &amp; Verification
+Research Attention Dashboard
 </h2>
 
 
 <p class="attention-intro">
 
-This dashboard reports observable research-engagement signals
-associated with the computational audit of Sun's (2,4,6,8)
-Conjecture. The metrics describe platform events and research
-actions; they should not be interpreted as verified counts of
-individual researchers or as measures of scientific validity.
+This dashboard reports observable platform signals associated
+with the computational audit of Sun's (2,4,6,8) Conjecture. The
+metrics are derived from the structured data in <code>data/attention.json</code>
+and are deliberately separated from scientific validation.
 
 </p>
 
@@ -1734,14 +1791,16 @@ Sun's (2,4,6,8) Conjecture Audit
 </h3>
 
 <p>
-
 Candidate
-<code>n* = 896,315,812,331,399</code>
+<code id="candidate-number">n* = 896,315,812,331,399</code>
 •
-OEIS A306477
-
+<a id="candidate-oeis" href="https://oeis.org/A306477" target="_blank" rel="noopener">OEIS A306477</a>
 </p>
-
+<div class="attention-meta">
+<span class="live" id="data-status">Live data</span>
+<span id="data-window">GitHub traffic: rolling 14 days</span>
+<span id="data-refreshed">Updated —</span>
+</div>
 </div>
 
 
@@ -1774,7 +1833,7 @@ id="reach-value">
 </div>
 
 <div class="attention-description">
-Views / reads
+Platform views / reads
 </div>
 
 </div>
@@ -1783,7 +1842,7 @@ Views / reads
 <div class="attention-card">
 
 <div class="attention-label">
-Engagement
+Unique Visitors
 </div>
 
 <div
@@ -1793,7 +1852,7 @@ id="engagement-value">
 </div>
 
 <div class="attention-description">
-Unique visitors
+GitHub, rolling 14 days
 </div>
 
 </div>
@@ -1802,7 +1861,7 @@ Unique visitors
 <div class="attention-card">
 
 <div class="attention-label">
-Verification
+Research Actions
 </div>
 
 <div
@@ -1831,7 +1890,7 @@ id="validation-value">
 </div>
 
 <div class="attention-description">
-Citations / replications
+Citations / independent replications
 </div>
 
 </div>
@@ -1867,7 +1926,7 @@ Reach
 <div class="funnel-row">
 
 <span>
-Engagement
+Unique Visitors
 </span>
 
 <strong id="engagement-count">
@@ -1880,7 +1939,7 @@ Engagement
 <div class="funnel-row">
 
 <span>
-Verification
+Research Actions
 </span>
 
 <strong id="verification-count">
@@ -1893,7 +1952,7 @@ Verification
 <div class="funnel-row">
 
 <span>
-Peer Validation
+Validation
 </span>
 
 <strong id="validation-count">
@@ -1995,9 +2054,14 @@ Last updated:
 <br>
 
 Metrics represent observable platform events and research
-actions. Views, reads, downloads, clones, forks, and visitor
-counts are not equivalent to verified numbers of individual
-researchers.
+actions. They are not equivalent to counts of individual
+researchers and do not constitute evidence of mathematical
+validity. GitHub traffic is a rolling 14-day measurement; historical
+archives, where available, are maintained separately.
+
+<div id="data-quality" class="data-quality">
+Data consistency check: pending.
+</div>
 
 </div>
 
@@ -2787,288 +2851,311 @@ rel="noopener">
 ===================================================== -->
 
 <script>
+/* =============================================================
+   ATTENTION DASHBOARD DATA ENGINE
+   Source: data/attention.json
+   The page derives display metrics from source-level records.
+   It does not treat platform activity as scientific validation.
+============================================================= */
 
-async function loadAttentionData(){
+(() => {
+    "use strict";
 
-    try{
+    const DATA_URL = "data/attention.json";
 
-        const response =
-            await fetch(
-                "data/attention.json",
-                {
-                    cache:"no-store"
+    const byId = id => document.getElementById(id);
+
+    const number = value => {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : 0;
+    };
+
+    const formatNumber = value =>
+        number(value).toLocaleString("en-US");
+
+    const setText = (id, value) => {
+        const el = byId(id);
+        if (el) el.textContent = value;
+    };
+
+    const firstRepository = data =>
+        data?.github?.repositories?.[0] || {};
+
+    async function loadAttentionData() {
+        try {
+            const response = await fetch(DATA_URL, {
+                cache: "no-store"
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+            const repo = firstRepository(data);
+
+            /* -------------------------------------------------
+               SOURCE-LEVEL METRICS
+            ------------------------------------------------- */
+
+            const githubViews = number(
+                data.github?.totals?.views ?? repo.views
+            );
+
+            const githubUniqueVisitors = number(
+                data.github?.totals?.unique_visitors ?? repo.unique_visitors
+            );
+
+            const githubClones = number(
+                data.github?.totals?.clones ?? repo.clones
+            );
+
+            const githubForks = number(
+                data.github?.totals?.forks ?? repo.forks
+            );
+
+            const zenodoViews = number(
+                data.zenodo?.totals?.total_views
+            );
+
+            const zenodoDownloads = number(
+                data.zenodo?.totals?.total_downloads
+            );
+
+            const researchgateReads = number(
+                data.researchgate?.total_reads
+            );
+
+            const osfViews = number(
+                data.osf?.totals?.views
+            );
+
+            const osfDownloads = number(
+                data.osf?.totals?.downloads
+            );
+
+            const citations = number(
+                data.validation?.citations
+            );
+
+            const replications = number(
+                data.validation?.independent_replications
+            );
+
+            /* -------------------------------------------------
+               DERIVED DASHBOARD METRICS
+
+               Reach:
+               GitHub views + ResearchGate reads + Zenodo views
+               + OSF views.
+
+               Unique Visitors:
+               GitHub unique visitors only. This is intentionally
+               not mixed with recommendations or other events.
+
+               Research Actions:
+               GitHub clones + forks + Zenodo downloads + OSF
+               downloads. These are stronger platform actions,
+               but are NOT scientific verification.
+
+               Validation:
+               citations + independent replications.
+            ------------------------------------------------- */
+
+            const reach =
+                githubViews +
+                researchgateReads +
+                zenodoViews +
+                osfViews;
+
+            const uniqueVisitors = githubUniqueVisitors;
+
+            const researchActions =
+                githubClones +
+                githubForks +
+                zenodoDownloads +
+                osfDownloads;
+
+            const validation =
+                citations +
+                replications;
+
+            /* -------------------------------------------------
+               MAIN INDICATORS
+            ------------------------------------------------- */
+
+            setText("reach-value", formatNumber(reach));
+            setText("engagement-value", formatNumber(uniqueVisitors));
+            setText("verification-value", formatNumber(researchActions));
+            setText("validation-value", formatNumber(validation));
+
+            /* -------------------------------------------------
+               FUNNEL
+            ------------------------------------------------- */
+
+            setText(
+                "reach-count",
+                `${formatNumber(reach)} observable events`
+            );
+
+            setText(
+                "engagement-count",
+                `${formatNumber(uniqueVisitors)} GitHub unique visitors`
+            );
+
+            setText(
+                "verification-count",
+                `${formatNumber(researchActions)} research actions`
+            );
+
+            setText(
+                "validation-count",
+                replications > 0
+                    ? `${formatNumber(replications)} independent replication(s)`
+                    : "Pending independent replication"
+            );
+
+            /* -------------------------------------------------
+               CANDIDATE METADATA
+            ------------------------------------------------- */
+
+            const candidateNumber = data.candidate?.number;
+            const candidateName = data.candidate?.name;
+            const oeis = data.candidate?.oeis;
+
+            if (candidateNumber) {
+                setText(
+                    "candidate-number",
+                    `n* = ${String(candidateNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                );
+            }
+
+            if (oeis) {
+                const oeisLink = byId("candidate-oeis");
+                if (oeisLink) {
+                    oeisLink.textContent = `OEIS ${oeis}`;
+                    oeisLink.href = `https://oeis.org/${encodeURIComponent(oeis)}`;
                 }
+            }
+
+            const status = data.candidate?.status || "Data loaded";
+            setText("data-status", status);
+
+            if (candidateName) {
+                const heading = document.querySelector(".attention-header h3");
+                if (heading) heading.textContent = `${candidateName} Audit`;
+            }
+
+            /* -------------------------------------------------
+               DATA WINDOW / REFRESH TIME
+            ------------------------------------------------- */
+
+            const windowLabel =
+                data.github?.data_window === "rolling_14_days"
+                    ? "GitHub traffic: rolling 14 days"
+                    : (data.github?.data_window || "Platform window not specified");
+
+            setText("data-window", windowLabel);
+
+            const updated = data.updated || data.last_verified || "—";
+            setText("data-refreshed", `Updated ${updated}`);
+            setText("attention-updated", updated);
+
+            /* -------------------------------------------------
+               EVIDENCE STATUS
+            ------------------------------------------------- */
+
+            setText(
+                "computation-status",
+                data.evidence?.computational_audit || "Not reported"
             );
 
-
-        if(!response.ok){
-
-            throw new Error(
-                "Unable to load attention data."
+            setText(
+                "proof-status",
+                data.evidence?.mathematical_proof || "Not reported"
             );
 
+            setText(
+                "replication-status",
+                data.evidence?.independent_replication || "Not reported"
+            );
+
+            setText(
+                "peer-status",
+                data.evidence?.peer_validation || "Not reported"
+            );
+
+            /* -------------------------------------------------
+               CONSISTENCY CHECK
+            ------------------------------------------------- */
+
+            const storedReach = number(
+                data.attention?.reach_events
+            );
+
+            const storedActions = number(
+                data.attention?.verification_events
+            );
+
+            const storedValidation =
+                number(data.attention?.validation_events);
+
+            const reachOK = storedReach === reach;
+            const actionsOK = storedActions === researchActions;
+            const validationOK = storedValidation === validation;
+
+            const quality = byId("data-quality");
+
+            if (quality) {
+                if (reachOK && actionsOK && validationOK) {
+                    quality.classList.remove("warning");
+                    quality.textContent =
+                        "Data consistency check: source metrics agree with the stored attention totals.";
+                } else {
+                    quality.classList.add("warning");
+                    quality.textContent =
+                        "Data consistency check: source-level metrics and one or more stored attention totals differ. Display values are calculated from source-level records.";
+                }
+            }
+
+            /* -------------------------------------------------
+               ACCESSIBILITY / STATE
+            ------------------------------------------------- */
+
+            document
+                .querySelectorAll(".attention-value")
+                .forEach(el => el.removeAttribute("aria-busy"));
         }
-
-
-        const data =
-            await response.json();
-
-
-        /* ==============================================
-           REACH
-        ============================================== */
-
-        const reach =
-
-            Number(
-                data.reach?.researchgate_reads || 0
-            )
-
-            +
-
-            Number(
-                data.reach?.github_views || 0
-            )
-
-            +
-
-            Number(
-                data.reach?.zenodo_views || 0
+        catch (error) {
+            console.warn(
+                "Research attention dashboard:",
+                error.message
             );
 
-
-        /* ==============================================
-           ENGAGEMENT
-        ============================================== */
-
-        const engagement =
-
-            Number(
-                data.engagement?.unique_visitors || 0
+            setText(
+                "attention-updated",
+                "Data source unavailable"
             );
 
-
-        /* ==============================================
-           VERIFICATION
-        ============================================== */
-
-        const verification =
-
-            Number(
-                data.verification?.github_clones || 0
-            )
-
-            +
-
-            Number(
-                data.verification?.github_forks || 0
-            )
-
-            +
-
-            Number(
-                data.verification?.downloads || 0
+            setText(
+                "data-status",
+                "Data unavailable"
             );
 
-
-        /* ==============================================
-           VALIDATION
-        ============================================== */
-
-        const citations =
-
-            Number(
-                data.validation?.citations || 0
-            );
-
-
-        const replications =
-
-            Number(
-                data.validation?.independent_replications || 0
-            );
-
-
-        const validation =
-            citations + replications;
-
-
-        /* ==============================================
-           FORMATTER
-        ============================================== */
-
-        const formatNumber =
-            value =>
-                Number(value).toLocaleString();
-
-
-        /* ==============================================
-           MAIN INDICATORS
-        ============================================== */
-
-        document.getElementById(
-            "reach-value"
-        ).textContent =
-            formatNumber(reach);
-
-
-        document.getElementById(
-            "engagement-value"
-        ).textContent =
-            formatNumber(engagement);
-
-
-        document.getElementById(
-            "verification-value"
-        ).textContent =
-            formatNumber(verification);
-
-
-        document.getElementById(
-            "validation-value"
-        ).textContent =
-            formatNumber(validation);
-
-
-        /* ==============================================
-           FUNNEL
-        ============================================== */
-
-        document.getElementById(
-            "reach-count"
-        ).textContent =
-            formatNumber(reach)
-            + " observable events";
-
-
-        document.getElementById(
-            "engagement-count"
-        ).textContent =
-            formatNumber(engagement)
-            + " unique";
-
-
-        document.getElementById(
-            "verification-count"
-        ).textContent =
-            formatNumber(verification)
-            + " actions";
-
-
-        document.getElementById(
-            "validation-count"
-        ).textContent =
-
-            replications > 0
-
-                ? formatNumber(replications)
-                  + " independent replication(s)"
-
-                : "Pending independent replication";
-
-
-        /* ==============================================
-           EVIDENCE STATUS
-        ============================================== */
-
-        if(
-            data.evidence &&
-            data.evidence.computational_audit
-        ){
-
-            document.getElementById(
-                "computation-status"
-            ).textContent =
-                data.evidence.computational_audit;
-
+            const quality = byId("data-quality");
+            if (quality) {
+                quality.classList.add("warning");
+                quality.textContent =
+                    "Data source unavailable. The dashboard could not load data/attention.json.";
+            }
         }
-
-
-        if(
-            data.evidence &&
-            data.evidence.mathematical_proof
-        ){
-
-            document.getElementById(
-                "proof-status"
-            ).textContent =
-                data.evidence.mathematical_proof;
-
-        }
-
-
-        if(
-            data.evidence &&
-            data.evidence.independent_replication
-        ){
-
-            document.getElementById(
-                "replication-status"
-            ).textContent =
-                data.evidence.independent_replication;
-
-        }
-
-
-        if(
-            data.evidence &&
-            data.evidence.peer_validation
-        ){
-
-            document.getElementById(
-                "peer-status"
-            ).textContent =
-                data.evidence.peer_validation;
-
-        }
-
-
-        /* ==============================================
-           LAST UPDATED
-        ============================================== */
-
-        if(data.last_verified){
-
-            document.getElementById(
-                "attention-updated"
-            ).textContent =
-                data.last_verified;
-
-        }
-
-
     }
 
-    catch(error){
-
-        console.warn(
-            "Research attention dashboard:",
-            error.message
-        );
-
-
-        /*
-         * Keep the dashboard functional even when
-         * the external JSON data source is unavailable.
-         */
-
-        document.getElementById(
-            "attention-updated"
-        ).textContent =
-            "Data source unavailable";
-
-
-    }
-
-}
-
-
-loadAttentionData();
-
+    loadAttentionData();
+})();
 </script>
 
 
 </body>
 
 </html>
-```

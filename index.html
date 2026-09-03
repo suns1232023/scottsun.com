@@ -1,3161 +1,1982 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations</title>
-
-<meta name="description"
-content="Official academic homepage of Scott Sun, an independent researcher working across structural information, geometry, emergence, mathematical physics, mathematical foundations, and computational mathematics.">
-
-<meta name="keywords"
-content="Scott Sun, Structural Information Evolution, Information Theory, Emergence, Mathematical Physics, Complex Systems, Geometry, Emergent Causality, Spectral Dimension, Additive Combinatorics, Computational Mathematics">
-
-<meta name="author" content="Scott Sun">
-<meta name="robots" content="index, follow">
-
-<meta name="google-site-verification"
-content="It2Rb9QnNlNUEyBYecRaNevWvx28dfK41GzoYY3UdSQ">
-
-<meta name="citation_author" content="Scott Sun">
-<meta name="citation_language" content="en">
-<meta name="citation_publication_date" content="2026">
-<meta name="citation_orcid" content="0009-0002-1095-6228">
-
-<link rel="canonical" href="https://www.scottsun.com/">
-<link rel="me" href="https://orcid.org/0009-0002-1095-6228">
-
-<!-- =====================================================
-     Open Graph
-===================================================== -->
-
-<meta property="og:type" content="profile">
-
-<meta property="og:title"
-content="Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations">
-
-<meta property="og:description"
-content="Independent research across structural information, geometry, emergence, mathematical physics, mathematical foundations, and computational mathematics.">
-
-<meta property="og:url" content="https://www.scottsun.com/">
-
-
-<!-- =====================================================
-     MathJax
-===================================================== -->
-
-<script>
-
-window.MathJax = {
-
-    tex: {
-
-        inlineMath: [
-            ['\\(', '\\)']
-        ],
-
-        displayMath: [
-            ['\\[', '\\]'],
-            ['$$', '$$']
-        ]
-
-    },
-
-    options: {
-
-        skipHtmlTags: [
-            'script',
-            'noscript',
-            'style',
-            'textarea',
-            'pre',
-            'code'
-        ]
-
-    }
-
-};
-
-</script>
-
-<script async
-src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-<!-- =====================================================
-     Schema.org
-===================================================== -->
-
-<script type="application/ld+json">
-
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-
-  "name": "Scott Sun",
-
-  "url": "https://www.scottsun.com/",
-
-  "identifier":
-    "https://orcid.org/0009-0002-1095-6228",
-
-  "jobTitle":
-    "Independent Researcher",
-
-  "knowsAbout": [
-
-    "Information Theory",
-    "Structural Information Evolution",
-    "Complex Systems",
-    "Mathematical Physics",
-    "Emergence",
-    "Geometry",
-    "Emergent Causality",
-    "Spectral Dimension",
-    "Additive Combinatorics",
-    "Computational Mathematics",
-    "Foundations of Physics"
-
-  ],
-
-  "sameAs": [
-
-    "https://orcid.org/0009-0002-1095-6228",
-
-    "https://scholar.google.com/citations?user=bmVEc3wAAAAJ",
-
-    "https://www.lens.org/lens/orcid/0009-0002-1095-6228"
-
-  ]
-
-}
-
-</script>
-
-
-<style>
-
-/* =========================================================
-   DESIGN SYSTEM
-========================================================= */
-
-:root{
-
-    --primary:#1e3a5f;
-    --primary-dark:#142b46;
-    --primary-light:#eef3f8;
-
-    --secondary:#526b86;
-
-    --light:#f6f8fb;
-    --lighter:#fbfcfe;
-
-    --border:#dfe6ee;
-
-    --text:#202830;
-    --muted:#667382;
-
-    --white:#ffffff;
-
-    --success-bg:#eef6f0;
-    --success-text:#356347;
-
-    --warning-bg:#f7f3e8;
-    --warning-text:#725d2d;
-
-    --candidate-bg:#f7f3e8;
-    --candidate-text:#725d2d;
-
-    --max-width:1120px;
-
-}
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-*{
-
-    box-sizing:border-box;
-
-}
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
-body{
-
-    margin:0;
-
-    padding:0;
-
-    background:#ffffff;
-
-    color:var(--text);
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    line-height:1.75;
-
-}
-
-a{
-
-    color:var(--primary);
-
-}
-
-code{
-
-    font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        Menlo,
-        monospace;
-
-    font-size:0.9em;
-
-}
-
-.container{
-
-    max-width:var(--max-width);
-
-    margin:auto;
-
-    padding:0 36px;
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.nav{
-
-    background:var(--primary-dark);
-
-    color:white;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
-    border-bottom:
-        1px solid rgba(255,255,255,0.12);
-
-}
-
-.nav-inner{
-
-    max-width:var(--max-width);
-
-    margin:auto;
-
-    padding:12px 36px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.nav-brand{
-
-    font-weight:700;
-
-    letter-spacing:0.3px;
-
-}
-
-.nav-links{
-
-    display:flex;
-
-    gap:22px;
-
-}
-
-.nav-links a{
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:0.92rem;
-
-    opacity:0.9;
-
-}
-
-.nav-links a:hover{
-
-    opacity:1;
-
-    text-decoration:underline;
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-
-    background:
-        linear-gradient(
-            135deg,
-            #1e3a5f,
-            #344f70
-        );
-
-    color:white;
-
-    padding:
-        78px 36px
-        72px;
-
-}
-
-.hero-inner{
-
-    max-width:var(--max-width);
-
-    margin:auto;
-
-}
-
-.hero h1{
-
-    font-size:3.2rem;
-
-    line-height:1.15;
-
-    margin:0 0 14px;
-
-    letter-spacing:-0.5px;
-
-}
-
-.hero-subtitle{
-
-    font-size:1.28rem;
-
-    font-weight:500;
-
-    margin-bottom:20px;
-
-    max-width:900px;
-
-}
-
-.hero-description{
-
-    max-width:850px;
-
-    font-size:1.05rem;
-
-    opacity:0.94;
-
-}
-
-.hero-links{
-
-    margin-top:28px;
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-}
-
-.hero-links a{
-
-    display:inline-block;
-
-    color:white;
-
-    text-decoration:none;
-
-    border:
-        1px solid rgba(255,255,255,0.45);
-
-    padding:7px 14px;
-
-    border-radius:6px;
-
-    font-size:0.9rem;
-
-}
-
-.hero-links a:hover{
-
-    background:
-        rgba(255,255,255,0.10);
-
-}
-
-
-/* =========================================================
-   SECTION
-========================================================= */
-
-.section{
-
-    padding:56px 0 8px;
-
-}
-
-.section h2{
-
-    color:var(--primary);
-
-    font-size:1.75rem;
-
-    margin:
-        0 0 22px;
-
-    padding-bottom:10px;
-
-    border-bottom:
-        2px solid var(--border);
-
-}
-
-.section h3{
-
-    color:var(--primary);
-
-    margin-top:0;
-
-}
-
-.lead{
-
-    font-size:1.05rem;
-
-    max-width:920px;
-
-}
-
-
-/* =========================================================
-   RESEARCH PROGRAM
-========================================================= */
-
-.research-map{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(240px,1fr)
-        );
-
-    gap:18px;
-
-    margin-top:28px;
-
-}
-
-.research-card{
-
-    background:var(--light);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:10px;
-
-    padding:22px;
-
-}
-
-.research-card h3{
-
-    margin-bottom:8px;
-
-    font-size:1.08rem;
-
-}
-
-.research-card p{
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:0.94rem;
-
-}
-
-.research-tags{
-
-    margin-top:24px;
-
-}
-
-.research-tags span{
-
-    display:inline-block;
-
-    background:#eef3f8;
-
-    color:var(--primary);
-
-    padding:6px 12px;
-
-    margin:
-        4px 5px
-        4px 0;
-
-    border-radius:20px;
-
-    font-size:0.88rem;
-
-}
-
-
-/* =========================================================
-   CURRENT RESEARCH
-========================================================= */
-
-.current-box{
-
-    background:#f8fbff;
-
-    border:
-        1px solid #dbe7f2;
-
-    border-left:
-        5px solid var(--primary);
-
-    border-radius:7px;
-
-    padding:
-        24px 26px;
-
-}
-
-.current-box strong{
-
-    color:var(--primary);
-
-}
-
-.status{
-
-    display:inline-block;
-
-    margin-left:8px;
-
-    padding:
-        3px 9px;
-
-    border-radius:12px;
-
-    background:
-        var(--warning-bg);
-
-    color:
-        var(--warning-text);
-
-    font-size:0.78rem;
-
-    font-weight:600;
-
-    vertical-align:middle;
-
-}
-
-
-/* =========================================================
-   RESEARCH ATTENTION DASHBOARD
-========================================================= */
-
-.attention-intro{
-
-    max-width:920px;
-
-    color:var(--muted);
-
-    font-size:0.96rem;
-
-    margin-bottom:22px;
-
-}
-
-.attention-dashboard{
-
-    border:
-        1px solid var(--border);
-
-    border-radius:10px;
-
-    background:var(--lighter);
-
-    overflow:hidden;
-
-}
-
-.attention-header{
-
-    padding:
-        22px 24px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-
-    border-bottom:
-        1px solid var(--border);
-
-}
-
-.attention-header h3{
-
-    margin:
-        0 0 5px;
-
-    font-size:1.12rem;
-
-}
-
-.attention-header p{
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:0.9rem;
-
-}
-
-.attention-status{
-
-    display:inline-block;
-
-    padding:
-        5px 10px;
-
-    border-radius:14px;
-
-    background:
-        var(--candidate-bg);
-
-    color:
-        var(--candidate-text);
-
-    font-size:0.76rem;
-
-    font-weight:700;
-
-    white-space:nowrap;
-
-}
-
-.attention-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:1px;
-
-    background:var(--border);
-
-}
-
-.attention-card{
-
-    background:white;
-
-    padding:
-        22px 15px;
-
-    text-align:center;
-
-}
-
-.attention-label{
-
-    font-size:0.74rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:0.7px;
-
-    color:var(--muted);
-
-    margin-bottom:7px;
-
-}
-
-.attention-value{
-
-    font-size:1.8rem;
-
-    font-weight:700;
-
-    line-height:1.2;
-
-    color:var(--primary);
-
-}
-
-.attention-description{
-
-    margin-top:7px;
-
-    font-size:0.76rem;
-
-    color:var(--muted);
-
-}
-
-.attention-funnel{
-
-    padding:
-        20px 24px;
-
-    background:var(--light);
-
-}
-
-.funnel-title{
-
-    font-size:0.84rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:0.7px;
-
-    color:var(--muted);
-
-    margin-bottom:9px;
-
-    font-weight:700;
-
-}
-
-.funnel-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-
-    padding:8px 0;
-
-    border-bottom:
-        1px solid var(--border);
-
-    font-size:0.9rem;
-
-}
-
-.funnel-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.funnel-row strong{
-
-    color:var(--primary);
-
-}
-
-.evidence-panel{
-
-    padding:
-        20px 24px;
-
-    background:white;
-
-    border-top:
-        1px solid var(--border);
-
-}
-
-.evidence-panel h4{
-
-    margin:
-        0 0 12px;
-
-    color:var(--primary);
-
-    font-size:0.94rem;
-
-}
-
-.evidence-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:10px;
-
-}
-
-.evidence-item{
-
-    padding:
-        12px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:7px;
-
-    background:var(--lighter);
-
-}
-
-.evidence-item .evidence-label{
-
-    display:block;
-
-    font-size:0.72rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:0.5px;
-
-    color:var(--muted);
-
-    margin-bottom:4px;
-
-}
-
-.evidence-item strong{
-
-    font-size:0.9rem;
-
-    color:var(--primary);
-
-}
-
-.attention-footer{
-
-    padding:
-        12px 20px;
-
-    border-top:
-        1px solid var(--border);
-
-    color:var(--muted);
-
-    font-size:0.75rem;
-
-    line-height:1.6;
-
-}
-
-
-/* =========================================================
-   STATUS GRID
-========================================================= */
-
-.status-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(260px,1fr)
-        );
-
-    gap:16px;
-
-}
-
-.status-card{
-
-    border:
-        1px solid var(--border);
-
-    border-radius:9px;
-
-    padding:
-        18px 20px;
-
-    background:white;
-
-}
-
-.status-card .label{
-
-    font-size:0.78rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:0.7px;
-
-    color:var(--muted);
-
-    margin-bottom:5px;
-
-}
-
-.status-card h3{
-
-    font-size:1rem;
-
-    margin:
-        0 0 6px;
-
-}
-
-.status-card p{
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:0.9rem;
-
-}
-
-
-/* =========================================================
-   METHODOLOGY
-========================================================= */
-
-.methodology{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(230px,1fr)
-        );
-
-    gap:16px;
-
-}
-
-.method-card{
-
-    padding:
-        20px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:9px;
-
-    background:var(--lighter);
-
-}
-
-.method-card h3{
-
-    font-size:1rem;
-
-    margin-bottom:7px;
-
-}
-
-.method-card p{
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:0.9rem;
-
-}
-
-
-/* =========================================================
-   IDENTITY
-========================================================= */
-
-.identity-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(210px,1fr)
-        );
-
-    gap:15px;
-
-}
-
-.card{
-
-    background:var(--light);
-
-    padding:18px;
-
-    border-radius:9px;
-
-    border:
-        1px solid var(--border);
-
-}
-
-.card strong{
-
-    color:var(--primary);
-
-}
-
-.card a{
-
-    text-decoration:none;
-
-    font-weight:600;
-
-}
-
-.card a:hover{
-
-    text-decoration:underline;
-
-}
-
-
-/* =========================================================
-   RESEARCH STATEMENT
-========================================================= */
-
-.statement{
-
-    max-width:900px;
-
-    font-size:1.02rem;
-
-}
-
-
-/* =========================================================
-   PUBLICATIONS
-========================================================= */
-
-.publication-group{
-
-    margin-top:34px;
-
-}
-
-.publication-group h3{
-
-    margin-bottom:16px;
-
-}
-
-.publication{
-
-    padding:
-        21px 22px;
-
-    margin-bottom:16px;
-
-    border:
-        1px solid var(--border);
-
-    border-left:
-        4px solid var(--primary);
-
-    background:
-        var(--lighter);
-
-    border-radius:
-        0 8px 8px 0;
-
-}
-
-.publication-title{
-
-    font-weight:650;
-
-    font-size:1.04rem;
-
-    line-height:1.55;
-
-    margin-bottom:7px;
-
-}
-
-.publication-meta{
-
-    font-size:0.9rem;
-
-    color:var(--muted);
-
-    margin-bottom:9px;
-
-}
-
-.publication-status{
-
-    font-size:0.82rem;
-
-    color:var(--secondary);
-
-    margin-bottom:9px;
-
-}
-
-.publication a{
-
-    text-decoration:none;
-
-    font-weight:600;
-
-}
-
-.publication a:hover{
-
-    text-decoration:underline;
-
-}
-
-
-/* =========================================================
-   RESEARCH POLICY NOTE
-========================================================= */
-
-.note{
-
-    background:#f8fbff;
-
-    border-left:
-        4px solid var(--secondary);
-
-    padding:
-        18px 20px;
-
-    margin-top:26px;
-
-    border-radius:
-        0 7px 7px 0;
-
-    color:#4d5b68;
-
-    font-size:0.93rem;
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-
-    margin-top:70px;
-
-    padding:
-        32px 20px;
-
-    text-align:center;
-
-    font-size:0.88rem;
-
-    color:var(--muted);
-
-    border-top:
-        1px solid var(--border);
-
-}
-
-
-
-/* =========================================================
-   ATTENTION DATA QUALITY & META
-========================================================= */
-
-.attention-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:12px;
-}
-
-.attention-meta span{
-    display:inline-flex;
-    align-items:center;
-    padding:4px 9px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:var(--lighter);
-    color:var(--muted);
-    font-size:0.74rem;
-}
-
-.attention-meta .live{
-    color:var(--success-text);
-    background:var(--success-bg);
-}
-
-.metric-source{
-    margin-top:8px;
-    font-size:0.72rem;
-    color:var(--muted);
-}
-
-.data-quality{
-    margin-top:12px;
-    padding:10px 12px;
-    border:1px solid var(--border);
-    border-radius:7px;
-    background:var(--lighter);
-    color:var(--muted);
-    font-size:0.76rem;
-    line-height:1.55;
-}
-
-.data-quality.warning{
-    background:var(--warning-bg);
-    color:var(--warning-text);
-}
-
-.dashboard-error{
-    padding:18px 20px;
-    color:var(--warning-text);
-    background:var(--warning-bg);
-    border-top:1px solid var(--border);
-    font-size:0.86rem;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:800px){
-
-    .attention-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-    .evidence-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-}
-
-@media(max-width:700px){
-
-    .container{
-
-        padding:
-            0 20px;
-
-    }
-
-    .nav-inner{
-
-        padding:
-            11px 20px;
-
-    }
-
-    .nav-links{
-
-        display:none;
-
-    }
-
-    .hero{
-
-        padding:
-            55px 20px
-            50px;
-
-    }
-
-    .hero h1{
-
-        font-size:2.35rem;
-
-    }
-
-    .hero-subtitle{
-
-        font-size:1.08rem;
-
-    }
-
-    .hero-description{
-
-        font-size:0.98rem;
-
-    }
-
-    .section{
-
-        padding-top:42px;
-
-    }
-
-    .attention-header{
-
-        align-items:flex-start;
-
-        flex-direction:column;
-
-    }
-
-    .attention-funnel{
-
-        padding:
-            16px 18px;
-
-    }
-
-    .evidence-panel{
-
-        padding:
-            18px;
-
-    }
-
-}
-
-@media(max-width:480px){
-
-    .attention-grid{
-
-        grid-template-columns:
-            1fr 1fr;
-
-    }
-
-    .attention-card{
-
-        padding:
-            18px 8px;
-
-    }
-
-    .attention-value{
-
-        font-size:1.45rem;
-
-    }
-
-    .evidence-grid{
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scott Sun | Independent Researcher | Information, Geometry & Mathematical Foundations</title>
+
+    <meta name="description"
+          content="Scott Sun's independent research program in information dynamics, emergent geometry, additive combinatorics, complex systems, and information economics.">
+
+    <meta name="author" content="Scott Sun">
+
+    <link rel="canonical" href="https://www.scottsun.com/">
+
+    <style>
+        :root {
+            --bg: #f7f8fa;
+            --surface: #ffffff;
+            --surface-soft: #f1f3f5;
+            --text: #17202a;
+            --muted: #68717c;
+            --line: #e1e5e9;
+            --accent: #1f4f7a;
+            --accent-soft: #eaf1f7;
+            --success: #2f6b4f;
+            --warning: #8a6d1d;
+            --danger: #8a3b3b;
+            --max-width: 1120px;
+            --radius: 14px;
+            --shadow: 0 8px 30px rgba(20, 35, 50, 0.055);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(var(--max-width), calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* --------------------------------------------------
+           Header
+        -------------------------------------------------- */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav {
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .brand span {
+            display: block;
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: -3px;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* --------------------------------------------------
+           Hero
+        -------------------------------------------------- */
+
+        .hero {
+            padding: 92px 0 76px;
+            border-bottom: 1px solid var(--line);
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f8fafc 100%
+                );
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            margin: 0;
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.08;
+            letter-spacing: -0.045em;
+            font-weight: 750;
+        }
+
+        .hero-subtitle {
+            max-width: 820px;
+            margin: 25px 0 0;
+            color: #4d5863;
+            font-size: clamp(18px, 2.3vw, 23px);
+            line-height: 1.55;
+        }
+
+        .hero-note {
+            max-width: 820px;
+            margin-top: 25px;
+            padding-left: 18px;
+            border-left: 3px solid var(--line);
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0 16px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: var(--surface);
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .button.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        /* --------------------------------------------------
+           Sections
+        -------------------------------------------------- */
+
+        section {
+            padding: 78px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-header {
+            margin-bottom: 34px;
+        }
+
+        .section-label {
+            margin-bottom: 8px;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 750;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+
+        .section-header p {
+            max-width: 760px;
+            margin: 12px 0 0;
+            color: var(--muted);
+        }
+
+        /* --------------------------------------------------
+           Research Program
+        -------------------------------------------------- */
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .research-card {
+            min-height: 220px;
+            padding: 24px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .research-number {
+            margin-bottom: 26px;
+            color: #a2aab2;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .research-card h3 {
+            margin: 0 0 10px;
+            font-size: 19px;
+            line-height: 1.3;
+        }
+
+        .research-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* --------------------------------------------------
+           Publications
+        -------------------------------------------------- */
+
+        .publication-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .publication {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+            padding: 23px 25px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+
+        .publication h3 {
+            margin: 0 0 5px;
+            font-size: 17px;
+        }
+
+        .publication p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .publication-status {
+            white-space: nowrap;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* --------------------------------------------------
+           Current Status
+        -------------------------------------------------- */
+
+        .status-panel {
+            padding: 30px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .status-top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .status-title {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: -0.02em;
+        }
+
+        .status-tag {
+            display: inline-flex;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #edf5ef;
+            color: var(--success);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .candidate-number {
+            margin: 22px 0 8px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: clamp(23px, 4vw, 34px);
+            letter-spacing: 0.02em;
+            word-break: break-all;
+        }
+
+        .candidate-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .candidate-description {
+            max-width: 800px;
+            margin: 20px 0 0;
+            color: #59636e;
+        }
+
+        /* --------------------------------------------------
+           Evidence
+        -------------------------------------------------- */
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .evidence-card {
+            padding: 22px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+
+        .evidence-card .state {
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .state.complete {
+            color: var(--success);
+        }
+
+        .state.pending {
+            color: var(--warning);
+        }
+
+        .state.none {
+            color: var(--muted);
+        }
+
+        .evidence-card h3 {
+            margin: 0 0 7px;
+            font-size: 16px;
+        }
+
+        .evidence-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* --------------------------------------------------
+           Attention Dashboard
+        -------------------------------------------------- */
+
+        .attention-note {
+            max-width: 820px;
+            padding: 15px 18px;
+            margin-bottom: 24px;
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .attention-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .metric-card {
+            padding: 24px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            margin-top: 8px;
+            font-size: 38px;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            font-weight: 750;
+        }
+
+        .metric-description {
+            min-height: 42px;
+            margin-top: 9px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .metric-source {
+            margin-top: 13px;
+            color: #929aa2;
+            font-size: 11px;
+        }
+
+        /* --------------------------------------------------
+           Funnel
+        -------------------------------------------------- */
+
+        .funnel {
+            margin-top: 28px;
+            padding: 26px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+
+        .funnel-title {
+            margin-bottom: 22px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .funnel-row {
+            display: grid;
+            grid-template-columns: 125px 1fr 60px;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 13px;
+        }
+
+        .funnel-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .funnel-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .funnel-track {
+            height: 9px;
+            overflow: hidden;
+            border-radius: 99px;
+            background: #e9edf0;
+        }
+
+        .funnel-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: var(--accent);
+            transition: width 0.6s ease;
+        }
+
+        .funnel-count {
+            text-align: right;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 12px;
+        }
+
+        /* --------------------------------------------------
+           Audit
+        -------------------------------------------------- */
+
+        .audit-box {
+            margin-top: 22px;
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--surface-soft);
+            font-size: 13px;
+        }
+
+        .audit-status {
+            font-weight: 700;
+        }
+
+        .audit-status.pass {
+            color: var(--success);
+        }
+
+        .audit-status.warn {
+            color: var(--warning);
+        }
+
+        .audit-details {
+            margin-top: 5px;
+            color: var(--muted);
+        }
+
+        /* --------------------------------------------------
+           Resources
+        -------------------------------------------------- */
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .resource {
+            padding: 21px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            transition: 0.2s ease;
+        }
+
+        .resource:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .resource h3 {
+            margin: 0 0 7px;
+            font-size: 15px;
+        }
+
+        .resource p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* --------------------------------------------------
+           Footer
+        -------------------------------------------------- */
+
+        footer {
+            padding: 42px 0 55px;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-title {
+            font-weight: 700;
+        }
+
+        .footer-meta {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-note {
+            max-width: 760px;
+            margin-top: 30px;
+            color: #89919a;
+            font-size: 11px;
+        }
+
+        /* --------------------------------------------------
+           Responsive
+        -------------------------------------------------- */
+
+        @media (max-width: 900px) {
+            .research-grid,
+            .evidence-grid,
+            .attention-grid,
+            .resource-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                width: min(var(--max-width), calc(100% - 28px));
+            }
+
+            .nav {
+                min-height: 60px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 65px 0 55px;
+            }
+
+            section {
+                padding: 58px 0;
+            }
+
+            .research-grid,
+            .evidence-grid,
+            .attention-grid,
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .publication {
+                grid-template-columns: 1fr;
+            }
+
+            .publication-status {
+                white-space: normal;
+            }
+
+            .funnel-row {
+                grid-template-columns: 95px 1fr 50px;
+                gap: 9px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+<header>
+    <div class="container nav">
+        <a class="brand" href="#top">
+            Scott Sun
+            <span>Independent Research Program</span>
+        </a>
 
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<nav class="nav">
-
-<div class="nav-inner">
-
-<div class="nav-brand">
-Scott Sun
-</div>
-
-<div class="nav-links">
-
-<a href="#research">
-Research
-</a>
-
-<a href="#current">
-Current Status
-</a>
-
-<a href="#attention">
-Attention
-</a>
-
-<a href="#methodology">
-Methodology
-</a>
-
-<a href="#identity">
-Academic Identity
-</a>
-
-<a href="#publications">
-Publications
-</a>
-
-</div>
-
-</div>
-
-</nav>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<header class="hero">
-
-<div class="hero-inner">
-
-<h1>
-Scott Sun
-</h1>
-
-<div class="hero-subtitle">
-
-Independent Researcher in Information, Geometry, Emergence, and Mathematical Foundations
-
-</div>
-
-<div class="hero-description">
-
-Independent research spanning structural information,
-emergent geometry and causality, spectral and geometric dynamics,
-mathematical foundations, and computational mathematics.
-
-</div>
-
-<div class="hero-links">
-
-<a
-href="https://orcid.org/0009-0002-1095-6228"
-target="_blank"
-rel="noopener">
-
-ORCID
-
-</a>
-
-<a
-href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ"
-target="_blank"
-rel="noopener">
-
-Google Scholar
-
-</a>
-
-<a
-href="https://www.lens.org/lens/orcid/0009-0002-1095-6228"
-target="_blank"
-rel="noopener">
-
-Lens
-
-</a>
-
-<a
-href="https://doi.org/10.17605/OSF.IO/CAQXH"
-target="_blank"
-rel="noopener">
-
-OSF Hub
-
-</a>
-
-</div>
-
-</div>
-
+        <nav class="nav-links">
+            <a href="#research">Research</a>
+            <a href="#publications">Publications</a>
+            <a href="#status">Current Status</a>
+            <a href="#attention">Attention</a>
+            <a href="#resources">Resources</a>
+        </nav>
+    </div>
 </header>
 
-
-<main class="container">
-
-
-<!-- =====================================================
-     RESEARCH PROGRAM
-===================================================== -->
-
-<section
-class="section"
-id="research">
-
-<h2>
-Research Program
-</h2>
-
-<p class="lead">
-
-The research programme investigates relationships among
-<strong>information, mathematical structure, geometry, causality,
-complexity, and emergence</strong>. The programme combines
-mathematical analysis, theoretical modelling, and computational
-investigation across several complementary areas.
-
-</p>
-
-
-<div class="research-map">
-
-
-<div class="research-card">
-
-<h3>
-01 — Structural Information Evolution
-</h3>
-
-<p>
-
-Study of information, entropy, and structural organization
-across scales, with emphasis on how macroscopic organization
-may emerge from underlying informational dynamics.
-
-</p>
-
-</div>
-
-
-<div class="research-card">
-
-<h3>
-02 — Emergent Geometry &amp; Causality
-</h3>
-
-<p>
-
-Mathematical approaches to causal structure, Lorentzian geometry,
-light-cone algebra, quotient constructions, and pre-geometric
-descriptions of spacetime.
-
-</p>
-
-</div>
-
-
-<div class="research-card">
-
-<h3>
-03 — Spectral &amp; Geometric Dynamics
-</h3>
-
-<p>
-
-Investigation of spectral dimension, scale-dependent geometry,
-irreversible flow, fractal structures, and related geometric
-dynamics.
-
-</p>
-
-</div>
-
-
-<div class="research-card">
-
-<h3>
-04 — Mathematical Foundations &amp; Computation
-</h3>
-
-<p>
-
-Research in mathematical representation problems, additive
-combinatorics, gap geometry, computational enumeration, and
-reproducible computational analysis.
-
-</p>
-
-</div>
-
-
-</div>
-
-
-<div class="research-tags">
-
-<span>Information Theory</span>
-<span>Structural Information</span>
-<span>Complex Systems</span>
-<span>Emergence</span>
-<span>Mathematical Physics</span>
-<span>Foundations of Physics</span>
-<span>Geometry</span>
-<span>Causal Structure</span>
-<span>Spectral Dimension</span>
-<span>Additive Combinatorics</span>
-<span>Computational Mathematics</span>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     CURRENT RESEARCH STATUS
-===================================================== -->
-
-<section
-class="section"
-id="current">
-
-<h2>
-Current Research Status — September 2026
-</h2>
-
-
-<div class="current-box">
-
-
-<p>
-
-<strong>
-Sun's (2,4,6,8) Binomial Representation Conjecture
-</strong>
-
-<span class="status">
-V23.4 Completed
-</span>
-
-</p>
-
-
-<p>
-
-The V23.4 phase completed an exhaustive computational
-investigation of the candidate
-
-<strong>
-\(n^* = 896,315,812,331,399\)
-</strong>
-
-for the representation
-
-\[
-n =
-\binom{w}{2}
-+
-\binom{x}{4}
-+
-\binom{y}{6}
-+
-\binom{z}{8}.
-\]
-
-</p>
-
-
-<p>
-
-Explicit finite parameter bounds were established, and the
-resulting search domain was evaluated using exact integer
-arithmetic. The computation examined
-
-<strong>
-2,818,953,028 admissible \((z,y,x)\) triples
-</strong>
-
-and found no representation of the candidate within the
-certified search domain.
-
-</p>
-
-
-<p>
-
-The result is currently classified as a
-
-<strong>
-computational counterexample candidate
-</strong>,
-
-rather than a confirmed mathematical counterexample.
-Independent replication and further mathematical audit remain
-necessary before a stronger conclusion can be made.
-
-</p>
-
-
-<p>
-
-The original proof programme has therefore been
-
-<strong>
-concluded at V23.4
-</strong>
-
-and is not being continued under the original conjectural
-assumption.
-
-</p>
-
-
-<p>
-
-The V23.4 investigation also established the modular result
-
-\[
-\mathcal{D}_3 \pmod{231}
-=
-\mathbb{Z}/231\mathbb{Z},
-\]
-
-which rules out a local residue obstruction at that modulus.
-Additional Cantor–Pascal and scale-structure observations are
-retained as exploratory mathematical diagnostics.
-
-</p>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     RESEARCH ATTENTION & VERIFICATION DASHBOARD
-===================================================== -->
-
-<section
-class="section"
-id="attention">
-
-<h2>
-Research Attention Dashboard
-</h2>
-
-
-<p class="attention-intro">
-
-This dashboard reports observable platform signals associated
-with the computational audit of Sun's (2,4,6,8) Conjecture. The
-metrics are derived from the structured data in <code>data/attention.json</code>
-and are deliberately separated from scientific validation.
-
-</p>
-
-
-<div class="attention-dashboard">
-
-
-<div class="attention-header">
-
-<div>
-
-<h3>
-Sun's (2,4,6,8) Conjecture Audit
-</h3>
-
-<p>
-Candidate
-<code id="candidate-number">n* = 896,315,812,331,399</code>
-•
-<a id="candidate-oeis" href="https://oeis.org/A306477" target="_blank" rel="noopener">OEIS A306477</a>
-</p>
-<div class="attention-meta">
-<span class="live" id="data-status">Live data</span>
-<span id="data-window">GitHub traffic: rolling 14 days</span>
-<span id="data-refreshed">Updated —</span>
-</div>
-</div>
-
-
-<span class="attention-status">
-
-Computational Candidate
-
-</span>
-
-</div>
-
-
-<!-- =================================================
-     KEY INDICATORS
-================================================= -->
-
-<div class="attention-grid">
-
-
-<div class="attention-card">
-
-<div class="attention-label">
-Reach
-</div>
-
-<div
-class="attention-value"
-id="reach-value">
-—
-</div>
-
-<div class="attention-description">
-Platform views / reads
-</div>
-
-</div>
-
-
-<div class="attention-card">
-
-<div class="attention-label">
-Unique Visitors
-</div>
-
-<div
-class="attention-value"
-id="engagement-value">
-—
-</div>
-
-<div class="attention-description">
-GitHub, rolling 14 days
-</div>
-
-</div>
-
-
-<div class="attention-card">
-
-<div class="attention-label">
-Research Actions
-</div>
-
-<div
-class="attention-value"
-id="verification-value">
-—
-</div>
-
-<div class="attention-description">
-Downloads / clones / forks
-</div>
-
-</div>
-
-
-<div class="attention-card">
-
-<div class="attention-label">
-Validation
-</div>
-
-<div
-class="attention-value"
-id="validation-value">
-—
-</div>
-
-<div class="attention-description">
-Citations / independent replications
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- =================================================
-     ATTENTION FUNNEL
-================================================= -->
-
-<div class="attention-funnel">
-
-<div class="funnel-title">
-Observable Research-Engagement Funnel
-</div>
-
-
-<div class="funnel-row">
-
-<span>
-Reach
-</span>
-
-<strong id="reach-count">
-—
-</strong>
-
-</div>
-
-
-<div class="funnel-row">
-
-<span>
-Unique Visitors
-</span>
-
-<strong id="engagement-count">
-—
-</strong>
-
-</div>
-
-
-<div class="funnel-row">
-
-<span>
-Research Actions
-</span>
-
-<strong id="verification-count">
-—
-</strong>
-
-</div>
-
-
-<div class="funnel-row">
-
-<span>
-Validation
-</span>
-
-<strong id="validation-count">
-Pending independent replication
-</strong>
-
-</div>
-
-</div>
-
-
-<!-- =================================================
-     EVIDENCE CLASSIFICATION
-================================================= -->
-
-<div class="evidence-panel">
-
-<h4>
-Evidence Classification
-</h4>
-
-
-<div class="evidence-grid">
-
-
-<div class="evidence-item">
-
-<span class="evidence-label">
-Mathematical Proof
-</span>
-
-<strong id="proof-status">
-Not established
-</strong>
-
-</div>
-
-
-<div class="evidence-item">
-
-<span class="evidence-label">
-Computational Audit
-</span>
-
-<strong id="computation-status">
-Completed
-</strong>
-
-</div>
-
-
-<div class="evidence-item">
-
-<span class="evidence-label">
-Independent Replication
-</span>
-
-<strong id="replication-status">
-Pending
-</strong>
-
-</div>
-
-
-<div class="evidence-item">
-
-<span class="evidence-label">
-Peer Validation
-</span>
-
-<strong id="peer-status">
-Pending
-</strong>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =================================================
-     FOOTNOTE
-================================================= -->
-
-<div class="attention-footer">
-
-Data source:
-<code>data/attention.json</code>
-
-<br>
-
-Last updated:
-<span id="attention-updated">
-—
-</span>
-
-<br>
-
-Metrics represent observable platform events and research
-actions. They are not equivalent to counts of individual
-researchers and do not constitute evidence of mathematical
-validity. GitHub traffic is a rolling 14-day measurement; historical
-archives, where available, are maintained separately.
-
-<div id="data-quality" class="data-quality">
-Data consistency check: pending.
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     RESEARCH STATUS
-===================================================== -->
-
-<section class="section">
-
-<h2>
-Research Status
-</h2>
-
-
-<div class="status-grid">
-
-
-<div class="status-card">
-
-<div class="label">
-Mathematical Research
-</div>
-
-<h3>
-(2,4,6,8) Representation Programme
-</h3>
-
-<p>
-
-V23.4 completed. The original proof programme is closed
-pending independent verification and further mathematical
-analysis of the computational candidate.
-
-</p>
-
-</div>
-
-
-<div class="status-card">
-
-<div class="label">
-Computational Mathematics
-</div>
-
-<h3>
-Exhaustive Computational Audit
-</h3>
-
-<p>
-
-A finite, exact computational search has been completed for
-the V23.4 candidate. The result requires independent
-reproduction before being treated as a confirmed obstruction.
-
-</p>
-
-</div>
-
-
-<div class="status-card">
-
-<div class="label">
-Theoretical Framework
-</div>
-
-<h3>
-Structural Information Evolution
-</h3>
-
-<p>
-
-Ongoing development of a framework relating information,
-entropy, structure, geometry, and emergence across physical
-systems.
-
-</p>
-
-</div>
-
-
-<div class="status-card">
-
-<div class="label">
-Foundations of Physics
-</div>
-
-<h3>
-Emergent Causality &amp; Geometry
-</h3>
-
-<p>
-
-Ongoing theoretical work on pre-geometric, causal, Lorentzian,
-and quotient-based structures.
-
-</p>
-
-</div>
-
-
-<div class="status-card">
-
-<div class="label">
-Exploratory Theory
-</div>
-
-<h3>
-Spectral &amp; Fractal Dynamics
-</h3>
-
-<p>
-
-Exploratory investigation of spectral-dimension flow,
-fractal geometry, and scale-dependent structural dynamics.
-
-</p>
-
-</div>
-
-
-<div class="status-card">
-
-<div class="label">
-Research Practice
-</div>
-
-<h3>
-Reproducible Mathematical Computation
-</h3>
-
-<p>
-
-Emphasis on explicit definitions, finite bounds, exact
-arithmetic, independent verification, reproducibility,
-and transparent evidence classification.
-
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     METHODOLOGY
-===================================================== -->
-
-<section
-class="section"
-id="methodology">
-
-<h2>
-Research Methodology
-</h2>
-
-
-<p class="lead">
-
-The programme places particular emphasis on distinguishing
-what has been mathematically proved, computationally verified,
-theoretically constructed, and provisionally hypothesized.
-
-</p>
-
-
-<div class="methodology">
-
-
-<div class="method-card">
-
-<h3>
-01 — Explicit Definitions
-</h3>
-
-<p>
-
-Mathematical objects, assumptions, parameter domains, and
-logical dependencies are stated explicitly whenever possible.
-
-</p>
-
-</div>
-
-
-<div class="method-card">
-
-<h3>
-02 — Exact Computation
-</h3>
-
-<p>
-
-Computational experiments use exact arithmetic and finite
-search bounds where the mathematical problem permits.
-
-</p>
-
-</div>
-
-
-<div class="method-card">
-
-<h3>
-03 — Independent Verification
-</h3>
-
-<p>
-
-Important computational claims are treated as provisional
-until independently reproduced and audited.
-
-</p>
-
-</div>
-
-
-<div class="method-card">
-
-<h3>
-04 — Evidence Separation
-</h3>
-
-<p>
-
-Proofs, computational observations, theoretical constructions,
-and exploratory hypotheses are kept conceptually distinct.
-
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     ACADEMIC IDENTITY
-===================================================== -->
-
-<section
-class="section"
-id="identity">
-
-<h2>
-Academic Identity
-</h2>
-
-
-<div class="identity-grid">
-
-
-<div class="card">
-
-<strong>
-ORCID
-</strong>
-
-<br>
-
-<a
-href="https://orcid.org/0009-0002-1095-6228"
-target="_blank"
-rel="noopener">
-
-0009-0002-1095-6228
-
-</a>
-
-</div>
-
-
-<div class="card">
-
-<strong>
-Google Scholar
-</strong>
-
-<br>
-
-<a
-href="https://scholar.google.com/citations?user=bmVEc3wAAAAJ"
-target="_blank"
-rel="noopener">
-
-Scholar Profile
-
-</a>
-
-</div>
-
-
-<div class="card">
-
-<strong>
-Lens.org
-</strong>
-
-<br>
-
-<a
-href="https://www.lens.org/lens/orcid/0009-0002-1095-6228"
-target="_blank"
-rel="noopener">
-
-Research Identity
-
-</a>
-
-</div>
-
-
-<div class="card">
-
-<strong>
-OSF Repository
-</strong>
-
-<br>
-
-<a
-href="https://doi.org/10.17605/OSF.IO/CAQXH"
-target="_blank"
-rel="noopener">
-
-OSF Project Hub
-
-</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     RESEARCH STATEMENT
-===================================================== -->
-
-<section class="section">
-
-<h2>
-Research Statement
-</h2>
-
-
-<p class="statement">
-
-The research programme explores whether information-theoretic
-and structural principles can provide mathematically coherent
-descriptions of how geometry, causality, complexity, and
-physical organization emerge across scales.
-
-</p>
-
-
-<p class="statement">
-
-The work combines mathematical analysis, information-theoretic
-ideas, complex-systems perspectives, geometric structures,
-theoretical modelling, and computational methods.
-
-</p>
-
-
-<p class="statement">
-
-A central methodological principle is to maintain a clear
-distinction between established mathematical results,
-verified computational observations, theoretical constructions,
-and open hypotheses.
-
-</p>
-
-
-<p class="statement">
-
-When computational or mathematical evidence challenges an
-existing conjecture, the research process treats verification,
-revision, and reassessment as integral parts of mathematical
-investigation.
-
-</p>
-
-</section>
-
-
-<!-- =====================================================
-     PUBLICATIONS
-===================================================== -->
-
-<section
-class="section"
-id="publications">
-
-<h2>
-Selected Research Outputs — 2026
-</h2>
-
-
-<!-- =====================================================
-     MATHEMATICAL FOUNDATIONS
-===================================================== -->
-
-<div class="publication-group">
-
-<h3>
-Mathematical Foundations &amp; Computational Mathematics
-</h3>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-A Computational Audit of a Candidate Counterexample to
-Sun's (2,4,6,8) Conjecture — Version 23.4 (Final):
-Exhaustive Verification and Cantor-Pascal Diagnostics
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • OSF / Zenodo Preprint
-
-</div>
-
-
-<div class="publication-status">
-
-Status: V23.4 completed • Computational counterexample candidate
-• Independent replication pending
-
-</div>
-
-
-<a
-href="https://doi.org/10.17605/OSF.IO/CAQXH"
-target="_blank"
-rel="noopener">
-
-OSF DOI
-
-</a>
-
-&nbsp; | &nbsp;
-
-<a
-href="https://doi.org/10.5281/zenodo.22139197"
-target="_blank"
-rel="noopener">
-
-Zenodo Archive
-
-</a>
-
-</div>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-Sun's (2,4,6,8) Binomial Representation Programme:
-Computational and Additive-Combinatorial Investigations
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • Research Programme
-
-</div>
-
-
-<div class="publication-status">
-
-Status: Programme concluded at V23.4 pending verification
-and further mathematical analysis
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-     GEOMETRY
-===================================================== -->
-
-<div class="publication-group">
-
-<h3>
-Geometry, Causality &amp; Foundations of Physics
-</h3>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-Möbius–Lorentz Quotients and Null Pin Holonomy:
-Affine Normal Forms, Null-Displacement Loci,
-Mapping-Torus Topology, Pin Lifts, and Mirror-Residue Pairing
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • Zenodo Preprint
-
-</div>
-
-
-<div class="publication-status">
-
-Status: Theoretical development
-
-</div>
-
-
-<a
-href="https://doi.org/10.5281/zenodo.22019535"
-target="_blank"
-rel="noopener">
-
-DOI: 10.5281/zenodo.22019535
-
-</a>
-
-</div>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-Invariant Light-Cone Algebra and Emergent Causal Structure:
-A Pre-Geometric Research Programme
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • Zenodo Preprint
-
-</div>
-
-
-<div class="publication-status">
-
-Status: Theoretical framework
-
-</div>
-
-
-<a
-href="https://doi.org/10.5281/zenodo.20483898"
-target="_blank"
-rel="noopener">
-
-DOI: 10.5281/zenodo.20483898
-
-</a>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-     STRUCTURAL INFORMATION
-===================================================== -->
-
-<div class="publication-group">
-
-<h3>
-Structural Information &amp; Spectral Dynamics
-</h3>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-The Hidden Thread of Structural Information Evolution:
-A Comparative Study of Condensed Matter, Quantum Plasma
-and Black Hole Systems
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • Zenodo Preprint
-
-</div>
-
-
-<div class="publication-status">
-
-Status: Structural Information Evolution programme
-
-</div>
-
-
-<a
-href="https://doi.org/10.5281/zenodo.20792832"
-target="_blank"
-rel="noopener">
-
-DOI: 10.5281/zenodo.20792832
-
-</a>
-
-</div>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-Time as Irreversible Spectral-Dimension Flow
-with a One-Third Power Law
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • Zenodo Preprint
-
-</div>
-
-
-<div class="publication-status">
-
-Status: Exploratory theoretical model
-
-</div>
-
-
-<a
-href="https://doi.org/10.5281/zenodo.21524285"
-target="_blank"
-rel="noopener">
-
-DOI: 10.5281/zenodo.21524285
-
-</a>
-
-</div>
-
-
-<div class="publication">
-
-<div class="publication-title">
-
-Fractal Folding Theory:
-From the Kakeya Conjecture to Quantum Gravity Observations
-
-</div>
-
-
-<div class="publication-meta">
-
-Scott Sun (2026) • Zenodo Preprint
-
-</div>
-
-
-<div class="publication-status">
-
-Status: Exploratory research
-
-</div>
-
-
-<a
-href="https://doi.org/10.5281/zenodo.20373606"
-target="_blank"
-rel="noopener">
-
-DOI: 10.5281/zenodo.20373606
-
-</a>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-     VERSIONING POLICY
-===================================================== -->
-
-<div class="note">
-
-<strong>
-Research and Versioning Policy
-</strong>
-
-<br><br>
-
-Research outputs are archived through persistent scholarly
-identifiers including DOI and ORCID. Research versions may
-evolve as mathematical and computational results are
-independently examined.
-
-<br><br>
-
-The website distinguishes between established mathematical
-results, computational audits, candidate counterexamples,
-theoretical frameworks, and exploratory research.
-
-<br><br>
-
-In particular, a computational candidate is not described
-as a confirmed mathematical counterexample until the
-underlying computation has been independently reproduced
-and the relevant mathematical assumptions and search bounds
-have been fully audited.
-
-</div>
-
-
-</section>
-
+<main id="top">
+
+    <!-- ==================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+        <div class="container">
+
+            <div class="eyebrow">
+                Independent Research
+            </div>
+
+            <h1>
+                Information, Emergent Geometry &amp; Mathematical Foundations
+            </h1>
+
+            <p class="hero-subtitle">
+                An independent research program at the intersection of
+                information dynamics, emergent spacetime, additive
+                combinatorics, complex systems, and information economics.
+            </p>
+
+            <div class="hero-note">
+                This site records formal preprints, computational experiments,
+                auditable candidate results, and reproducible research code.
+                Exploratory hypotheses are explicitly separated from verified
+                mathematical results.
+            </div>
+
+            <div class="hero-actions">
+                <a class="button primary"
+                   href="https://github.com/suns1232023/IFG-Theoretical-Foundations"
+                   target="_blank"
+                   rel="noopener">
+                    Research Repository
+                </a>
+
+                <a class="button"
+                   href="https://orcid.org/0009-0002-1095-6228"
+                   target="_blank"
+                   rel="noopener">
+                    ORCID
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         RESEARCH PROGRAM
+    ================================================== -->
+
+    <section id="research">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">Research Program</div>
+
+                <h2>
+                    Four connected research directions
+                </h2>
+
+                <p>
+                    The program explores how information structure,
+                    geometry, computation, and collective dynamics may
+                    generate higher-level mathematical and physical behavior.
+                </p>
+            </div>
+
+            <div class="research-grid">
+
+                <article class="research-card">
+                    <div class="research-number">01</div>
+                    <h3>Structural Information Evolution</h3>
+                    <p>
+                        Information dynamics, structural constraints,
+                        emergence, and the evolution of complex systems.
+                    </p>
+                </article>
+
+                <article class="research-card">
+                    <div class="research-number">02</div>
+                    <h3>Emergent Geometry &amp; Causality</h3>
+                    <p>
+                        Investigating whether geometric and causal structures
+                        can arise from deeper informational organization.
+                    </p>
+                </article>
+
+                <article class="research-card">
+                    <div class="research-number">03</div>
+                    <h3>Additive Combinatorics &amp; Computation</h3>
+                    <p>
+                        Computational audits, additive structure, covering
+                        problems, and candidate counterexamples.
+                    </p>
+                </article>
+
+                <article class="research-card">
+                    <div class="research-number">04</div>
+                    <h3>Information Economics</h3>
+                    <p>
+                        Information-theoretic approaches to market dynamics,
+                        phase transitions, and collective economic behavior.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         PUBLICATIONS
+    ================================================== -->
+
+    <section id="publications">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">Selected Research</div>
+
+                <h2>
+                    Research manuscripts
+                </h2>
+
+                <p>
+                    Selected work spanning theoretical foundations,
+                    emergent geometry, and information-based models.
+                </p>
+            </div>
+
+            <div class="publication-list">
+
+                <article class="publication">
+                    <div>
+                        <h3>
+                            Invariant Light-Cone Algebra and Emergent Causal Structure
+                        </h3>
+                        <p>
+                            Mathematical foundations of causal structure and
+                            invariant information-geometric relations.
+                        </p>
+                    </div>
+                    <div class="publication-status">
+                        Research manuscript
+                    </div>
+                </article>
+
+                <article class="publication">
+                    <div>
+                        <h3>
+                            The Hidden Thread of Structural Information Evolution
+                        </h3>
+                        <p>
+                            A framework for describing structural evolution
+                            through information constraints and emergence.
+                        </p>
+                    </div>
+                    <div class="publication-status">
+                        Research manuscript
+                    </div>
+                </article>
+
+                <article class="publication">
+                    <div>
+                        <h3>
+                            Exchange Entropy Index (EEI): Modeling Market Phase Transitions
+                        </h3>
+                        <p>
+                            An information-theoretic framework for examining
+                            collective market-state transitions.
+                        </p>
+                    </div>
+                    <div class="publication-status">
+                        Research manuscript
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         CURRENT STATUS
+    ================================================== -->
+
+    <section id="status">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">Current Research Status</div>
+
+                <h2>
+                    Computational audit
+                </h2>
+
+                <p>
+                    The following status is generated from the current
+                    research record and is intentionally separated from
+                    claims of mathematical proof.
+                </p>
+            </div>
+
+            <div class="status-panel">
+
+                <div class="status-top">
+                    <div>
+                        <h3 class="status-title" id="candidate-name">
+                            Sun's (2,4,6,8) Conjecture
+                        </h3>
+                    </div>
+
+                    <div class="status-tag" id="candidate-status">
+                        Computational Counterexample Candidate
+                    </div>
+                </div>
+
+                <div class="candidate-number" id="candidate-number">
+                    896315812331399
+                </div>
+
+                <div class="candidate-meta">
+                    <span>
+                        OEIS:
+                        <a
+                            id="candidate-oeis"
+                            href="https://oeis.org/A306477"
+                            target="_blank"
+                            rel="noopener">
+                            A306477
+                        </a>
+                    </span>
+
+                    <span>
+                        Claim level:
+                        <strong id="claim-level">Unconfirmed</strong>
+                    </span>
+                </div>
+
+                <p class="candidate-description" id="candidate-description">
+                    A candidate counterexample identified by computational
+                    exhaustive search. Independent replication and peer
+                    validation remain pending.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         EVIDENCE CLASSIFICATION
+    ================================================== -->
+
+    <section>
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">Evidence Classification</div>
+
+                <h2>
+                    What is established — and what is not
+                </h2>
+
+                <p>
+                    Research claims are classified by evidence level rather
+                    than by presentation or computational activity alone.
+                </p>
+            </div>
+
+            <div class="evidence-grid">
+
+                <article class="evidence-card">
+                    <div class="state none" id="proof-state">
+                        Not established
+                    </div>
+
+                    <h3>Mathematical Proof</h3>
+
+                    <p id="proof-description">
+                        No complete mathematical proof has been established.
+                    </p>
+                </article>
+
+                <article class="evidence-card">
+                    <div class="state complete" id="audit-state">
+                        Completed
+                    </div>
+
+                    <h3>Computational Audit</h3>
+
+                    <p id="audit-description">
+                        Exhaustive computational verification has been completed
+                        within the certified search domain.
+                    </p>
+                </article>
+
+                <article class="evidence-card">
+                    <div class="state pending" id="replication-state">
+                        Pending
+                    </div>
+
+                    <h3>Independent Replication</h3>
+
+                    <p id="replication-description">
+                        Independent replication has not yet been documented.
+                    </p>
+                </article>
+
+                <article class="evidence-card">
+                    <div class="state pending" id="peer-state">
+                        Pending
+                    </div>
+
+                    <h3>Peer Validation</h3>
+
+                    <p id="peer-description">
+                        External peer validation has not yet been documented.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         RESEARCH ATTENTION
+    ================================================== -->
+
+    <section id="attention">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">
+                    Research Attention
+                </div>
+
+                <h2>
+                    Research Attention Dashboard
+                </h2>
+
+                <p>
+                    Observable platform activity associated with the research
+                    program. Attention metrics are reported separately from
+                    scientific validation.
+                </p>
+            </div>
+
+            <div class="attention-note">
+                These metrics represent observable platform events.
+                They are <strong>not</strong> deduplicated researchers and
+                should not be interpreted as scientific impact or validation.
+            </div>
+
+            <div class="attention-grid">
+
+                <article class="metric-card">
+                    <div class="metric-label">
+                        Reach
+                    </div>
+
+                    <div class="metric-value" id="reach-value">
+                        —
+                    </div>
+
+                    <div class="metric-description">
+                        Observable platform access events
+                    </div>
+
+                    <div class="metric-source">
+                        GitHub + ResearchGate + Zenodo + OSF
+                    </div>
+                </article>
+
+
+                <article class="metric-card">
+                    <div class="metric-label">
+                        Engagement
+                    </div>
+
+                    <div class="metric-value" id="engagement-value">
+                        —
+                    </div>
+
+                    <div class="metric-description">
+                        Observable interaction events
+                    </div>
+
+                    <div class="metric-source">
+                        Unique visitors + recommendations
+                    </div>
+                </article>
+
+
+                <article class="metric-card">
+                    <div class="metric-label">
+                        Research Actions
+                    </div>
+
+                    <div class="metric-value" id="research-actions-value">
+                        —
+                    </div>
+
+                    <div class="metric-description">
+                        Observable actions beyond passive access
+                    </div>
+
+                    <div class="metric-source">
+                        Clones + forks + downloads
+                    </div>
+                </article>
+
+
+                <article class="metric-card">
+                    <div class="metric-label">
+                        Validation
+                    </div>
+
+                    <div class="metric-value" id="validation-value">
+                        —
+                    </div>
+
+                    <div class="metric-description">
+                        Documented external validation events
+                    </div>
+
+                    <div class="metric-source">
+                        Citations + independent replications
+                    </div>
+                </article>
+
+            </div>
+
+
+            <!-- Funnel -->
+
+            <div class="funnel">
+
+                <div class="funnel-title">
+                    Evidence &amp; Attention Funnel
+                </div>
+
+                <div class="funnel-row">
+                    <div class="funnel-label">Reach</div>
+
+                    <div class="funnel-track">
+                        <div
+                            class="funnel-fill"
+                            id="reach-fill">
+                        </div>
+                    </div>
+
+                    <div
+                        class="funnel-count"
+                        id="reach-count">
+                        —
+                    </div>
+                </div>
+
+
+                <div class="funnel-row">
+                    <div class="funnel-label">Engagement</div>
+
+                    <div class="funnel-track">
+                        <div
+                            class="funnel-fill"
+                            id="engagement-fill">
+                        </div>
+                    </div>
+
+                    <div
+                        class="funnel-count"
+                        id="engagement-count">
+                        —
+                    </div>
+                </div>
+
+
+                <div class="funnel-row">
+                    <div class="funnel-label">Research Actions</div>
+
+                    <div class="funnel-track">
+                        <div
+                            class="funnel-fill"
+                            id="research-actions-fill">
+                        </div>
+                    </div>
+
+                    <div
+                        class="funnel-count"
+                        id="research-actions-count">
+                        —
+                    </div>
+                </div>
+
+
+                <div class="funnel-row">
+                    <div class="funnel-label">Validation</div>
+
+                    <div class="funnel-track">
+                        <div
+                            class="funnel-fill"
+                            id="validation-fill">
+                        </div>
+                    </div>
+
+                    <div
+                        class="funnel-count"
+                        id="validation-count">
+                        —
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Data audit -->
+
+            <div class="audit-box">
+
+                <div>
+                    Data consistency:
+                    <span
+                        class="audit-status"
+                        id="audit-status">
+                        Checking…
+                    </span>
+                </div>
+
+                <div
+                    class="audit-details"
+                    id="audit-details">
+                    Verifying source-level metrics against stored attention totals.
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         RESOURCES
+    ================================================== -->
+
+    <section id="resources">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">Resources</div>
+
+                <h2>
+                    Research infrastructure
+                </h2>
+
+                <p>
+                    Public repositories and persistent identifiers supporting
+                    reproducibility and independent examination.
+                </p>
+            </div>
+
+            <div class="resource-grid">
+
+                <a
+                    class="resource"
+                    href="https://github.com/suns1232023/IFG-Theoretical-Foundations"
+                    target="_blank"
+                    rel="noopener">
+
+                    <h3>GitHub</h3>
+
+                    <p>
+                        Source code, computational experiments,
+                        and research records.
+                    </p>
+                </a>
+
+
+                <a
+                    class="resource"
+                    href="https://orcid.org/0009-0002-1095-6228"
+                    target="_blank"
+                    rel="noopener">
+
+                    <h3>ORCID</h3>
+
+                    <p>
+                        Persistent researcher identifier and scholarly record.
+                    </p>
+                </a>
+
+
+                <a
+                    class="resource"
+                    href="https://oeis.org/A306477"
+                    target="_blank"
+                    rel="noopener">
+
+                    <h3>OEIS A306477</h3>
+
+                    <p>
+                        Public mathematical sequence and conjecture record.
+                    </p>
+                </a>
+
+
+                <a
+                    class="resource"
+                    href="https://zenodo.org/"
+                    target="_blank"
+                    rel="noopener">
+
+                    <h3>Zenodo</h3>
+
+                    <p>
+                        Persistent research records, datasets,
+                        and reproducible artifacts.
+                    </p>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
 
 </main>
 
 
-<!-- =====================================================
+<!-- ======================================================
      FOOTER
-===================================================== -->
+====================================================== -->
 
 <footer>
+    <div class="container">
 
-© 2026 Scott Sun
+        <div class="footer-grid">
 
-<br><br>
+            <div>
+                <div class="footer-title">
+                    Scott Sun
+                </div>
 
-Independent Researcher
+                <div class="footer-meta">
+                    Independent Researcher
+                </div>
+            </div>
 
-<br>
+            <div class="footer-links">
 
-Information • Geometry • Emergence • Mathematical Foundations
+                <a
+                    href="https://github.com/suns1232023"
+                    target="_blank"
+                    rel="noopener">
+                    GitHub
+                </a>
 
-<br><br>
+                <a
+                    href="https://orcid.org/0009-0002-1095-6228"
+                    target="_blank"
+                    rel="noopener">
+                    ORCID
+                </a>
 
-ORCID:
+                <a
+                    href="https://oeis.org/A306477"
+                    target="_blank"
+                    rel="noopener">
+                    OEIS
+                </a>
 
-<a
-href="https://orcid.org/0009-0002-1095-6228"
-target="_blank"
-rel="noopener">
+            </div>
 
-0009-0002-1095-6228
+        </div>
 
-</a>
 
+        <div class="footer-note">
+
+            Research attention metrics are derived from observable
+            platform-level events. Cross-platform users cannot currently
+            be deduplicated. Traffic, downloads, clones, and other
+            engagement signals are therefore not presented as counts of
+            individual researchers or as measures of scientific validity.
+
+            <br><br>
+
+            Research claims are classified separately as mathematical proof,
+            computational audit, independent replication, and peer validation.
+
+            <br><br>
+
+            <span id="data-footer">
+                Data source: data/attention.json
+            </span>
+
+        </div>
+
+    </div>
 </footer>
 
 
-<!-- =====================================================
-     ATTENTION DASHBOARD DATA ENGINE
-===================================================== -->
+<!-- ======================================================
+     DATA ENGINE
+====================================================== -->
 
 <script>
-/* =============================================================
-   ATTENTION DASHBOARD DATA ENGINE
-   Source: data/attention.json
-   The page derives display metrics from source-level records.
-   It does not treat platform activity as scientific validation.
-============================================================= */
 
-(() => {
-    "use strict";
+    /*
+     * Research Attention Data Engine
+     *
+     * Design principles:
+     *
+     * 1. No fabricated fallback values.
+     * 2. Source-level metrics are recalculated.
+     * 3. Stored attention totals are audited.
+     * 4. Platform activity is never presented as scientific validation.
+     */
+
 
     const DATA_URL = "data/attention.json";
 
-    const byId = id => document.getElementById(id);
 
-    const number = value => {
+    function number(value) {
+
         const n = Number(value);
+
         return Number.isFinite(n) ? n : 0;
-    };
 
-    const formatNumber = value =>
-        number(value).toLocaleString("en-US");
+    }
 
-    const setText = (id, value) => {
-        const el = byId(id);
-        if (el) el.textContent = value;
-    };
 
-    const firstRepository = data =>
-        data?.github?.repositories?.[0] || {};
+    function setText(id, value) {
 
-    async function loadAttentionData() {
+        const element = document.getElementById(id);
+
+        if (element) {
+            element.textContent = value;
+        }
+
+    }
+
+
+    function setWidth(id, value) {
+
+        const element = document.getElementById(id);
+
+        if (!element) {
+            return;
+        }
+
+        const safeValue =
+            Math.max(0, Math.min(100, value));
+
+        element.style.width =
+            safeValue + "%";
+
+    }
+
+
+    function formatNumber(value) {
+
+        return number(value).toLocaleString("en-US");
+
+    }
+
+
+    function calculateMetrics(data) {
+
+        const github =
+            data.github?.totals || {};
+
+        const researchgate =
+            data.researchgate || {};
+
+        const zenodo =
+            data.zenodo?.totals || {};
+
+        const osf =
+            data.osf?.totals || {};
+
+        const validation =
+            data.validation || {};
+
+
+        /*
+         * Reach
+         *
+         * GitHub views
+         * + ResearchGate reads
+         * + Zenodo views
+         * + OSF views
+         */
+
+        const reach =
+            number(github.views) +
+            number(researchgate.total_reads) +
+            number(zenodo.total_views) +
+            number(osf.views);
+
+
+        /*
+         * Engagement
+         *
+         * GitHub unique visitors
+         * + ResearchGate recommendations
+         */
+
+        const engagement =
+            number(github.unique_visitors) +
+            number(researchgate.total_recommendations);
+
+
+        /*
+         * Research actions
+         *
+         * GitHub clones
+         * + GitHub forks
+         * + Zenodo downloads
+         * + OSF downloads
+         */
+
+        const researchActions =
+            number(github.clones) +
+            number(github.forks) +
+            number(zenodo.total_downloads) +
+            number(osf.downloads);
+
+
+        /*
+         * Validation
+         *
+         * Citations
+         * + Independent replications
+         */
+
+        const validationEvents =
+            number(validation.citations) +
+            number(validation.independent_replications);
+
+
+        return {
+            reach,
+            engagement,
+            researchActions,
+            validationEvents
+        };
+
+    }
+
+
+    function displayMetrics(metrics) {
+
+        setText(
+            "reach-value",
+            formatNumber(metrics.reach)
+        );
+
+        setText(
+            "engagement-value",
+            formatNumber(metrics.engagement)
+        );
+
+        setText(
+            "research-actions-value",
+            formatNumber(metrics.researchActions)
+        );
+
+        setText(
+            "validation-value",
+            formatNumber(metrics.validationEvents)
+        );
+
+
+        setText(
+            "reach-count",
+            formatNumber(metrics.reach)
+        );
+
+        setText(
+            "engagement-count",
+            formatNumber(metrics.engagement)
+        );
+
+        setText(
+            "research-actions-count",
+            formatNumber(metrics.researchActions)
+        );
+
+        setText(
+            "validation-count",
+            formatNumber(metrics.validationEvents)
+        );
+
+
+        const maxValue =
+            Math.max(
+                metrics.reach,
+                metrics.engagement,
+                metrics.researchActions,
+                metrics.validationEvents,
+                1
+            );
+
+
+        setWidth(
+            "reach-fill",
+            metrics.reach / maxValue * 100
+        );
+
+        setWidth(
+            "engagement-fill",
+            metrics.engagement / maxValue * 100
+        );
+
+        setWidth(
+            "research-actions-fill",
+            metrics.researchActions / maxValue * 100
+        );
+
+        setWidth(
+            "validation-fill",
+            metrics.validationEvents / maxValue * 100
+        );
+
+    }
+
+
+    function auditMetrics(data, metrics) {
+
+        const stored =
+            data.attention || {};
+
+
+        const storedReach =
+            number(stored.reach_events);
+
+        const storedEngagement =
+            number(stored.engagement_events);
+
+        const storedActions =
+            number(stored.research_action_events);
+
+        const storedValidation =
+            number(stored.validation_events);
+
+
+        const checks = {
+
+            reach:
+                storedReach === metrics.reach,
+
+            engagement:
+                storedEngagement === metrics.engagement,
+
+            researchActions:
+                storedActions === metrics.researchActions,
+
+            validation:
+                storedValidation === metrics.validationEvents
+
+        };
+
+
+        const passed =
+            checks.reach &&
+            checks.engagement &&
+            checks.researchActions &&
+            checks.validation;
+
+
+        const status =
+            document.getElementById("audit-status");
+
+
+        if (status) {
+
+            status.textContent =
+                passed
+                    ? "Passed"
+                    : "Warning";
+
+            status.classList.remove(
+                "pass",
+                "warn"
+            );
+
+            status.classList.add(
+                passed ? "pass" : "warn"
+            );
+
+        }
+
+
+        setText(
+            "audit-details",
+
+            passed
+
+                ? "Source-level metrics agree with all stored attention totals."
+
+                : "One or more stored attention totals do not match the source-level metrics."
+
+        );
+
+    }
+
+
+    function updateCandidate(data) {
+
+        const candidate =
+            data.candidate || {};
+
+
+        setText(
+            "candidate-name",
+            candidate.name ||
+            "Research Candidate"
+        );
+
+
+        setText(
+            "candidate-number",
+            candidate.number ||
+            "—"
+        );
+
+
+        setText(
+            "candidate-status",
+            candidate.status ||
+            "Unclassified"
+        );
+
+
+        setText(
+            "claim-level",
+            candidate.claim_level ||
+            "Unclassified"
+        );
+
+
+        setText(
+            "candidate-description",
+            candidate.description ||
+            "No candidate description available."
+        );
+
+
+        const oeis =
+            document.getElementById("candidate-oeis");
+
+
+        if (oeis && candidate.oeis) {
+
+            oeis.textContent =
+                candidate.oeis;
+
+            oeis.href =
+                "https://oeis.org/" +
+                candidate.oeis;
+
+        }
+
+    }
+
+
+    function updateEvidence(data) {
+
+        const evidence =
+            data.evidence || {};
+
+
+        setText(
+            "proof-state",
+            evidence.mathematical_proof ||
+            "Not established"
+        );
+
+
+        setText(
+            "audit-state",
+            evidence.computational_audit ||
+            "Not established"
+        );
+
+
+        setText(
+            "replication-state",
+            evidence.independent_replication ||
+            "Pending"
+        );
+
+
+        setText(
+            "peer-state",
+            evidence.peer_validation ||
+            "Pending"
+        );
+
+    }
+
+
+    function updateFooter(data) {
+
+        const quality =
+            data.data_quality || {};
+
+        const updated =
+            data.updated ||
+            quality.last_checked ||
+            "Unknown";
+
+
+        setText(
+            "data-footer",
+
+            "Data source: data/attention.json | " +
+            "Last verified: " +
+            updated
+
+        );
+
+    }
+
+
+    async function loadResearchData() {
+
         try {
-            const response = await fetch(DATA_URL, {
-                cache: "no-store"
-            });
+
+            const response =
+                await fetch(
+                    DATA_URL,
+                    {
+                        cache: "no-store"
+                    }
+                );
+
 
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
+                throw new Error(
+                    "HTTP " + response.status
+                );
             }
 
-            const data = await response.json();
-            const repo = firstRepository(data);
 
-            /* -------------------------------------------------
-               SOURCE-LEVEL METRICS
-            ------------------------------------------------- */
+            const data =
+                await response.json();
 
-            const githubViews = number(
-                data.github?.totals?.views ?? repo.views
+
+            const metrics =
+                calculateMetrics(data);
+
+
+            displayMetrics(metrics);
+
+            auditMetrics(
+                data,
+                metrics
             );
 
-            const githubUniqueVisitors = number(
-                data.github?.totals?.unique_visitors ?? repo.unique_visitors
+            updateCandidate(data);
+
+            updateEvidence(data);
+
+            updateFooter(data);
+
+
+        } catch (error) {
+
+            /*
+             * Important:
+             *
+             * Do NOT display fabricated numbers
+             * when the data file is unavailable.
+             */
+
+            setText(
+                "reach-value",
+                "Unavailable"
             );
 
-            const githubClones = number(
-                data.github?.totals?.clones ?? repo.clones
+            setText(
+                "engagement-value",
+                "Unavailable"
             );
 
-            const githubForks = number(
-                data.github?.totals?.forks ?? repo.forks
+            setText(
+                "research-actions-value",
+                "Unavailable"
             );
 
-            const zenodoViews = number(
-                data.zenodo?.totals?.total_views
+            setText(
+                "validation-value",
+                "Unavailable"
             );
 
-            const zenodoDownloads = number(
-                data.zenodo?.totals?.total_downloads
-            );
-
-            const researchgateReads = number(
-                data.researchgate?.total_reads
-            );
-
-            const osfViews = number(
-                data.osf?.totals?.views
-            );
-
-            const osfDownloads = number(
-                data.osf?.totals?.downloads
-            );
-
-            const citations = number(
-                data.validation?.citations
-            );
-
-            const replications = number(
-                data.validation?.independent_replications
-            );
-
-            /* -------------------------------------------------
-               DERIVED DASHBOARD METRICS
-
-               Reach:
-               GitHub views + ResearchGate reads + Zenodo views
-               + OSF views.
-
-               Unique Visitors:
-               GitHub unique visitors only. This is intentionally
-               not mixed with recommendations or other events.
-
-               Research Actions:
-               GitHub clones + forks + Zenodo downloads + OSF
-               downloads. These are stronger platform actions,
-               but are NOT scientific verification.
-
-               Validation:
-               citations + independent replications.
-            ------------------------------------------------- */
-
-            const reach =
-                githubViews +
-                researchgateReads +
-                zenodoViews +
-                osfViews;
-
-            const uniqueVisitors = githubUniqueVisitors;
-
-            const researchActions =
-                githubClones +
-                githubForks +
-                zenodoDownloads +
-                osfDownloads;
-
-            const validation =
-                citations +
-                replications;
-
-            /* -------------------------------------------------
-               MAIN INDICATORS
-            ------------------------------------------------- */
-
-            setText("reach-value", formatNumber(reach));
-            setText("engagement-value", formatNumber(uniqueVisitors));
-            setText("verification-value", formatNumber(researchActions));
-            setText("validation-value", formatNumber(validation));
-
-            /* -------------------------------------------------
-               FUNNEL
-            ------------------------------------------------- */
 
             setText(
                 "reach-count",
-                `${formatNumber(reach)} observable events`
+                "—"
             );
 
             setText(
                 "engagement-count",
-                `${formatNumber(uniqueVisitors)} GitHub unique visitors`
+                "—"
             );
 
             setText(
-                "verification-count",
-                `${formatNumber(researchActions)} research actions`
+                "research-actions-count",
+                "—"
             );
 
             setText(
                 "validation-count",
-                replications > 0
-                    ? `${formatNumber(replications)} independent replication(s)`
-                    : "Pending independent replication"
+                "—"
             );
 
-            /* -------------------------------------------------
-               CANDIDATE METADATA
-            ------------------------------------------------- */
 
-            const candidateNumber = data.candidate?.number;
-            const candidateName = data.candidate?.name;
-            const oeis = data.candidate?.oeis;
+            setText(
+                "audit-status",
+                "Unavailable"
+            );
 
-            if (candidateNumber) {
-                setText(
-                    "candidate-number",
-                    `n* = ${String(candidateNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+
+            setText(
+                "audit-details",
+                "Research telemetry could not be loaded. No fallback values are displayed."
+            );
+
+
+            const status =
+                document.getElementById(
+                    "audit-status"
                 );
+
+
+            if (status) {
+
+                status.classList.remove(
+                    "pass"
+                );
+
+                status.classList.add(
+                    "warn"
+                );
+
             }
 
-            if (oeis) {
-                const oeisLink = byId("candidate-oeis");
-                if (oeisLink) {
-                    oeisLink.textContent = `OEIS ${oeis}`;
-                    oeisLink.href = `https://oeis.org/${encodeURIComponent(oeis)}`;
-                }
-            }
 
-            const status = data.candidate?.status || "Data loaded";
-            setText("data-status", status);
-
-            if (candidateName) {
-                const heading = document.querySelector(".attention-header h3");
-                if (heading) heading.textContent = `${candidateName} Audit`;
-            }
-
-            /* -------------------------------------------------
-               DATA WINDOW / REFRESH TIME
-            ------------------------------------------------- */
-
-            const windowLabel =
-                data.github?.data_window === "rolling_14_days"
-                    ? "GitHub traffic: rolling 14 days"
-                    : (data.github?.data_window || "Platform window not specified");
-
-            setText("data-window", windowLabel);
-
-            const updated = data.updated || data.last_verified || "—";
-            setText("data-refreshed", `Updated ${updated}`);
-            setText("attention-updated", updated);
-
-            /* -------------------------------------------------
-               EVIDENCE STATUS
-            ------------------------------------------------- */
-
-            setText(
-                "computation-status",
-                data.evidence?.computational_audit || "Not reported"
+            console.error(
+                "Research telemetry unavailable:",
+                error
             );
 
-            setText(
-                "proof-status",
-                data.evidence?.mathematical_proof || "Not reported"
-            );
-
-            setText(
-                "replication-status",
-                data.evidence?.independent_replication || "Not reported"
-            );
-
-            setText(
-                "peer-status",
-                data.evidence?.peer_validation || "Not reported"
-            );
-
-            /* -------------------------------------------------
-               CONSISTENCY CHECK
-            ------------------------------------------------- */
-
-            const storedReach = number(
-                data.attention?.reach_events
-            );
-
-            const storedActions = number(
-                data.attention?.verification_events
-            );
-
-            const storedValidation =
-                number(data.attention?.validation_events);
-
-            const reachOK = storedReach === reach;
-            const actionsOK = storedActions === researchActions;
-            const validationOK = storedValidation === validation;
-
-            const quality = byId("data-quality");
-
-            if (quality) {
-                if (reachOK && actionsOK && validationOK) {
-                    quality.classList.remove("warning");
-                    quality.textContent =
-                        "Data consistency check: source metrics agree with the stored attention totals.";
-                } else {
-                    quality.classList.add("warning");
-                    quality.textContent =
-                        "Data consistency check: source-level metrics and one or more stored attention totals differ. Display values are calculated from source-level records.";
-                }
-            }
-
-            /* -------------------------------------------------
-               ACCESSIBILITY / STATE
-            ------------------------------------------------- */
-
-            document
-                .querySelectorAll(".attention-value")
-                .forEach(el => el.removeAttribute("aria-busy"));
         }
-        catch (error) {
-            console.warn(
-                "Research attention dashboard:",
-                error.message
-            );
 
-            setText(
-                "attention-updated",
-                "Data source unavailable"
-            );
-
-            setText(
-                "data-status",
-                "Data unavailable"
-            );
-
-            const quality = byId("data-quality");
-            if (quality) {
-                quality.classList.add("warning");
-                quality.textContent =
-                    "Data source unavailable. The dashboard could not load data/attention.json.";
-            }
-        }
     }
 
-    loadAttentionData();
-})();
+
+    loadResearchData();
+
 </script>
 
-
 </body>
-
 </html>

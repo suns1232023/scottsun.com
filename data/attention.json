@@ -1,105 +1,212 @@
-{
-  "schema_version": "1.0",
-  "updated": "2026-09-02",
+import json
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+import requests
 
-  "candidate": {
-    "name": "Sun's (2,4,6,8) Conjecture",
-    "number": "896315812331399",
-    "oeis": "A306477",
-    "status": "Computational Counterexample Candidate"
-  },
+JSON_FILE = Path("data/attention.json")
 
-  "github": {
-    "repositories": [
-      {
-        "name": "IFG-Theoretical-Foundations",
-        "url": "https://github.com/suns1232023/IFG-Theoretical-Foundations",
-        "views": 114,
-        "unique_visitors": 5,
-        "clones": 66,
-        "unique_cloners": 37,
-        "forks": 0,
-        "stars": 0
-      }
-    ],
+OWNER = "suns1232023"
+REPO = "IFG-Theoretical-Foundations"
+ZENODO_RECORD = "22139197"
+GITHUB_API = "https://api.github.com"
 
-    "totals": {
-      "views": 114,
-      "unique_visitors": 5,
-      "clones": 66,
-      "unique_cloners": 37,
-      "forks": 0,
-      "stars": 0
-    },
 
-    "data_window": "rolling_14_days",
-    "lifetime_archive": true
-  },
+def github_headers():
+    token = os.environ.get("GITHUB_TOKEN")
+    headers = {"Accept": "application/vnd.github+json"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    return headers
 
-  "researchgate": {
-    "publications": [
-      {
-        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-        "reads": 32,
-        "recommendations": 1,
-        "research_interest_score": 1.3
-      }
-    ],
-    "total_reads": 32
-  },
 
-  "zenodo": {
-    "records": [
-      {
-        "doi": "10.5281/zenodo.22139197",
-        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-        "unique_views": 118,
-        "total_views": 118,
-        "unique_downloads": 10,
-        "total_downloads": 10
-      }
-    ],
-    "totals": {
-      "unique_views": 118,
-      "total_views": 118,
-      "unique_downloads": 10,
-      "total_downloads": 10
+def get_json(url, headers=None):
+    response = requests.get(url, headers=headers, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+
+def update():
+    if not JSON_FILE.exists():
+        raise FileNotFoundError(f"{JSON_FILE} 不存在，请检查路径。")
+
+    with JSON_FILE.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    # ==================================================
+    # 1. 方法论元数据维护 (Methodology)
+    # ==================================================
+    data["methodology"] = {
+        "reach_definition": "Platform-level traffic events across hubs (non-deduplicated globally)",
+        "verification_definition": "High-intent interaction events such as code clones and paper downloads"
     }
-  },
 
-  "osf": {
-    "projects": [
-      {
-        "doi": "10.17605/OSF.IO/CAQXH",
-        "title": "Sun's (2,4,6,8) Conjecture Audit",
-        "views": 0,
-        "downloads": 0
-      }
-    ],
-    "totals": {
-      "views": 0,
-      "downloads": 0
+    # ==================================================
+    # 2. GitHub API (抓取元数据与近14天流量)
+    # ==================================================
+    repo_info = get_json(f"{GITHUB_API}/repos/{OWNER}/{REPO}", github_headers())
+    stars = repo_info.get("stargazers_count", 0)
+    forks = repo_info.get("forks_count", 0)
+
+    views_data = get_json(f"{GITHUB_API}/repos/{OWNER}/{REPO}/traffic/views", github_headers())
+    clones_data = get_json(f"{GITHUB_API}/repos/{OWNER}/{REPO}/traffic/clones", github_headers())
+
+    v_14d = views_data.get("count", 0)
+    uv_14d = views_data.get("uniques", 0)
+    c_14d = clones_data.get("count", 0)
+    uc_14d = clones_data.get("uniques", 0)
+
+    # 安全地匹配或创建仓库项
+    github_sec = data.setdefault("github", {})
+    repos_list = github_sec.setdefault("repositories", [])
+    
+    target_repo = None
+    for r in repos_list:
+        if r.get("name") == REPO or r.get("url", "").endswith(REPO):
+            target_repo = r
+            break
+            
+    if not target_repo:
+        target_repo = {"name": REPO, "url": f"https://github.com/{OWNER}/{REPO}"}
+        repos_list.append(target_repo)
+
+    # 同步仓库级别字段
+    target_repo.update({
+        "views": v_14d,
+        "unique_visitors": uv_14d,
+        "clones": c_14d,
+        "unique_cloners": uc_14d,
+        "forks": forks,
+        "stars": stars
+    })
+
+    # 更新 GitHub 汇总信息
+    github_sec["totals"] = {
+        "views": v_14d,
+        "unique_visitors": uv_14d,
+        "clones": c_14d,
+        "unique_cloners": uc_14d,
+        "forks": forks,
+        "stars": stars
     }
-  },
 
-  "validation": {
-    "citations": 0,
-    "independent_replications": 0
-  },
+    # 每日细粒度增量合并 (关键：解决滚动窗口数据丢包)
+    daily_history = github_sec.setdefault("daily_history", {})
+    for item in views_data.get("views", []):
+        d_str = item["timestamp"].split("T")[0]
+        entry = daily_history.setdefault(d_str, {})
+        entry["views"] = item["count"]
+        entry["unique_views"] = item["uniques"]
 
-  "evidence": {
-    "mathematical_proof": "Not established",
-    "computational_audit": "Completed",
-    "independent_replication": "Pending",
-    "peer_validation": "Pending"
-  },
+    for item in clones_data.get("clones", []):
+        d_str = item["timestamp"].split("T")[0]
+        entry = daily_history.setdefault(d_str, {})
+        entry["clones"] = item["count"]
+        entry["unique_clones"] = item["uniques"]
 
-  "attention": {
-    "reach_events": 264,
-    "engagement_events": 6,
-    "verification_events": 76,
-    "validation_events": 0
-  },
+    # ==================================================
+    # 3. Zenodo API (抓取记录级与汇总级指标)
+    # ==================================================
+    zenodo_info = get_json(f"https://zenodo.org/api/records/{ZENODO_RECORD}")
+    z_stats = zenodo_info.get("stats", {})
 
-  "last_verified": "2026-09-02"
-}
+    z_views = z_stats.get("views", 0)
+    z_uviews = z_stats.get("unique_views", 0)
+    z_downloads = z_stats.get("downloads", 0)
+    z_udownloads = z_stats.get("unique_downloads", 0)
+
+    zenodo_sec = data.setdefault("zenodo", {})
+    records_list = zenodo_sec.setdefault("records", [])
+    
+    target_record = None
+    for rec in records_list:
+        if ZENODO_RECORD in rec.get("doi", "") or str(rec.get("id", "")) == ZENODO_RECORD:
+            target_record = rec
+            break
+
+    if not target_record:
+        target_record = {"doi": f"10.5281/zenodo.{ZENODO_RECORD}"}
+        records_list.append(target_record)
+
+    target_record.update({
+        "total_views": z_views,
+        "unique_views": z_uviews,
+        "total_downloads": z_downloads,
+        "unique_downloads": z_udownloads
+    })
+
+    zenodo_sec["totals"] = {
+        "total_views": z_views,
+        "unique_views": z_uviews,
+        "total_downloads": z_downloads,
+        "unique_downloads": z_udownloads
+    }
+
+    # ==================================================
+    # 4. 学术传播漏斗计算 (Academic Attention Funnel)
+    # ==================================================
+    rg_reads = data.get("researchgate", {}).get("total_reads", 0)
+    rg_recs = 0
+    rg_pubs = data.get("researchgate", {}).get("publications", [])
+    if rg_pubs:
+        rg_recs = rg_pubs[0].get("recommendations", 0)
+
+    osf_views = data.get("osf", {}).get("totals", {}).get("views", 0)
+    osf_downloads = data.get("osf", {}).get("totals", {}).get("downloads", 0)
+
+    # 重新构建分层清晰的 attention 字典
+    data["attention"] = {
+        # 1. 平台级到达事件总量
+        "platform_events": {
+            "github_views_14d": v_14d,
+            "zenodo_views_total": z_views,
+            "researchgate_reads_total": rg_reads,
+            "osf_views_total": osf_views,
+            "total_reach_events": v_14d + z_views + rg_reads + osf_views
+        },
+        # 2. 去重访客数总量
+        "unique_events": {
+            "github_unique_visitors_14d": uv_14d,
+            "zenodo_unique_views_total": z_uviews,
+            "total_unique_views": uv_14d + z_uviews
+        },
+        # 3. 验证行为总量 (克隆与下载)
+        "verification_events": {
+            "github_clones_14d": c_14d,
+            "github_unique_cloners_14d": uc_14d,
+            "zenodo_downloads_total": z_downloads,
+            "zenodo_unique_downloads_total": z_udownloads,
+            "osf_downloads_total": osf_downloads,
+            "total_verification_events": c_14d + z_downloads + osf_downloads
+        },
+        # 4. 互动与同行验证
+        "engagement_events": {
+            "github_stars": stars,
+            "github_forks": forks,
+            "researchgate_recommendations": rg_recs
+        },
+        "validation_events": {
+            "citations": data.get("validation", {}).get("citations", 0),
+            "independent_replications": data.get("validation", {}).get("independent_replications", 0)
+        }
+    }
+
+    # ==================================================
+    # 5. 元数据更新与写回
+    # ==================================================
+    data["updated"] = today
+    data["last_verified"] = today
+
+    with JSON_FILE.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+    print(f"[{today}] 成功更新学术传播指标：")
+    print(f" - GitHub: {stars} Stars | {v_14d} Views (14d) | {c_14d} Clones (14d)")
+    print(f" - Zenodo: {z_views} Views | {z_downloads} Downloads")
+
+
+if __name__ == "__main__":
+    update()

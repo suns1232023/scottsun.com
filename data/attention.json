@@ -1,11 +1,6 @@
 {
   "schema_version": "1.0",
   "updated": "2026-09-02",
-  "last_verified": "2026-09-02",
-  "methodology": {
-    "reach_definition": "Platform-level traffic events across hubs (non-deduplicated globally)",
-    "verification_definition": "High-intent interaction events such as code clones and paper downloads"
-  },
   "candidate": {
     "name": "Sun's (2,4,6,8) Conjecture",
     "number": "896315812331399",
@@ -33,50 +28,67 @@
       "forks": 0,
       "stars": 0
     },
-    "daily_history": {
-      "2026-09-01": {
-        "views": 21,
-        "unique_views": 3,
-        "clones": 8,
-        "unique_clones": 4
-      },
-      "2026-09-02": {
-        "views": 17,
-        "unique_views": 2,
-        "clones": 5,
-        "unique_clones": 2
+    "data_window": "rolling_14_days",
+    "lifetime_archive": true
+  },
+  "researchgate": {
+    "publications": [
+      {
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        "reads": 32,
+        "recommendations": 1,
+        "research_interest_score": 1.3
       }
+    ],
+    "total_reads": 32
+  },
+  "zenodo": {
+    "records": [
+      {
+        "doi": "10.5281/zenodo.22139197",
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        "unique_views": 118,
+        "total_views": 118,
+        "unique_downloads": 10,
+        "total_downloads": 10
+      }
+    ],
+    "totals": {
+      "unique_views": 118,
+      "total_views": 118,
+      "unique_downloads": 10,
+      "total_downloads": 10
     }
   },
-  "attention": {
-    "platform_events": {
-      "github_views_14d": 114,
-      "zenodo_views_total": 118,
-      "researchgate_reads_total": 32,
-      "osf_views_total": 0,
-      "total_reach_events": 264
-    },
-    "unique_events": {
-      "github_unique_visitors_14d": 5,
-      "zenodo_unique_views_total": 118,
-      "total_unique_views": 123
-    },
-    "verification_events": {
-      "github_clones_14d": 66,
-      "github_unique_cloners_14d": 37,
-      "zenodo_downloads_total": 10,
-      "zenodo_unique_downloads_total": 10,
-      "osf_downloads_total": 0,
-      "total_verification_events": 76
-    },
-    "engagement_events": {
-      "github_stars": 0,
-      "github_forks": 0,
-      "researchgate_recommendations": 1
-    },
-    "validation_events": {
-      "citations": 0,
-      "independent_replications": 0
+  "osf": {
+    "projects": [
+      {
+        "doi": "10.17605/OSF.IO/CAQXH",
+        "title": "Sun's (2,4,6,8) Conjecture Audit",
+        "views": 0,
+        "downloads": 0
+      }
+    ],
+    "totals": {
+      "views": 0,
+      "downloads": 0
     }
-  }
+  },
+  "validation": {
+    "citations": 0,
+    "independent_replications": 0
+  },
+  "evidence": {
+    "mathematical_proof": "Not established",
+    "computational_audit": "Completed",
+    "independent_replication": "Pending",
+    "peer_validation": "Pending"
+  },
+  "attention": {
+    "reach_events": 264,
+    "engagement_events": 6,
+    "verification_events": 76,
+    "validation_events": 0
+  },
+  "last_verified": "2026-09-02"
 }

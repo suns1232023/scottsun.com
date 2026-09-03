@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-09-01",
+  "updated": "2026-09-02",
 
   "candidate": {
     "name": "Sun's (2,4,6,8) Conjecture",
@@ -10,137 +10,96 @@
   },
 
   "github": {
-
     "repositories": [
-
       {
         "name": "IFG-Theoretical-Foundations",
         "url": "https://github.com/suns1232023/IFG-Theoretical-Foundations",
-
-        "views": 0,
-        "unique_visitors": 0,
-
-        "clones": 0,
-        "unique_cloners": 0,
-
+        "views": 114,
+        "unique_visitors": 5,
+        "clones": 66,
+        "unique_cloners": 37,
         "forks": 0,
         "stars": 0
       }
-
     ],
 
     "totals": {
-
-      "views": 0,
-      "unique_visitors": 0,
-
-      "clones": 0,
-      "unique_cloners": 0,
-
+      "views": 114,
+      "unique_visitors": 5,
+      "clones": 66,
+      "unique_cloners": 37,
       "forks": 0,
       "stars": 0
     },
 
     "data_window": "rolling_14_days",
-
     "lifetime_archive": true
-
   },
-
 
   "researchgate": {
-
     "publications": [
-
       {
-        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture",
-        "reads": 0
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        "reads": 32,
+        "recommendations": 1,
+        "research_interest_score": 1.3
       }
-
     ],
-
-    "total_reads": 0
-
+    "total_reads": 32
   },
-
 
   "zenodo": {
-
     "records": [
-
       {
         "doi": "10.5281/zenodo.22139197",
-        "title": "A Computational Audit of a Candidate Counterexample",
-        "unique_views": 0,
-        "total_views": 0,
-        "unique_downloads": 0,
-        "total_downloads": 0
+        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        "unique_views": 118,
+        "total_views": 118,
+        "unique_downloads": 10,
+        "total_downloads": 10
       }
-
     ],
-
     "totals": {
-
-      "unique_views": 0,
-      "total_views": 0,
-      "unique_downloads": 0,
-      "total_downloads": 0
-
+      "unique_views": 118,
+      "total_views": 118,
+      "unique_downloads": 10,
+      "total_downloads": 10
     }
-
   },
 
-
   "osf": {
-
     "projects": [
-
       {
         "doi": "10.17605/OSF.IO/CAQXH",
         "title": "Sun's (2,4,6,8) Conjecture Audit",
         "views": 0,
         "downloads": 0
       }
-
     ],
-
     "totals": {
-
       "views": 0,
       "downloads": 0
-
     }
-
   },
-
 
   "validation": {
-
     "citations": 0,
     "independent_replications": 0
-
   },
 
-
   "evidence": {
-
     "mathematical_proof": "Not established",
     "computational_audit": "Completed",
     "independent_replication": "Pending",
     "peer_validation": "Pending"
-
   },
-
 
   "attention": {
-
-    "reach_events": 0,
-    "engagement_events": 0,
-    "verification_events": 0,
+    "reach_events": 264,
+    "engagement_events": 6,
+    "verification_events": 76,
     "validation_events": 0
-
   },
 
-
-  "last_verified": "2026-09-01"
+  "last_verified": "2026-09-02"
 }

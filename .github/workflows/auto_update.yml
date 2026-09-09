@@ -1,0 +1,38 @@
+name: Auto Update Attention Telemetry
+
+on:
+  schedule:
+    # 每天 UTC 时间 0:00 (北京时间早上 8:00) 自动触发
+    - cron: '0 0 * * *'
+  # 允许在 GitHub 网页界面手动点击按钮触发
+  workflow_dispatch:
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 赋予 GitHub Bot 自动提交代码写权限
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Telemetry Updater Script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/update_attention.py
+
+      - name: Commit and Push if Changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add attention.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update attention.json telemetry" && git push)

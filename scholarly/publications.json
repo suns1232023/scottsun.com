@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "author": {
+    "name": "Scott Sun",
+    "orcid": "0009-0002-1095-6228"
+  },
+
+  "publications": [
+
+    {
+      "id": "sun-2468-v23-4",
+
+      "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture — Version 23.4 (Final): Exhaustive Verification and Cantor-Pascal Diagnostics",
+
+      "author": "Scott Sun",
+
+      "year": 2026,
+
+      "version": "23.4",
+
+      "type": "preprint",
+
+      "status": "computational-audit",
+
+      "doi": "10.5281/zenodo.22139197",
+
+      "osf": "10.17605/OSF.IO/CAQXH",
+
+      "orcid": "0009-0002-1095-6228",
+
+      "topics": [
+        "additive combinatorics",
+        "binomial representation",
+        "computational number theory",
+        "OEIS A306477"
+      ],
+
+      "links": {
+        "oeis": "https://oeis.org/A306477"
+      }
+    },
+
+    {
+      "id": "sun-triangular-witness-v13-1",
+
+      "title": "Triangular Witness Trajectories and Gap-Cascade Bounds for the (2,4,6,8) Binomial Representation Problem: A Computationally Audited Framework and Open Trajectory-Crossing Program",
+
+      "author": "Scott Sun",
+
+      "year": 2026,
+
+      "version": "13.1",
+
+      "type": "preprint",
+
+      "status": "research-program",
+
+      "doi": "10.5281/zenodo.21973304",
+
+      "osf": "10.17605/OSF.IO/CAQXH",
+
+      "orcid": "0009-0002-1095-6228",
+
+      "topics": [
+        "additive combinatorics",
+        "binomial coefficients",
+        "OEIS A306477",
+        "gap geometry"
+      ],
+
+      "links": {
+        "oeis": "https://oeis.org/A306477"
+      }
+    },
+
+    {
+      "id": "sun-spectral-dimension",
+
+      "title": "Spectral Dimension Flow, Horizon Defects, and Emergent Time",
+
+      "author": "Scott Sun",
+
+      "year": 2026,
+
+      "version": "3.0",
+
+      "type": "preprint",
+
+      "status": "theoretical-framework",
+
+      "doi": "10.5281/zenodo.20300824",
+
+      "orcid": "0009-0002-1095-6228",
+
+      "topics": [
+        "spectral dimension",
+        "emergent time",
+        "horizon defects",
+        "information geometry"
+      ]
+    }
+
+  ]
+}

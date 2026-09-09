@@ -58,18 +58,28 @@
   },
 
   "researchgate": {
+    "publications_count": 14,
     "publications": [
       {
         "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-        "reads": 0,
-        "recommendations": 0,
+        "reads": 120,
+        "recommendations": 1,
         "research_interest_score": 4.3
       }
     ],
 
-    "total_reads": 0,
-    "total_recommendations": 0,
+    "total_reads": 120,
+    "reads_breakdown": {
+      "full_text_reads": 72,
+      "other_reads": 48
+    },
+    "total_recommendations": 1,
     "interest_score": 4.3,
+    "interest_score_change_weekly": "+0.40",
+    "percentile_ranks": {
+      "all_members": "Higher than 17%",
+      "first_published_2026": "Higher than 88%"
+    },
 
     "data_status": "Manual",
     "api_status": "No public official API"
@@ -123,8 +133,8 @@
   },
 
   "attention": {
-    "reach_events": 639,
-    "engagement_events": 0,
+    "reach_events": 759,
+    "engagement_events": 1,
     "research_action_events": 182,
     "validation_events": 1,
     "academic_attention_events": 1,
@@ -132,16 +142,16 @@
     "components": {
       "reach": {
         "github_views": 0,
-        "researchgate_reads": 0,
+        "researchgate_reads": 120,
         "zenodo_views": 639,
         "osf_views": 0,
-        "calculated_total": 639
+        "calculated_total": 759
       },
 
       "engagement": {
         "github_unique_visitors": 0,
-        "researchgate_recommendations": 0,
-        "calculated_total": 0
+        "researchgate_recommendations": 1,
+        "calculated_total": 1
       },
 
       "research_actions": {

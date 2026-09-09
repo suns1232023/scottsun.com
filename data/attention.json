@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
-  "updated": "2026-09-08",
-  "last_verified": "2026-09-08",
+  "updated": "2026-09-09",
+  "last_verified": "2026-09-09",
 
   "metadata": {
     "author": "Scott Sun",
@@ -118,7 +118,7 @@
   },
 
   "validation": {
-    "citations": 0,
+    "citations": 1,
     "independent_replications": 0
   },
 
@@ -126,7 +126,8 @@
     "reach_events": 639,
     "engagement_events": 0,
     "research_action_events": 182,
-    "validation_events": 0,
+    "validation_events": 1,
+    "academic_attention_events": 1,
 
     "components": {
       "reach": {
@@ -152,9 +153,9 @@
       },
 
       "validation": {
-        "citations": 0,
+        "citations": 1,
         "independent_replications": 0,
-        "calculated_total": 0
+        "calculated_total": 1
       }
     }
   },
@@ -208,7 +209,7 @@
     "attention_totals_verified": true,
     "cross_platform_deduplication": false,
     "independent_validation": false,
-    "last_checked": "2026-09-08"
+    "last_checked": "2026-09-09"
   },
 
   "audit_control": {

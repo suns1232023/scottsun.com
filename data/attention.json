@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
-  "updated": "2026-09-02",
-  "last_verified": "2026-09-02",
+  "updated": "2026-09-08",
+  "last_verified": "2026-09-08",
 
   "metadata": {
     "author": "Scott Sun",
@@ -15,8 +15,8 @@
     "number": "896315812331399",
     "oeis": "A306477",
     "status": "Computational Counterexample Candidate",
-    "claim_level": "Unconfirmed",
-    "description": "A candidate counterexample identified by computational exhaustive search. Independent replication and peer validation remain pending."
+    "claim_level": "Unconfirmed computational candidate",
+    "description": "The V23.4 phase completed an exhaustive computational investigation of the candidate n* = 896,315,812,331,399 within the mathematically bounded search domain. The computation examined 2,818,953,028 admissible (z,y,x) triples using exact integer arithmetic and found no representation of the candidate."
   },
 
   "github": {
@@ -26,10 +26,10 @@
         "url": "https://github.com/suns1232023/IFG-Theoretical-Foundations",
 
         "traffic": {
-          "views": 114,
-          "unique_visitors": 5,
-          "clones": 66,
-          "unique_cloners": 37
+          "views": 0,
+          "unique_visitors": 0,
+          "clones": 0,
+          "unique_cloners": 0
         },
 
         "engagement": {
@@ -40,10 +40,10 @@
     ],
 
     "totals": {
-      "views": 114,
-      "unique_visitors": 5,
-      "clones": 66,
-      "unique_cloners": 37,
+      "views": 0,
+      "unique_visitors": 0,
+      "clones": 0,
+      "unique_cloners": 0,
       "forks": 0,
       "stars": 0
     },
@@ -61,14 +61,15 @@
     "publications": [
       {
         "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-        "reads": 32,
-        "recommendations": 1,
-        "research_interest_score": 1.3
+        "reads": 0,
+        "recommendations": 0,
+        "research_interest_score": 4.3
       }
     ],
 
-    "total_reads": 32,
-    "total_recommendations": 1,
+    "total_reads": 0,
+    "total_recommendations": 0,
+    "interest_score": 4.3,
 
     "data_status": "Manual",
     "api_status": "No public official API"
@@ -80,19 +81,19 @@
         "doi": "10.5281/zenodo.22139197",
         "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
 
-        "unique_views": 118,
-        "total_views": 118,
+        "unique_views": 639,
+        "total_views": 639,
 
-        "unique_downloads": 10,
-        "total_downloads": 10
+        "unique_downloads": 182,
+        "total_downloads": 182
       }
     ],
 
     "totals": {
-      "unique_views": 118,
-      "total_views": 118,
-      "unique_downloads": 10,
-      "total_downloads": 10
+      "unique_views": 639,
+      "total_views": 639,
+      "unique_downloads": 182,
+      "total_downloads": 182
     },
 
     "data_status": "API"
@@ -122,32 +123,32 @@
   },
 
   "attention": {
-    "reach_events": 264,
-    "engagement_events": 6,
-    "research_action_events": 76,
+    "reach_events": 639,
+    "engagement_events": 0,
+    "research_action_events": 182,
     "validation_events": 0,
 
     "components": {
       "reach": {
-        "github_views": 114,
-        "researchgate_reads": 32,
-        "zenodo_views": 118,
+        "github_views": 0,
+        "researchgate_reads": 0,
+        "zenodo_views": 639,
         "osf_views": 0,
-        "calculated_total": 264
+        "calculated_total": 639
       },
 
       "engagement": {
-        "github_unique_visitors": 5,
-        "researchgate_recommendations": 1,
-        "calculated_total": 6
+        "github_unique_visitors": 0,
+        "researchgate_recommendations": 0,
+        "calculated_total": 0
       },
 
       "research_actions": {
-        "github_clones": 66,
+        "github_clones": 0,
         "github_forks": 0,
-        "zenodo_downloads": 10,
+        "zenodo_downloads": 182,
         "osf_downloads": 0,
-        "calculated_total": 76
+        "calculated_total": 182
       },
 
       "validation": {
@@ -207,7 +208,7 @@
     "attention_totals_verified": true,
     "cross_platform_deduplication": false,
     "independent_validation": false,
-    "last_checked": "2026-09-02"
+    "last_checked": "2026-09-08"
   },
 
   "audit_control": {

@@ -9,9 +9,8 @@ JSON_PATH = Path("attention.json")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = os.getenv("GITHUB_REPOSITORY")
 
-ZENODO_RECORD_ID = "22139197"
 GITHUB_API = "https://api.github.com"
-ZENODO_API = f"https://zenodo.org/api/records/{ZENODO_RECORD_ID}"
+ZENODO_API_BASE = "https://zenodo.org/api/records"
 
 
 def get_json(url, headers=None, timeout=30):
@@ -32,27 +31,30 @@ def update_telemetry():
 
     today = date.today().isoformat()
 
-    # 2. 从 GitHub API 获取流量数据
+    # 2. 从 GitHub API 获取 Repo 基础数据（Stars/Forks）及流量数据
     github_headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
     }
-    traffic_url = f"{GITHUB_API}/repos/{REPO_NAME}/traffic"
+    repo_url = f"{GITHUB_API}/repos/{REPO_NAME}"
+    
+    # 获取实时 Stars 与 Forks
+    repo_info = get_json(repo_url, headers=github_headers)
+    gh_stars = repo_info.get("stargazers_count", 0)
+    gh_forks = repo_info.get("forks_count", 0)
 
-    views_data = get_json(f"{traffic_url}/views", headers=github_headers)
-    clones_data = get_json(f"{traffic_url}/clones", headers=github_headers)
+    # 获取近14天流量
+    views_data = get_json(f"{repo_url}/traffic/views", headers=github_headers)
+    clones_data = get_json(f"{repo_url}/traffic/clones", headers=github_headers)
 
     gh_views = views_data.get("count", 0)
     gh_uniques = views_data.get("uniques", 0)
     gh_clones = clones_data.get("count", 0)
     gh_cloners = clones_data.get("uniques", 0)
 
-    gh_forks = data["github"]["totals"].get("forks", 0)
-    gh_stars = data["github"]["totals"].get("stars", 0)
-
     # 更新 GitHub 源层
-    if data["github"]["repositories"]:
+    if data["github"].get("repositories"):
         data["github"]["repositories"][0]["traffic"] = {
             "views": gh_views,
             "unique_visitors": gh_uniques,
@@ -73,8 +75,13 @@ def update_telemetry():
         "stars": gh_stars,
     }
 
-    # 3. 从 Zenodo API 获取下载与访问数据
-    zenodo_data = get_json(ZENODO_API)
+    # 3. 从 Zenodo API 获取数据（动态读取 JSON 中的 record_id）
+    zenodo_record_id = "22139197"
+    if data.get("zenodo", {}).get("records"):
+        zenodo_record_id = data["zenodo"]["records"][0].get("id", zenodo_record_id)
+
+    zenodo_url = f"{ZENODO_API_BASE}/{zenodo_record_id}"
+    zenodo_data = get_json(zenodo_url)
     z_stats = zenodo_data.get("stats", {})
 
     z_unique_views = z_stats.get("unique_views", 0)
@@ -89,11 +96,11 @@ def update_telemetry():
         "total_downloads": z_downloads,
     }
 
-    if data["zenodo"]["records"]:
+    if data["zenodo"].get("records"):
         data["zenodo"]["records"][0].update(zenodo_payload)
     data["zenodo"]["totals"].update(zenodo_payload)
 
-    # 4. 读取其它平台的现有数据（如手动维度的 ResearchGate）
+    # 4. 读取其它平台的现有数据（如 ResearchGate, OSF, Validation）
     rg_reads = data["researchgate"]["total_reads"]
     rg_recs = data["researchgate"]["total_recommendations"]
 
@@ -103,7 +110,7 @@ def update_telemetry():
     val_citations = data["validation"]["citations"]
     val_replications = data["validation"]["independent_replications"]
 
-    # 5. 严格依据原始方法论重新计算 Attention 汇总
+    # 5. 重新计算 Attention 汇总
     reach_total = gh_views + rg_reads + z_views + osf_views
     engagement_total = gh_uniques + rg_recs
     research_action_total = gh_clones + gh_forks + z_downloads + osf_downloads
@@ -142,7 +149,7 @@ def update_telemetry():
         "calculated_total": validation_total,
     }
 
-    # 6. 断言自检（保障符合 audit_control 逻辑）
+    # 6. 断言自检
     assert reach_total == (
         gh_views + rg_reads + z_views + osf_views
     ), "Reach 逻辑校验失败"
@@ -156,7 +163,7 @@ def update_telemetry():
 
     data["audit_control"]["status"] = "Passed"
 
-    # 7. 更新时间戳与标记
+    # 7. 更新时间戳
     data["updated"] = today
     data["last_verified"] = today
     data["data_quality"]["last_checked"] = today

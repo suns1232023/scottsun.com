@@ -22,7 +22,7 @@ Current work explores the relationships between information, entropy, geometry, 
 * **Lens.org:** [Scott Sun Profile](https://www.lens.org/lens/profile/scott-sun)
 * **Google Scholar:** [Scott Sun Citation Profile](https://scholar.google.com/citations?user=bmVEc3wAAAAJ)
 * **OSF Open Research Hub:** [OSF Project Repository](https://doi.org/10.17605/OSF.IO/8BR43)
-* **GitHub Research Site:** [suns1232023.github.io](https://suns1232023.github.io)
+* **GitHub Research Site:** [suns1232023.github.io](https://suns1232023.github.io/scottsun.com/) 
 
 ## Selected Research Topics
 

@@ -16,12 +16,13 @@ Current work explores the relationships between information, entropy, geometry, 
 * Quantum Gravity
 * AI Governance
 
-## Academic Profiles
+## Academic Profiles & Repositories
 
-* ORCID: https://orcid.org/0009-0002-1095-6228
-* Google Scholar: https://scholar.google.com/citations?user=bmVEc3wAAAAJ
-* Lens: https://www.lens.org/lens/orcid/0009-0002-1095-6228
-* Personal Website: https://www.scottsun.com
+* **ORCID:** [0009-0002-1095-6228](https://orcid.org/0009-0002-1095-6228)
+* **Lens.org:** [Scott Sun Profile](https://www.lens.org/lens/profile/scott-sun)
+* **Google Scholar:** [Scott Sun Citation Profile](https://scholar.google.com/citations?user=bmVEc3wAAAAJ)
+* **OSF Open Research Hub:** [OSF Project Repository](https://doi.org/10.17605/OSF.IO/8BR43)
+* **GitHub Research Site:** [suns1232023.github.io](https://suns1232023.github.io)
 
 ## Selected Research Topics
 

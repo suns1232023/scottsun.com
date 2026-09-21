@@ -37,7 +37,7 @@ REPORT_SCHEMA_VERSION = "1.1"
 HTTP_TIMEOUT = 20
 
 # User-Agent sent to external APIs
-USER_AGENT_CROSSREF  = (
+USER_AGENT_CROSSREF = (
     "ScholarlyAudit/1.0 "
     "(https://github.com/scottsun; "
     "mailto:contact@scottsun.com)"
@@ -51,6 +51,15 @@ USER_AGENT_OPENALEX = (
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def clean_doi_string(raw_doi: str) -> str:
+    """Strip protocol prefixes from DOIs to ensure uniform format (e.g. 10.5281/...)."""
+    if not raw_doi:
+        return ""
+    doi = str(raw_doi).strip()
+    doi = re.sub(r"^https?://(dx\.)?doi\.org/", "", doi, flags=re.IGNORECASE)
+    return doi.strip()
+
 
 def normalize(text: str) -> str:
     """
@@ -98,11 +107,15 @@ def extract_author_names(pub: dict) -> str:
 # External API lookups
 # ---------------------------------------------------------------------------
 
-def crossref_lookup(doi: str) -> dict | None:
+def crossref_lookup(raw_doi: str) -> dict | None:
     """
     Query Crossref Works API for a DOI.
     Returns the 'message' dict on success, None on failure.
     """
+    doi = clean_doi_string(raw_doi)
+    if not doi:
+        return None
+
     url = f"https://api.crossref.org/works/{doi}"
     headers = {"User-Agent": USER_AGENT_CROSSREF}
 
@@ -121,28 +134,30 @@ def crossref_lookup(doi: str) -> dict | None:
         return None
 
 
-def openalex_lookup(doi: str) -> dict | None:
+def openalex_lookup(raw_doi: str) -> dict | None:
     """
     Query OpenAlex Works API for a DOI.
     Returns the work dict on success, None on failure.
     """
-    # OpenAlex expects the bare DOI (no https://doi.org/ prefix)
-    clean_doi = doi.replace("https://doi.org/", "").strip()
-    url = f"https://api.openalex.org/works/https://doi.org/{clean_doi}"
+    doi = clean_doi_string(raw_doi)
+    if not doi:
+        return None
+
+    url = f"https://api.openalex.org/works/https://doi.org/{doi}"
     headers = {"User-Agent": USER_AGENT_OPENALEX}
 
     try:
         resp = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT)
 
         if resp.status_code == 404:
-            print(f"[WARN] OpenAlex: no record for DOI {clean_doi}")
+            print(f"[WARN] OpenAlex: no record for DOI {doi}")
             return None
 
         resp.raise_for_status()
         return resp.json()
 
     except requests.RequestException as exc:
-        print(f"[WARN] OpenAlex lookup failed for {clean_doi}: {exc}")
+        print(f"[WARN] OpenAlex lookup failed for {doi}: {exc}")
         return None
 
 
@@ -192,7 +207,8 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
     warnings: list[str] = []
 
     title      = pub.get("title", "")
-    doi        = pub.get("doi", "")
+    raw_doi    = pub.get("doi", "")
+    doi        = clean_doi_string(raw_doi)
     author_str = extract_author_names(pub)
 
     print("\n" + "─" * 60)
@@ -206,7 +222,7 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
 
     if not doi:
         errors.append("Missing DOI")
-    elif not str(doi).startswith("10."):
+    elif not doi.startswith("10."):
         warnings.append(f"DOI format appears unusual: {doi}")
 
     if not author_str:
@@ -229,6 +245,7 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
         "computational-candidate",
         "exploratory",
         "published",
+        "research-program"
     }
     ev = pub.get("evidence_level", "")
     if not ev:

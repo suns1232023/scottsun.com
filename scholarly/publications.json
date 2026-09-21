@@ -1,5 +1,6 @@
 {
-  "schema_version": "1.1",
+  "_comment": "Scott Sun — Scholarly Publications Metadata | scholarly/publications.json",
+  "_schema_version": "1.1",
 
   "author": {
     "name": "Scott Sun",
@@ -9,10 +10,11 @@
   "metadata": {
     "maintainer": "Scott Sun",
     "last_reviewed": "2026-09-21",
-    "publication_count": 3
+    "publication_count": 7
   },
 
   "publications": [
+
     {
       "id": "sun-2468-v23-4",
 
@@ -30,9 +32,11 @@
 
       "type": "preprint",
       "status": "computational-audit",
+      "peer_reviewed": false,
+      "evidence_level": "computational-audit",
 
       "doi": "10.5281/zenodo.22139197",
-      "osf": "10.17605/OSF.IO/CAQXH",
+      "osf": "https://osf.io/caqxh/",
 
       "topics": [
         "additive combinatorics",
@@ -42,7 +46,9 @@
       ],
 
       "links": {
-        "oeis": "https://oeis.org/A306477"
+        "zenodo": "https://doi.org/10.5281/zenodo.22139197",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
       }
     },
 
@@ -63,9 +69,11 @@
 
       "type": "preprint",
       "status": "research-program",
+      "peer_reviewed": false,
+      "evidence_level": "computational-audit",
 
       "doi": "10.5281/zenodo.21973304",
-      "osf": "10.17605/OSF.IO/CAQXH",
+      "osf": "https://osf.io/caqxh/",
 
       "topics": [
         "additive combinatorics",
@@ -75,7 +83,146 @@
       ],
 
       "links": {
-        "oeis": "https://oeis.org/A306477"
+        "zenodo": "https://doi.org/10.5281/zenodo.21973304",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
+    },
+
+    {
+      "id": "sun-mobius-lorentz",
+
+      "title": "Möbius–Lorentz Quotients and Null Pin Holonomy",
+
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+
+      "year": 2026,
+      "version": "1.0",
+
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+
+      "doi": "10.5281/zenodo.22019535",
+
+      "topics": [
+        "emergent geometry",
+        "Möbius transformation",
+        "Lorentz group",
+        "null pin holonomy",
+        "causal structure"
+      ],
+
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22019535"
+      }
+    },
+
+    {
+      "id": "sun-invariant-light-cone",
+
+      "title": "Invariant Light-Cone Algebra and Emergent Causal Structure",
+
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+
+      "year": 2026,
+      "version": "1.0",
+
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+
+      "doi": "10.5281/zenodo.20483898",
+
+      "topics": [
+        "light-cone algebra",
+        "emergent causality",
+        "causal structure",
+        "mathematical physics"
+      ],
+
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20483898"
+      }
+    },
+
+    {
+      "id": "sun-hidden-thread",
+
+      "title": "The Hidden Thread of Structural Information Evolution",
+
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+
+      "year": 2026,
+      "version": "1.0",
+
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+
+      "doi": "10.5281/zenodo.20792832",
+
+      "topics": [
+        "structural information",
+        "information evolution",
+        "complex systems",
+        "emergence"
+      ],
+
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20792832"
+      }
+    },
+
+    {
+      "id": "sun-time-spectral-dimension",
+
+      "title": "Time as Irreversible Spectral-Dimension Flow",
+
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+
+      "year": 2026,
+      "version": "1.0",
+
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+
+      "doi": "10.5281/zenodo.21524285",
+
+      "topics": [
+        "spectral dimension",
+        "irreversibility",
+        "emergent time",
+        "information geometry"
+      ],
+
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.21524285"
       }
     },
 
@@ -99,6 +246,8 @@
 
       "type": "preprint",
       "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
 
       "doi": "10.5281/zenodo.20300824",
 
@@ -107,7 +256,12 @@
         "emergent time",
         "horizon defects",
         "information geometry"
-      ]
+      ],
+
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20300824"
+      }
     }
+
   ]
 }

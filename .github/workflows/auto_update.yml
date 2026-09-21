@@ -2,23 +2,21 @@ name: Auto Update Attention Telemetry
 
 on:
   schedule:
-    # 每天 UTC 0:00（北京时间 08:00）
-    - cron: '0 0 * * *'
+    # 每天 UTC 00:00（北京时间 08:00）
+    - cron: "0 0 * * *"
 
-  # 允许在 GitHub 网页界面手动触发
   workflow_dispatch:
 
-# 避免并发任务导致 Git 冲突
 concurrency:
   group: auto-update-telemetry
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   update-json:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout Repository
@@ -27,25 +25,34 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Dependencies
-        run: pip install requests
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
 
-      - name: Run Telemetry Updater Script
+      - name: Run Telemetry Updater
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TRAFFIC_TOKEN: ${{ secrets.GH_TRAFFIC_TOKEN }}
-        run: python scripts/update_attention.py
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python scripts/update_attention.py
+
+      - name: Validate JSON
+        run: |
+          python -m json.tool data/attention.json > /dev/null
 
       - name: Commit and Push if Changed
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add attention.json
+          git add data/attention.json
 
-          git diff --quiet && git diff --staged --quiet || (
-            git commit -m "chore: auto-update attention.json telemetry" &&
+          if git diff --cached --quiet; then
+            echo "No telemetry changes to commit."
+          else
+            git commit -m "chore: auto-update attention telemetry"
             git push
-          )
+          fi

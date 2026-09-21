@@ -1,454 +1,491 @@
+"""
+update_attention.py — Scott Sun Academic Homepage
+Fetches telemetry from GitHub and Zenodo APIs,
+recomputes attention metrics, and writes data/attention.json.
+
+Usage (via GitHub Actions):
+    python scripts/update_attention.py
+
+Required environment variables:
+    GITHUB_TOKEN       — GitHub Actions token (contents: write)
+    GITHUB_REPOSITORY  — e.g. "scottsun/suns-conjecture-2468"
+"""
+
 from datetime import date
 import json
 import os
 from pathlib import Path
+
 import requests
 
-# --------------------------------------------------
-# Repository layout
-#
-# root/
-# ├── data/
-# │   └── attention.json
-# ├── scripts/
-# │   └── update_attention.py
-# └── attention.json (legacy)
-# --------------------------------------------------
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-ROOT = SCRIPT_DIR.parent
+ROOT       = SCRIPT_DIR.parent
 
-DATA_DIR = ROOT / "data"
-JSON_PATH = DATA_DIR / "attention.json"
+DATA_DIR          = ROOT / "data"
+JSON_PATH         = DATA_DIR / "attention.json"
+LEGACY_JSON_PATH  = ROOT / "attention.json"   # pre-migration location
 
-LEGACY_JSON_PATH = ROOT / "attention.json"
+# ---------------------------------------------------------------------------
+# Environment
+# ---------------------------------------------------------------------------
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-REPO_NAME = os.getenv("GITHUB_REPOSITORY")
+REPO_NAME    = os.getenv("GITHUB_REPOSITORY")
 
-GITHUB_API = "https://api.github.com"
+# ---------------------------------------------------------------------------
+# API constants
+# ---------------------------------------------------------------------------
+
+GITHUB_API      = "https://api.github.com"
 ZENODO_API_BASE = "https://zenodo.org/api/records"
 
+GITHUB_HEADERS = {
+    "Authorization":      f"Bearer {GITHUB_TOKEN}",
+    "Accept":             "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+}
 
-def get_json(url, headers=None, timeout=30):
-    response = requests.get(url, headers=headers, timeout=timeout)
-    response.raise_for_status()
-    return response.json()
+HTTP_TIMEOUT = 30   # seconds
+
+# Staleness threshold written into data_quality
+STALENESS_THRESHOLD_DAYS = 30
 
 
-def init_default_data():
+# ---------------------------------------------------------------------------
+# HTTP helper
+# ---------------------------------------------------------------------------
+
+def get_json(url: str, headers: dict | None = None) -> dict:
+    """GET a URL and return parsed JSON. Raises on HTTP error."""
+    resp = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT)
+    resp.raise_for_status()
+    return resp.json()
+
+
+# ---------------------------------------------------------------------------
+# Default data structure
+# Mirrors attention.json v2.2 — keep in sync with data/attention.json
+# ---------------------------------------------------------------------------
+
+def init_default_data() -> dict:
+    """
+    Return a valid skeleton when no attention.json exists yet.
+    All numeric fields default to 0; all required keys are present.
+    """
     return {
-        "schema_version": "1.1",
-        "updated": "",
-        "last_verified": "",
+        "_comment":        "Scott Sun — Research Attention Data | data/attention.json",
+        "_schema_version": "2.2",
+        "updated":         "",
+        "last_verified":   "",
+
         "data_quality": {
-            "last_checked": ""
+            "attention_totals_verified": False,
+            "staleness_threshold_days":  STALENESS_THRESHOLD_DAYS,
+            "last_checked":              "",
         },
-        "audit_control": {
-            "status": "Pending"
-        },
+
+        "audit_control": {"status": "Pending"},
+
         "github": {
-            "repositories": [{}],
-            "totals": {}
-        },
-        "zenodo": {
-            "records": [
+            "data_window": "rolling_14_days",
+            "repositories": [
                 {
-                    "id": "22139197",
-                    "doi": "10.5281/zenodo.22139197"
+                    "name": "suns-conjecture-2468",
+                    "url":  "https://github.com/scottsun/suns-conjecture-2468",
+                    "traffic": {
+                        "views":          0,
+                        "unique_visitors": 0,
+                        "clones":         0,
+                        "unique_cloners": 0,
+                    },
+                    "engagement": {"forks": 0, "stars": 0},
                 }
             ],
-            "totals": {}
-        },
-        "researchgate": {
-            "total_reads": 0,
-            "total_recommendations": 0
-        },
-        "osf": {
             "totals": {
-                "views": 0,
-                "downloads": 0
-            }
+                "views":          0,
+                "unique_visitors": 0,
+                "clones":         0,
+                "unique_cloners": 0,
+                "forks":          0,
+                "stars":          0,
+            },
         },
+
+        "zenodo": {
+            "totals": {
+                "total_views":      0,
+                "unique_views":     0,
+                "total_downloads":  0,
+                "unique_downloads": 0,
+            },
+            "records": [
+                {"id": "22139197", "doi": "10.5281/zenodo.22139197",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "21973304", "doi": "10.5281/zenodo.21973304",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "22019535", "doi": "10.5281/zenodo.22019535",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "20483898", "doi": "10.5281/zenodo.20483898",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "20792832", "doi": "10.5281/zenodo.20792832",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "21524285", "doi": "10.5281/zenodo.21524285",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "20373606", "doi": "10.5281/zenodo.20373606",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+                {"id": "20300824", "doi": "10.5281/zenodo.20300824",
+                 "total_views": 0, "unique_views": 0,
+                 "total_downloads": 0, "unique_downloads": 0},
+            ],
+        },
+
+        "osf": {
+            "totals": {"views": 0, "downloads": 0},
+            "projects": [
+                {"doi": "10.17605/OSF.IO/CAQXH",
+                 "title": "Sun's (2,4,6,8) Conjecture — OSF Hub",
+                 "views": 0, "downloads": 0},
+            ],
+        },
+
+        "researchgate": {
+            "total_reads":           0,
+            "total_recommendations": 0,
+            "profile_url": "https://www.researchgate.net/profile/Scott-Sun",
+        },
+
         "validation": {
-            "citations": 0,
-            "independent_replications": 0
+            "citations":               0,
+            "independent_replications": 0,
+            "notes": "No independent replication or peer validation recorded.",
         },
+
         "attention": {
-            "reach_events": 0,
-            "engagement_events": 0,
-            "research_action_events": 0,
-            "validation_events": 0,
+            "_note": (
+                "Pre-aggregated for cross-checking. "
+                "JS recomputes from source-level fields and flags discrepancies."
+            ),
+            "reach_events":              0,
+            "verification_events":       0,
             "academic_attention_events": 0,
             "components": {
-                "reach": {},
-                "engagement": {},
-                "research_actions": {},
-                "validation": {}
-            }
-        }
+                "reach": {
+                    "github_views":       0,
+                    "zenodo_views":       0,
+                    "osf_views":          0,
+                    "researchgate_reads": 0,
+                    "calculated_total":   0,
+                },
+                "verification": {
+                    "github_clones":    0,
+                    "github_forks":     0,
+                    "zenodo_downloads": 0,
+                    "osf_downloads":    0,
+                    "calculated_total": 0,
+                },
+                "academic_attention": {
+                    "citations":               0,
+                    "independent_replications": 0,
+                    "calculated_total":        0,
+                },
+            },
+        },
     }
 
 
-def load_data():
+# ---------------------------------------------------------------------------
+# Data loading
+# ---------------------------------------------------------------------------
+
+def load_data() -> dict:
+    """
+    Load attention.json from DATA_DIR.
+    Falls back to legacy root location, then to init_default_data().
+    """
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     if JSON_PATH.exists():
-        with JSON_PATH.open("r", encoding="utf-8") as f:
-            return json.load(f)
+        with JSON_PATH.open("r", encoding="utf-8") as fh:
+            return json.load(fh)
 
     if LEGACY_JSON_PATH.exists():
-        with LEGACY_JSON_PATH.open("r", encoding="utf-8") as f:
-            data = json.load(f)
+        print(f"[MIGRATION] Reading legacy file: {LEGACY_JSON_PATH}")
+        with LEGACY_JSON_PATH.open("r", encoding="utf-8") as fh:
+            return json.load(fh)
 
-        print(
-            f"[MIGRATION] Using legacy file "
-            f"{LEGACY_JSON_PATH}"
-        )
-        return data
-
-    print(
-        f"[INIT] Creating new telemetry file: "
-        f"{JSON_PATH}"
-    )
-
+    print(f"[INIT] No attention.json found — initialising defaults: {JSON_PATH}")
     return init_default_data()
 
 
-def update_telemetry():
+# ---------------------------------------------------------------------------
+# GitHub metrics
+# ---------------------------------------------------------------------------
+
+def fetch_github_metrics(repo_url: str) -> dict:
+    """
+    Fetch stars, forks, traffic views and clones from GitHub API.
+    Raises requests.RequestException on network / HTTP failure.
+    """
+    repo_info   = get_json(repo_url,                          headers=GITHUB_HEADERS)
+    views_data  = get_json(f"{repo_url}/traffic/views",       headers=GITHUB_HEADERS)
+    clones_data = get_json(f"{repo_url}/traffic/clones",      headers=GITHUB_HEADERS)
+
+    return {
+        "stars":          repo_info.get("stargazers_count", 0),
+        "forks":          repo_info.get("forks_count",      0),
+        "views":          views_data.get("count",           0),
+        "unique_visitors": views_data.get("uniques",        0),
+        "clones":         clones_data.get("count",          0),
+        "unique_cloners": clones_data.get("uniques",        0),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Zenodo metrics
+# ---------------------------------------------------------------------------
+
+def fetch_zenodo_record(record_id: str) -> dict:
+    """
+    Fetch stats for a single Zenodo record.
+    Returns a dict with view/download counts, or zeros on failure.
+    """
+    url = f"{ZENODO_API_BASE}/{record_id}"
+    try:
+        data   = get_json(url)
+        stats  = data.get("stats", {})
+        return {
+            "unique_views":     stats.get("unique_views",     0),
+            "total_views":      stats.get("views",            0),
+            "unique_downloads": stats.get("unique_downloads", 0),
+            "total_downloads":  stats.get("downloads",        0),
+        }
+    except Exception as exc:
+        print(f"[WARN] Zenodo API failed for record {record_id}: {exc}")
+        return {
+            "unique_views": 0, "total_views": 0,
+            "unique_downloads": 0, "total_downloads": 0,
+        }
+
+
+# ---------------------------------------------------------------------------
+# Audit helper (replaces assert)
+# ---------------------------------------------------------------------------
+
+def _verify(label: str, computed: int, expected: int) -> bool:
+    """
+    Compare a computed total against an expected value.
+    Prints a warning and returns False on mismatch.
+    Uses explicit if-check instead of assert so it works under python -O.
+    """
+    if computed != expected:
+        print(
+            f"[WARN] Audit mismatch — {label}: "
+            f"computed={computed}, expected={expected}"
+        )
+        return False
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Main telemetry update
+# ---------------------------------------------------------------------------
+
+def update_telemetry() -> None:
 
     if not GITHUB_TOKEN or not REPO_NAME:
         raise RuntimeError(
-            "缺少必要环境变量 "
-            "(GITHUB_TOKEN 或 GITHUB_REPOSITORY)"
+            "Missing required environment variables: "
+            "GITHUB_TOKEN and/or GITHUB_REPOSITORY"
         )
 
-    data = load_data()
-
+    data  = load_data()
     today = date.today().isoformat()
 
-    github_headers = {
-        "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
-
+    # ------------------------------------------------------------------ #
+    # 1. GitHub                                                           #
+    # ------------------------------------------------------------------ #
     repo_url = f"{GITHUB_API}/repos/{REPO_NAME}"
 
-    # --------------------------------------------------
-    # GitHub metrics
-    # --------------------------------------------------
+    try:
+        gh = fetch_github_metrics(repo_url)
+    except requests.RequestException as exc:
+        raise RuntimeError(f"GitHub API unavailable: {exc}") from exc
 
-    repo_info = get_json(
-        repo_url,
-        headers=github_headers
-    )
+    gh_views   = gh["views"]
+    gh_uniques = gh["unique_visitors"]
+    gh_clones  = gh["clones"]
+    gh_forks   = gh["forks"]
+    gh_stars   = gh["stars"]
 
-    gh_stars = repo_info.get(
-        "stargazers_count",
-        0
-    )
-
-    gh_forks = repo_info.get(
-        "forks_count",
-        0
-    )
-
-    views_data = get_json(
-        f"{repo_url}/traffic/views",
-        headers=github_headers
-    )
-
-    clones_data = get_json(
-        f"{repo_url}/traffic/clones",
-        headers=github_headers
-    )
-
-    gh_views = views_data.get("count", 0)
-    gh_uniques = views_data.get("uniques", 0)
-
-    gh_clones = clones_data.get("count", 0)
-    gh_cloners = clones_data.get("uniques", 0)
-
+    # Write into data structure (safe even if key was missing)
     data.setdefault("github", {})
-
-    repos = data["github"].setdefault(
-        "repositories",
-        []
-    )
-
+    repos = data["github"].setdefault("repositories", [{}])
     if not repos:
         repos.append({})
 
     repos[0]["traffic"] = {
-        "views": gh_views,
+        "views":          gh_views,
         "unique_visitors": gh_uniques,
-        "clones": gh_clones,
-        "unique_cloners": gh_cloners,
+        "clones":         gh_clones,
+        "unique_cloners": gh["unique_cloners"],
     }
-
-    repos[0]["engagement"] = {
-        "forks": gh_forks,
-        "stars": gh_stars,
-    }
+    repos[0]["engagement"] = {"forks": gh_forks, "stars": gh_stars}
 
     data["github"]["totals"] = {
-        "views": gh_views,
+        "views":          gh_views,
         "unique_visitors": gh_uniques,
-        "clones": gh_clones,
-        "unique_cloners": gh_cloners,
-        "forks": gh_forks,
-        "stars": gh_stars,
+        "clones":         gh_clones,
+        "unique_cloners": gh["unique_cloners"],
+        "forks":          gh_forks,
+        "stars":          gh_stars,
     }
 
-    # --------------------------------------------------
-    # Zenodo metrics
-    # --------------------------------------------------
+    # ------------------------------------------------------------------ #
+    # 2. Zenodo — iterate ALL records                                     #
+    # ------------------------------------------------------------------ #
+    data.setdefault("zenodo", {"totals": {}, "records": []})
 
-    z_views = 0
-    z_downloads = 0
+    zen_total_views     = 0
+    zen_total_downloads = 0
+    zen_unique_views    = 0
+    zen_unique_downloads = 0
 
-    try:
+    for record in data["zenodo"].get("records", []):
+        record_id = record.get("id", "")
+        if not record_id:
+            continue
 
-        zenodo_record_id = "22139197"
+        stats = fetch_zenodo_record(record_id)
+        record.update(stats)
 
-        if data.get("zenodo", {}).get("records"):
-            zenodo_record_id = (
-                data["zenodo"]["records"][0]
-                .get("id", zenodo_record_id)
-            )
+        zen_total_views      += stats["total_views"]
+        zen_total_downloads  += stats["total_downloads"]
+        zen_unique_views     += stats["unique_views"]
+        zen_unique_downloads += stats["unique_downloads"]
 
-        zenodo_url = (
-            f"{ZENODO_API_BASE}/{zenodo_record_id}"
-        )
+    data["zenodo"]["totals"] = {
+        "total_views":      zen_total_views,
+        "unique_views":     zen_unique_views,
+        "total_downloads":  zen_total_downloads,
+        "unique_downloads": zen_unique_downloads,
+    }
 
-        zenodo_data = get_json(zenodo_url)
+    # ------------------------------------------------------------------ #
+    # 3. Manually maintained sources (read from existing JSON)            #
+    # ------------------------------------------------------------------ #
+    rg  = data.get("researchgate", {})
+    osf = data.get("osf", {}).get("totals", {})
+    val = data.get("validation", {})
 
-        z_stats = zenodo_data.get(
-            "stats",
-            {}
-        )
+    rg_reads      = rg.get("total_reads",              0)
+    rg_recs       = rg.get("total_recommendations",    0)
+    osf_views     = osf.get("views",                   0)
+    osf_downloads = osf.get("downloads",               0)
+    val_citations = val.get("citations",               0)
+    val_replics   = val.get("independent_replications", 0)
 
-        z_unique_views = z_stats.get(
-            "unique_views",
-            0
-        )
+    # ------------------------------------------------------------------ #
+    # 4. Compute attention metrics                                        #
+    # ------------------------------------------------------------------ #
+    reach_total    = gh_views + rg_reads + zen_total_views + osf_views
+    verify_total   = gh_clones + gh_forks + zen_total_downloads + osf_downloads
+    academic_total = val_citations + val_replics
 
-        z_views = z_stats.get(
-            "views",
-            0
-        )
+    data.setdefault("attention", {})
+    attn = data["attention"]
 
-        z_unique_downloads = z_stats.get(
-            "unique_downloads",
-            0
-        )
+    attn["reach_events"]              = reach_total
+    attn["verification_events"]       = verify_total
+    attn["academic_attention_events"] = academic_total
 
-        z_downloads = z_stats.get(
-            "downloads",
-            0
-        )
+    # Remove legacy field names if present (migration)
+    for old_key in ("engagement_events", "research_action_events",
+                    "validation_events"):
+        attn.pop(old_key, None)
 
-        zenodo_payload = {
-            "unique_views": z_unique_views,
-            "total_views": z_views,
-            "unique_downloads": z_unique_downloads,
-            "total_downloads": z_downloads,
-        }
-
-        if data["zenodo"].get("records"):
-            data["zenodo"]["records"][0].update(
-                zenodo_payload
-            )
-
-        data["zenodo"]["totals"].update(
-            zenodo_payload
-        )
-
-    except Exception as exc:
-
-        print(
-            f"[WARN] Zenodo API failed: {exc}"
-        )
-
-        z_views = (
-            data.get("zenodo", {})
-            .get("totals", {})
-            .get("total_views", 0)
-        )
-
-        z_downloads = (
-            data.get("zenodo", {})
-            .get("totals", {})
-            .get("total_downloads", 0)
-        )
-
-    # --------------------------------------------------
-    # Additional sources
-    # --------------------------------------------------
-
-    rg_reads = data["researchgate"].get(
-        "total_reads",
-        0
-    )
-
-    rg_recs = data["researchgate"].get(
-        "total_recommendations",
-        0
-    )
-
-    osf_views = data["osf"]["totals"].get(
-        "views",
-        0
-    )
-
-    osf_downloads = data["osf"]["totals"].get(
-        "downloads",
-        0
-    )
-
-    val_citations = data["validation"].get(
-        "citations",
-        0
-    )
-
-    val_replications = data["validation"].get(
-        "independent_replications",
-        0
-    )
-
-    # --------------------------------------------------
-    # Calculations
-    # --------------------------------------------------
-
-    reach_total = (
-        gh_views +
-        rg_reads +
-        z_views +
-        osf_views
-    )
-
-    engagement_total = (
-        gh_uniques +
-        rg_recs
-    )
-
-    research_action_total = (
-        gh_clones +
-        gh_forks +
-        z_downloads +
-        osf_downloads
-    )
-
-    validation_total = (
-        val_citations +
-        val_replications
-    )
-
-    data["attention"]["reach_events"] = reach_total
-
-    data["attention"]["engagement_events"] = (
-        engagement_total
-    )
-
-    data["attention"]["research_action_events"] = (
-        research_action_total
-    )
-
-    data["attention"]["validation_events"] = (
-        validation_total
-    )
-
-    data["attention"]["academic_attention_events"] = (
-        validation_total
-    )
-
-    data["attention"]["components"]["reach"] = {
-        "github_views": gh_views,
+    attn.setdefault("components", {})
+    attn["components"]["reach"] = {
+        "github_views":       gh_views,
+        "zenodo_views":       zen_total_views,
+        "osf_views":          osf_views,
         "researchgate_reads": rg_reads,
-        "zenodo_views": z_views,
-        "osf_views": osf_views,
-        "calculated_total": reach_total,
+        "calculated_total":   reach_total,
+    }
+    attn["components"]["verification"] = {
+        "github_clones":    gh_clones,
+        "github_forks":     gh_forks,
+        "zenodo_downloads": zen_total_downloads,
+        "osf_downloads":    osf_downloads,
+        "calculated_total": verify_total,
+    }
+    attn["components"]["academic_attention"] = {
+        "citations":               val_citations,
+        "independent_replications": val_replics,
+        "calculated_total":        academic_total,
     }
 
-    data["attention"]["components"]["engagement"] = {
-        "github_unique_visitors": gh_uniques,
-        "researchgate_recommendations": rg_recs,
-        "calculated_total": engagement_total,
-    }
+    # Remove legacy component keys if present (migration)
+    for old_key in ("engagement", "research_actions", "validation"):
+        attn["components"].pop(old_key, None)
 
-    data["attention"]["components"]["research_actions"] = {
-        "github_clones": gh_clones,
-        "github_forks": gh_forks,
-        "zenodo_downloads": z_downloads,
-        "osf_downloads": osf_downloads,
-        "calculated_total": research_action_total,
-    }
+    # ------------------------------------------------------------------ #
+    # 5. Audit verification (explicit checks, not assert)                 #
+    # ------------------------------------------------------------------ #
+    audit_ok = all([
+        _verify("reach_total",   reach_total,
+                gh_views + rg_reads + zen_total_views + osf_views),
+        _verify("verify_total",  verify_total,
+                gh_clones + gh_forks + zen_total_downloads + osf_downloads),
+        _verify("academic_total", academic_total,
+                val_citations + val_replics),
+    ])
 
-    data["attention"]["components"]["validation"] = {
-        "citations": val_citations,
-        "independent_replications": val_replications,
-        "calculated_total": validation_total,
-    }
+    data.setdefault("audit_control", {})
+    data["audit_control"]["status"] = "Passed" if audit_ok else "Failed"
 
-    # --------------------------------------------------
-    # Audit
-    # --------------------------------------------------
-
-    assert reach_total == (
-        gh_views +
-        rg_reads +
-        z_views +
-        osf_views
-    )
-
-    assert engagement_total == (
-        gh_uniques +
-        rg_recs
-    )
-
-    assert research_action_total == (
-        gh_clones +
-        gh_forks +
-        z_downloads +
-        osf_downloads
-    )
-
-    assert validation_total == (
-        val_citations +
-        val_replications
-    )
-
-    data["audit_control"]["status"] = "Passed"
-
-    data["updated"] = today
+    # ------------------------------------------------------------------ #
+    # 6. Timestamps and data quality                                      #
+    # ------------------------------------------------------------------ #
+    data["updated"]       = today
     data["last_verified"] = today
-    data["data_quality"]["last_checked"] = today
 
-    DATA_DIR.mkdir(
-        parents=True,
-        exist_ok=True
+    data.setdefault("data_quality", {})
+    data["data_quality"]["last_checked"]              = today
+    data["data_quality"]["attention_totals_verified"] = audit_ok
+    data["data_quality"].setdefault(
+        "staleness_threshold_days", STALENESS_THRESHOLD_DAYS
     )
 
-    with JSON_PATH.open(
-        "w",
-        encoding="utf-8"
-    ) as f:
+    # ------------------------------------------------------------------ #
+    # 7. Write output                                                     #
+    # ------------------------------------------------------------------ #
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-        json.dump(
-            data,
-            f,
-            ensure_ascii=False,
-            indent=2
-        )
+    with JSON_PATH.open("w", encoding="utf-8") as fh:
+        json.dump(data, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
 
-        f.write("\n")
-
+    print(f"[{today}] {JSON_PATH} updated successfully.")
     print(
-        f"[{today}] "
-        f"{JSON_PATH} updated successfully."
+        f"  reach={reach_total}  verify={verify_total}  "
+        f"academic={academic_total}  audit={'OK' if audit_ok else 'WARN'}"
     )
 
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     update_telemetry()

@@ -4,7 +4,9 @@ import os
 from pathlib import Path
 import requests
 
-JSON_PATH = Path("attention.json")
+# 1. 动态获取当前脚本所在目录 (scripts/)，并定位到仓库根目录下的 attention.json
+SCRIPT_DIR = Path(__file__).resolve().parent
+JSON_PATH = SCRIPT_DIR.parent / "attention.json"
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = os.getenv("GITHUB_REPOSITORY")
@@ -19,32 +21,63 @@ def get_json(url, headers=None, timeout=30):
     return response.json()
 
 
+def init_default_data():
+    """当 attention.json 不存在时返回一个合法的初始结构，防止读取报错"""
+    return {
+        "updated": "",
+        "last_verified": "",
+        "data_quality": {"last_checked": ""},
+        "audit_control": {"status": "Pending"},
+        "github": {"repositories": [{}], "totals": {}},
+        "zenodo": {"records": [{"id": "22139197"}], "totals": {}},
+        "researchgate": {"total_reads": 0, "total_recommendations": 0},
+        "osf": {"totals": {"views": 0, "downloads": 0}},
+        "validation": {"citations": 0, "independent_replications": 0},
+        "attention": {
+            "reach_events": 0,
+            "engagement_events": 0,
+            "research_action_events": 0,
+            "validation_events": 0,
+            "components": {
+                "reach": {},
+                "engagement": {},
+                "research_actions": {},
+                "validation": {},
+            },
+        },
+    }
+
+
 def update_telemetry():
     if not GITHUB_TOKEN or not REPO_NAME:
         raise RuntimeError(
             "缺少必要的环境变量 (GITHUB_TOKEN 或 GITHUB_REPOSITORY)。"
         )
 
-    # 1. 读取原 JSON
-    with JSON_PATH.open("r", encoding="utf-8") as f:
-        data = json.load(f)
+    # 2. 读取原 JSON（如果不存在则初始化默认结构）
+    if not JSON_PATH.exists():
+        print(f"提示: 未找到 {JSON_PATH}，将自动创建初始 JSON 文件。")
+        data = init_default_data()
+    else:
+        with JSON_PATH.open("r", encoding="utf-8") as f:
+            data = json.load(f)
 
     today = date.today().isoformat()
 
-    # 2. 从 GitHub API 获取 Repo 基础数据（Stars/Forks）及流量数据
+    # 3. 从 GitHub API 获取 Repo 基础数据（Stars/Forks）及流量数据
     github_headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
     }
     repo_url = f"{GITHUB_API}/repos/{REPO_NAME}"
-    
+
     # 获取实时 Stars 与 Forks
     repo_info = get_json(repo_url, headers=github_headers)
     gh_stars = repo_info.get("stargazers_count", 0)
     gh_forks = repo_info.get("forks_count", 0)
 
-    # 获取近14天流量
+    # 获取近 14 天流量
     views_data = get_json(f"{repo_url}/traffic/views", headers=github_headers)
     clones_data = get_json(f"{repo_url}/traffic/clones", headers=github_headers)
 
@@ -75,7 +108,7 @@ def update_telemetry():
         "stars": gh_stars,
     }
 
-    # 3. 从 Zenodo API 获取数据（动态读取 JSON 中的 record_id）
+    # 4. 从 Zenodo API 获取数据（动态读取 JSON 中的 record_id）
     zenodo_record_id = "22139197"
     if data.get("zenodo", {}).get("records"):
         zenodo_record_id = data["zenodo"]["records"][0].get("id", zenodo_record_id)
@@ -100,17 +133,17 @@ def update_telemetry():
         data["zenodo"]["records"][0].update(zenodo_payload)
     data["zenodo"]["totals"].update(zenodo_payload)
 
-    # 4. 读取其它平台的现有数据（如 ResearchGate, OSF, Validation）
-    rg_reads = data["researchgate"]["total_reads"]
-    rg_recs = data["researchgate"]["total_recommendations"]
+    # 5. 读取其它平台的现有数据（如 ResearchGate, OSF, Validation）
+    rg_reads = data["researchgate"].get("total_reads", 0)
+    rg_recs = data["researchgate"].get("total_recommendations", 0)
 
-    osf_views = data["osf"]["totals"]["views"]
-    osf_downloads = data["osf"]["totals"]["downloads"]
+    osf_views = data["osf"]["totals"].get("views", 0)
+    osf_downloads = data["osf"]["totals"].get("downloads", 0)
 
-    val_citations = data["validation"]["citations"]
-    val_replications = data["validation"]["independent_replications"]
+    val_citations = data["validation"].get("citations", 0)
+    val_replications = data["validation"].get("independent_replications", 0)
 
-    # 5. 重新计算 Attention 汇总
+    # 6. 重新计算 Attention 汇总
     reach_total = gh_views + rg_reads + z_views + osf_views
     engagement_total = gh_uniques + rg_recs
     research_action_total = gh_clones + gh_forks + z_downloads + osf_downloads
@@ -149,7 +182,7 @@ def update_telemetry():
         "calculated_total": validation_total,
     }
 
-    # 6. 断言自检
+    # 7. 断言自检
     assert reach_total == (
         gh_views + rg_reads + z_views + osf_views
     ), "Reach 逻辑校验失败"
@@ -163,17 +196,17 @@ def update_telemetry():
 
     data["audit_control"]["status"] = "Passed"
 
-    # 7. 更新时间戳
+    # 8. 更新时间戳
     data["updated"] = today
     data["last_verified"] = today
     data["data_quality"]["last_checked"] = today
 
-    # 8. 保存回 JSON
+    # 9. 保存回 JSON
     with JSON_PATH.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-    print(f"[{today}] attention.json 自动更新并审计通过！")
+    print(f"[{today}] {JSON_PATH.name} 自动更新并审计通过！")
 
 
 if __name__ == "__main__":

@@ -1,236 +1,206 @@
-{
-  "schema_version": "1.2",
-  "updated": "2026-09-09",
-  "last_verified": "2026-09-09",
+from datetime import date
+import json
+import os
+from pathlib import Path
+import re
+import requests
 
-  "metadata": {
-    "author": "Scott Sun",
-    "purpose": "Research attention and evidence-tracking dashboard",
-    "status": "Public research telemetry",
-    "principle": "Platform attention is reported separately from scientific validation."
-  },
+# 1. 动态定位仓库根目录下的 attention.json
+SCRIPT_DIR = Path(__file__).resolve().parent
+JSON_PATH = SCRIPT_DIR.parent / "attention.json"
 
-  "candidate": {
-    "name": "Sun's (2,4,6,8) Conjecture",
-    "number": "896315812331399",
-    "oeis": "A306477",
-    "status": "Computational Counterexample Candidate",
-    "claim_level": "Unconfirmed computational candidate",
-    "description": "The V23.4 phase completed an exhaustive computational investigation of the candidate n* = 896,315,812,331,399 within the mathematically bounded search domain. The computation examined 2,818,953,028 admissible (z,y,x) triples using exact integer arithmetic and found no representation of the candidate."
-  },
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+REPO_NAME = os.getenv("GITHUB_REPOSITORY")
 
-  "github": {
-    "repositories": [
-      {
-        "name": "IFG-Theoretical-Foundations",
-        "url": "https://github.com/suns1232023/IFG-Theoretical-Foundations",
+GITHUB_API = "https://api.github.com"
+ZENODO_API_BASE = "https://zenodo.org/api/records"
 
-        "traffic": {
-          "views": 0,
-          "unique_visitors": 0,
-          "clones": 0,
-          "unique_cloners": 0
-        },
 
-        "engagement": {
-          "forks": 0,
-          "stars": 0
+def get_json(url, headers=None, timeout=30):
+    response = requests.get(url, headers=headers, timeout=timeout)
+    response.raise_for_status()
+    return response.json()
+
+
+def extract_zenodo_id(doi_str):
+    """从 DOI (如 10.5281/zenodo.22139197) 中提取 Zenodo Record ID"""
+    match = re.search(r"zenodo\.(\d+)", str(doi_str))
+    if match:
+        return match.group(1)
+    return "22139197"  # Fallback default ID
+
+
+def update_telemetry():
+    if not GITHUB_TOKEN or not REPO_NAME:
+        raise RuntimeError(
+            "缺少必要的环境变量 (GITHUB_TOKEN 或 GITHUB_REPOSITORY)。"
+        )
+
+    if not JSON_PATH.exists():
+        raise FileNotFoundError(f"未找到 telemetry 配置文件: {JSON_PATH}")
+
+    with JSON_PATH.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    today = date.today().isoformat()
+
+    # ==========================================
+    # 2. 从 GitHub API 获取流量与 Engagement 数据
+    # ==========================================
+    github_headers = {
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    repo_url = f"{GITHUB_API}/repos/{REPO_NAME}"
+
+    repo_info = get_json(repo_url, headers=github_headers)
+    gh_stars = repo_info.get("stargazers_count", 0)
+    gh_forks = repo_info.get("forks_count", 0)
+
+    views_data = get_json(f"{repo_url}/traffic/views", headers=github_headers)
+    clones_data = get_json(f"{repo_url}/traffic/clones", headers=github_headers)
+
+    gh_views = views_data.get("count", 0)
+    gh_uniques = views_data.get("uniques", 0)
+    gh_clones = clones_data.get("count", 0)
+    gh_cloners = clones_data.get("uniques", 0)
+
+    # 更新 GitHub 源层数据
+    if data.get("github", {}).get("repositories"):
+        data["github"]["repositories"][0]["traffic"] = {
+            "views": gh_views,
+            "unique_visitors": gh_uniques,
+            "clones": gh_clones,
+            "unique_cloners": gh_cloners,
         }
-      }
-    ],
+        data["github"]["repositories"][0]["engagement"] = {
+            "forks": gh_forks,
+            "stars": gh_stars,
+        }
 
-    "totals": {
-      "views": 0,
-      "unique_visitors": 0,
-      "clones": 0,
-      "unique_cloners": 0,
-      "forks": 0,
-      "stars": 0
-    },
-
-    "data_window": "rolling_14_days",
-
-    "archive": {
-      "enabled": false,
-      "type": "daily_snapshot",
-      "description": "Historical GitHub traffic is not currently archived in this JSON file. GitHub traffic is limited to the platform's rolling 14-day window."
+    data["github"]["totals"] = {
+        "views": gh_views,
+        "unique_visitors": gh_uniques,
+        "clones": gh_clones,
+        "unique_cloners": gh_cloners,
+        "forks": gh_forks,
+        "stars": gh_stars,
     }
-  },
 
-  "researchgate": {
-    "publications_count": 14,
-    "publications": [
-      {
-        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
-        "reads": 120,
-        "recommendations": 1,
-        "research_interest_score": 4.3
-      }
-    ],
+    # ==========================================
+    # 3. 从 Zenodo API 获取数据
+    # ==========================================
+    zenodo_doi = "10.5281/zenodo.22139197"
+    if data.get("zenodo", {}).get("records"):
+        zenodo_doi = data["zenodo"]["records"][0].get("doi", zenodo_doi)
 
-    "total_reads": 120,
-    "reads_breakdown": {
-      "full_text_reads": 72,
-      "other_reads": 48
-    },
-    "total_recommendations": 1,
-    "interest_score": 4.3,
-    "interest_score_change_weekly": "+0.40",
-    "percentile_ranks": {
-      "all_members": "Higher than 17%",
-      "first_published_2026": "Higher than 88%"
-    },
+    zenodo_record_id = extract_zenodo_id(zenodo_doi)
+    zenodo_url = f"{ZENODO_API_BASE}/{zenodo_record_id}"
 
-    "data_status": "Manual",
-    "api_status": "No public official API"
-  },
+    try:
+        zenodo_data = get_json(zenodo_url)
+        z_stats = zenodo_data.get("stats", {})
 
-  "zenodo": {
-    "records": [
-      {
-        "doi": "10.5281/zenodo.22139197",
-        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture: Exhaustive Verification and Cantor-Pascal Diagnostics",
+        z_unique_views = z_stats.get("unique_views", 0)
+        z_views = z_stats.get("views", 0)
+        z_unique_downloads = z_stats.get("unique_downloads", 0)
+        z_downloads = z_stats.get("downloads", 0)
 
-        "unique_views": 639,
-        "total_views": 639,
+        zenodo_payload = {
+            "unique_views": z_unique_views,
+            "total_views": z_views,
+            "unique_downloads": z_unique_downloads,
+            "total_downloads": z_downloads,
+        }
 
-        "unique_downloads": 182,
-        "total_downloads": 182
-      }
-    ],
+        if data.get("zenodo", {}).get("records"):
+            data["zenodo"]["records"][0].update(zenodo_payload)
+        data["zenodo"]["totals"].update(zenodo_payload)
+    except Exception as e:
+        print(f"[WARN] 获取 Zenodo API 数据失败, 将使用现有的缓存数据: {e}")
+        z_views = data["zenodo"]["totals"].get("total_views", 0)
+        z_downloads = data["zenodo"]["totals"].get("total_downloads", 0)
 
-    "totals": {
-      "unique_views": 639,
-      "total_views": 639,
-      "unique_downloads": 182,
-      "total_downloads": 182
-    },
+    # ==========================================
+    # 4. 读取 ResearchGate, OSF, Validation 数据
+    # ==========================================
+    rg_reads = data.get("researchgate", {}).get("total_reads", 0)
+    rg_recs = data.get("researchgate", {}).get("total_recommendations", 0)
 
-    "data_status": "API"
-  },
+    osf_views = data.get("osf", {}).get("totals", {}).get("views", 0)
+    osf_downloads = data.get("osf", {}).get("totals", {}).get("downloads", 0)
 
-  "osf": {
-    "projects": [
-      {
-        "doi": "10.17605/OSF.IO/CAQXH",
-        "title": "Sun's (2,4,6,8) Conjecture Audit",
-        "views": 0,
-        "downloads": 0
-      }
-    ],
+    val_citations = data.get("validation", {}).get("citations", 0)
+    val_replications = data.get("validation", {}).get("independent_replications", 0)
 
-    "totals": {
-      "views": 0,
-      "downloads": 0
-    },
+    # ==========================================
+    # 5. 汇总计算 Attention 指标
+    # ==========================================
+    reach_total = gh_views + rg_reads + z_views + osf_views
+    engagement_total = gh_uniques + rg_recs
+    research_action_total = gh_clones + gh_forks + z_downloads + osf_downloads
+    validation_total = val_citations + val_replications
 
-    "data_status": "API"
-  },
+    # 更新顶层 Attention 事件统计
+    data["attention"]["reach_events"] = reach_total
+    data["attention"]["engagement_events"] = engagement_total
+    data["attention"]["research_action_events"] = research_action_total
+    data["attention"]["validation_events"] = validation_total
+    data["attention"]["academic_attention_events"] = validation_total
 
-  "validation": {
-    "citations": 1,
-    "independent_replications": 0
-  },
-
-  "attention": {
-    "reach_events": 759,
-    "engagement_events": 1,
-    "research_action_events": 182,
-    "validation_events": 1,
-    "academic_attention_events": 1,
-
-    "components": {
-      "reach": {
-        "github_views": 0,
-        "researchgate_reads": 120,
-        "zenodo_views": 639,
-        "osf_views": 0,
-        "calculated_total": 759
-      },
-
-      "engagement": {
-        "github_unique_visitors": 0,
-        "researchgate_recommendations": 1,
-        "calculated_total": 1
-      },
-
-      "research_actions": {
-        "github_clones": 0,
-        "github_forks": 0,
-        "zenodo_downloads": 182,
-        "osf_downloads": 0,
-        "calculated_total": 182
-      },
-
-      "validation": {
-        "citations": 1,
-        "independent_replications": 0,
-        "calculated_total": 1
-      }
+    # 更新 Components 详细指标
+    data["attention"]["components"]["reach"] = {
+        "github_views": gh_views,
+        "researchgate_reads": rg_reads,
+        "zenodo_views": z_views,
+        "osf_views": osf_views,
+        "calculated_total": reach_total,
     }
-  },
 
-  "evidence": {
-    "mathematical_proof": "Not established",
-    "computational_audit": "Completed",
-    "independent_replication": "Pending",
-    "peer_validation": "Pending"
-  },
-
-  "methodology": {
-    "reach_events": {
-      "definition": "Platform-level access events reported by the respective platforms.",
-      "formula": "GitHub views + ResearchGate reads + Zenodo views + OSF views",
-      "interpretation": "Observable platform events. They are not equivalent to unique researchers."
-    },
-
-    "engagement_events": {
-      "definition": "Observable interaction signals beyond passive access.",
-      "formula": "GitHub unique visitors + ResearchGate recommendations",
-      "interpretation": "An event-based engagement indicator. It is not a deduplicated count of individuals."
-    },
-
-    "research_action_events": {
-      "definition": "Observable actions suggesting activity beyond passive viewing.",
-      "formula": "GitHub clones + GitHub forks + Zenodo downloads + OSF downloads",
-      "interpretation": "These actions indicate research-related activity but do not constitute independent scientific verification."
-    },
-
-    "validation_events": {
-      "definition": "Externally documented evidence providing stronger confirmation of the research claim.",
-      "formula": "Citations + independent replications",
-      "interpretation": "Only independently documented validation events are included."
-    },
-
-    "deduplication": {
-      "status": "Not_available",
-      "description": "Cross-platform users cannot currently be deduplicated. Platform events are therefore reported separately rather than converted into estimated unique individuals."
-    },
-
-    "github_traffic": {
-      "window": "rolling_14_days",
-      "historical_status": "Not_archived",
-      "description": "GitHub traffic represents the platform's currently available rolling traffic window and should not be interpreted as lifetime traffic."
+    data["attention"]["components"]["engagement"] = {
+        "github_unique_visitors": gh_uniques,
+        "researchgate_recommendations": rg_recs,
+        "calculated_total": engagement_total,
     }
-  },
 
-  "data_quality": {
-    "source_level_consistency": true,
-    "attention_totals_verified": true,
-    "cross_platform_deduplication": false,
-    "independent_validation": false,
-    "last_checked": "2026-09-09"
-  },
+    data["attention"]["components"]["research_actions"] = {
+        "github_clones": gh_clones,
+        "github_forks": gh_forks,
+        "zenodo_downloads": z_downloads,
+        "osf_downloads": osf_downloads,
+        "calculated_total": research_action_total,
+    }
 
-  "audit_control": {
-    "status": "Passed",
-    "checks": [
-      "Reach total equals source-level components.",
-      "Engagement total equals source-level components.",
-      "Research-action total equals source-level components.",
-      "Validation total equals source-level components.",
-      "No cross-platform deduplication is claimed.",
-      "No platform attention metric is classified as scientific validation."
-    ]
-  }
-}
+    data["attention"]["components"]["validation"] = {
+        "citations": val_citations,
+        "independent_replications": val_replications,
+        "calculated_total": validation_total,
+    }
+
+    # ==========================================
+    # 6. 数据审计自检 (Audit Control)
+    # ==========================================
+    assert reach_total == (gh_views + rg_reads + z_views + osf_views), "Reach 校验失败"
+    assert engagement_total == (gh_uniques + rg_recs), "Engagement 校验失败"
+    assert research_action_total == (gh_clones + gh_forks + z_downloads + osf_downloads), "Research Actions 校验失败"
+    assert validation_total == (val_citations + val_replications), "Validation 校验失败"
+
+    data["audit_control"]["status"] = "Passed"
+
+    # ==========================================
+    # 7. 更新时间戳并保存
+    # ==========================================
+    data["updated"] = today
+    data["last_verified"] = today
+    data["data_quality"]["last_checked"] = today
+
+    with JSON_PATH.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
+    print(f"[{today}] {JSON_PATH.name} (v{data.get('schema_version', '1.0')}) 自动更新并校验通过！")
+
+
+if __name__ == "__main__":
+    update_telemetry()

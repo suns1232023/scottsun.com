@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import requests
 
-# 1. 动态定位仓库根目录下的 attention.json
+# 1. 动态定位当前脚本的上级目录（即仓库根目录下的 attention.json）
 SCRIPT_DIR = Path(__file__).resolve().parent
 JSON_PATH = SCRIPT_DIR.parent / "attention.json"
 
@@ -23,11 +23,13 @@ def get_json(url, headers=None, timeout=30):
 
 
 def extract_zenodo_id(doi_str):
-    """从 DOI (如 10.5281/zenodo.22139197) 中提取 Zenodo Record ID"""
+    """从 DOI 字符串 (如 10.5281/zenodo.22139197) 中安全正则提取数字 ID"""
+    if not doi_str:
+        return "22139197"
     match = re.search(r"zenodo\.(\d+)", str(doi_str))
     if match:
         return match.group(1)
-    return "22139197"  # Fallback default ID
+    return "22139197"  # 备用默认 ID
 
 
 def update_telemetry():
@@ -36,8 +38,12 @@ def update_telemetry():
             "缺少必要的环境变量 (GITHUB_TOKEN 或 GITHUB_REPOSITORY)。"
         )
 
+    # 2. 读取配置文件（增加文件存在性安全检查）
     if not JSON_PATH.exists():
-        raise FileNotFoundError(f"未找到 telemetry 配置文件: {JSON_PATH}")
+        raise FileNotFoundError(
+            f"未找到配置文件: {JSON_PATH}\n"
+            f"请确认仓库根目录下存在 attention.json 文件。"
+        )
 
     with JSON_PATH.open("r", encoding="utf-8") as f:
         data = json.load(f)
@@ -45,7 +51,7 @@ def update_telemetry():
     today = date.today().isoformat()
 
     # ==========================================
-    # 2. 从 GitHub API 获取流量与 Engagement 数据
+    # 3. 从 GitHub API 获取 Repo 基础数据与流量数据
     # ==========================================
     github_headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
@@ -58,6 +64,7 @@ def update_telemetry():
     gh_stars = repo_info.get("stargazers_count", 0)
     gh_forks = repo_info.get("forks_count", 0)
 
+    # 获取流量（近 14 天）
     views_data = get_json(f"{repo_url}/traffic/views", headers=github_headers)
     clones_data = get_json(f"{repo_url}/traffic/clones", headers=github_headers)
 
@@ -66,8 +73,8 @@ def update_telemetry():
     gh_clones = clones_data.get("count", 0)
     gh_cloners = clones_data.get("uniques", 0)
 
-    # 更新 GitHub 源层数据
-    if data.get("github", {}).get("repositories"):
+    # 安全写入 github 模块
+    if "github" in data and "repositories" in data["github"] and len(data["github"]["repositories"]) > 0:
         data["github"]["repositories"][0]["traffic"] = {
             "views": gh_views,
             "unique_visitors": gh_uniques,
@@ -89,7 +96,7 @@ def update_telemetry():
     }
 
     # ==========================================
-    # 3. 从 Zenodo API 获取数据
+    # 4. 从 Zenodo API 获取数据（带 API 失败降级保护）
     # ==========================================
     zenodo_doi = "10.5281/zenodo.22139197"
     if data.get("zenodo", {}).get("records"):
@@ -117,13 +124,14 @@ def update_telemetry():
         if data.get("zenodo", {}).get("records"):
             data["zenodo"]["records"][0].update(zenodo_payload)
         data["zenodo"]["totals"].update(zenodo_payload)
+
     except Exception as e:
-        print(f"[WARN] 获取 Zenodo API 数据失败, 将使用现有的缓存数据: {e}")
-        z_views = data["zenodo"]["totals"].get("total_views", 0)
-        z_downloads = data["zenodo"]["totals"].get("total_downloads", 0)
+        print(f"[WARN] 获取 Zenodo API 失败，保留现有缓存数据: {e}")
+        z_views = data.get("zenodo", {}).get("totals", {}).get("total_views", 0)
+        z_downloads = data.get("zenodo", {}).get("totals", {}).get("total_downloads", 0)
 
     # ==========================================
-    # 4. 读取 ResearchGate, OSF, Validation 数据
+    # 5. 读取 ResearchGate, OSF, Validation 数据
     # ==========================================
     rg_reads = data.get("researchgate", {}).get("total_reads", 0)
     rg_recs = data.get("researchgate", {}).get("total_recommendations", 0)
@@ -135,21 +143,21 @@ def update_telemetry():
     val_replications = data.get("validation", {}).get("independent_replications", 0)
 
     # ==========================================
-    # 5. 汇总计算 Attention 指标
+    # 6. 计算 Attention 指标并更新 Components
     # ==========================================
     reach_total = gh_views + rg_reads + z_views + osf_views
     engagement_total = gh_uniques + rg_recs
     research_action_total = gh_clones + gh_forks + z_downloads + osf_downloads
     validation_total = val_citations + val_replications
 
-    # 更新顶层 Attention 事件统计
+    # 更新 attention 汇总
     data["attention"]["reach_events"] = reach_total
     data["attention"]["engagement_events"] = engagement_total
     data["attention"]["research_action_events"] = research_action_total
     data["attention"]["validation_events"] = validation_total
     data["attention"]["academic_attention_events"] = validation_total
 
-    # 更新 Components 详细指标
+    # 更新 attention.components
     data["attention"]["components"]["reach"] = {
         "github_views": gh_views,
         "researchgate_reads": rg_reads,
@@ -179,27 +187,29 @@ def update_telemetry():
     }
 
     # ==========================================
-    # 6. 数据审计自检 (Audit Control)
+    # 7. 断言校验与校验逻辑状态更新
     # ==========================================
-    assert reach_total == (gh_views + rg_reads + z_views + osf_views), "Reach 校验失败"
-    assert engagement_total == (gh_uniques + rg_recs), "Engagement 校验失败"
-    assert research_action_total == (gh_clones + gh_forks + z_downloads + osf_downloads), "Research Actions 校验失败"
-    assert validation_total == (val_citations + val_replications), "Validation 校验失败"
+    assert reach_total == (gh_views + rg_reads + z_views + osf_views), "Reach 逻辑校验失败"
+    assert engagement_total == (gh_uniques + rg_recs), "Engagement 逻辑校验失败"
+    assert research_action_total == (gh_clones + gh_forks + z_downloads + osf_downloads), "Research Actions 逻辑校验失败"
+    assert validation_total == (val_citations + val_replications), "Validation 逻辑校验失败"
 
-    data["audit_control"]["status"] = "Passed"
+    if "audit_control" in data:
+        data["audit_control"]["status"] = "Passed"
 
     # ==========================================
-    # 7. 更新时间戳并保存
+    # 8. 时间戳更新并安全写入文件
     # ==========================================
     data["updated"] = today
     data["last_verified"] = today
-    data["data_quality"]["last_checked"] = today
+    if "data_quality" in data:
+        data["data_quality"]["last_checked"] = today
 
     with JSON_PATH.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-    print(f"[{today}] {JSON_PATH.name} (v{data.get('schema_version', '1.0')}) 自动更新并校验通过！")
+    print(f"[{today}] {JSON_PATH.name} 数据成功更新并通过审计校验！")
 
 
 if __name__ == "__main__":

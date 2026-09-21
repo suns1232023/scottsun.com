@@ -686,6 +686,42 @@
       color: var(--muted);
     }
 
+    /* Source snapshots */
+    .source-snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .source-snapshot {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .source-snapshot h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+
+    .snapshot-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .snapshot-row:last-child { border-bottom: 0; }
+    .snapshot-label { color: var(--muted); }
+    .snapshot-value { font-family: var(--font-mono); font-weight: 600; }
+    .snapshot-meta { margin-top: 10px; color: #929aa2; font-size: 11px; }
+
     /* Audit box */
     .audit-box {
       margin-top: 20px;
@@ -777,7 +813,8 @@
       .research-grid,
       .evidence-grid,
       .attention-grid,
-      .resource-grid { grid-template-columns: repeat(2, 1fr); }
+      .resource-grid,
+      .source-snapshot-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 680px) {
@@ -800,7 +837,8 @@
       .research-grid,
       .evidence-grid,
       .attention-grid,
-      .resource-grid { grid-template-columns: 1fr; }
+      .resource-grid,
+      .source-snapshot-grid { grid-template-columns: 1fr; }
 
       .pub-item { grid-template-columns: 1fr; }
       .pub-badge { align-self: auto; }
@@ -1195,6 +1233,40 @@
           </div>
         </div>
 
+        <!-- Source snapshots -->
+        <div class="source-snapshot-grid" aria-label="Platform source snapshots">
+          <article class="source-snapshot">
+            <h3>ResearchGate</h3>
+            <div class="snapshot-row"><span class="snapshot-label">Research Interest Score</span><span class="snapshot-value" id="rg-ris">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Reads</span><span class="snapshot-value" id="rg-reads">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Recommendations</span><span class="snapshot-value" id="rg-recs">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Citations</span><span class="snapshot-value" id="rg-citations">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">h-index</span><span class="snapshot-value" id="rg-hindex">—</span></div>
+            <div class="snapshot-meta" id="rg-snapshot-meta">Snapshot: —</div>
+          </article>
+          <article class="source-snapshot">
+            <h3>GitHub</h3>
+            <div class="snapshot-row"><span class="snapshot-label">Views</span><span class="snapshot-value" id="gh-views">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Unique visitors</span><span class="snapshot-value" id="gh-uniques">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Clones</span><span class="snapshot-value" id="gh-clones">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Stars</span><span class="snapshot-value" id="gh-stars">—</span></div>
+            <div class="snapshot-meta" id="gh-snapshot-meta">Source: GitHub API</div>
+          </article>
+          <article class="source-snapshot">
+            <h3>Zenodo</h3>
+            <div class="snapshot-row"><span class="snapshot-label">Views</span><span class="snapshot-value" id="zn-views">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Downloads</span><span class="snapshot-value" id="zn-downloads">—</span></div>
+            <div class="snapshot-meta" id="zn-snapshot-meta">Source: Zenodo API</div>
+          </article>
+          <article class="source-snapshot">
+            <h3>Data health</h3>
+            <div class="snapshot-row"><span class="snapshot-label">Schema</span><span class="snapshot-value" id="data-schema">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Last verified</span><span class="snapshot-value" id="data-verified">—</span></div>
+            <div class="snapshot-row"><span class="snapshot-label">Updater</span><span class="snapshot-value" id="data-updater">—</span></div>
+            <div class="snapshot-meta">The page never treats missing data as zero.</div>
+          </article>
+        </div>
+
         <!-- Audit -->
         <div class="audit-box">
           <div>Data consistency:
@@ -1277,7 +1349,7 @@
   </footer>
 
   <!-- ═══════════════════════════════════════════════════════
-       DATA ENGINE  (v4 SRP architecture + v3 cross-check)
+       DATA ENGINE (v5 canonical-source + schema-validation + cache-busting)
        Design principles:
          1. No fabricated fallback values.
          2. Source-level metrics are recalculated client-side.
@@ -1288,74 +1360,96 @@
   <script>
     "use strict";
 
+    /* Canonical public data source. The updater must write this exact file. */
     const DATA_URL = "data/attention.json";
 
-    /* ── Utilities ─────────────────────────────────────── */
-    function num(v) { const n = Number(v); return Number.isFinite(n) ? n : 0; }
-    function fmt(v) { return num(v).toLocaleString("en-US"); }
-    function set(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+    function set(id, v) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = v;
+    }
+
+    function num(v) {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function fmt(v) {
+      const n = num(v);
+      return n === null ? "—" : n.toLocaleString("en-US");
+    }
+
     function setW(id, pct) {
       const el = document.getElementById(id);
       if (el) el.style.width = Math.max(0, Math.min(100, pct)) + "%";
     }
 
-    /* ── 1. Calculate metrics from source-level fields ── */
-    function calculateMetrics(data) {
-      const gh  = data.github?.totals    || {};
-      const rg  = data.researchgate      || {};
-      const zn  = data.zenodo?.totals    || {};
-      const osf = data.osf?.totals       || {};
-      const val = data.validation        || {};
-
-      /* Reach: views across all platforms */
-      const reach = num(gh.views) + num(rg.total_reads) + num(zn.total_views) + num(osf.views);
-
-      /* Engagement: unique visitors + recommendations (stronger signals) */
-      const engagement = num(gh.unique_visitors) + num(rg.total_recommendations);
-
-      /* Research actions: clones + forks + downloads */
-      const researchActions = num(gh.clones) + num(gh.forks) + num(zn.total_downloads) + num(osf.downloads);
-
-      /* Academic attention: citations + independent replications */
-      const academicAttention = num(val.citations) + num(val.independent_replications);
-
-      return { reach, engagement, researchActions, academicAttention };
+    /* Required source fields. Missing fields are errors, not zeros. */
+    function validateData(data) {
+      if (!data || typeof data !== "object") throw new Error("Invalid JSON object");
+      if (!data.schema_version) throw new Error("Missing schema_version");
+      if (!data.updated && !data.last_verified) throw new Error("Missing update timestamp");
+      const gh = data.github?.totals;
+      const rg = data.researchgate;
+      const zn = data.zenodo?.totals;
+      const osf = data.osf?.totals;
+      const val = data.validation;
+      if (!gh || !rg || !zn || !osf || !val) throw new Error("Incomplete source blocks");
+      const required = [
+        ["github.views", gh.views], ["github.unique_visitors", gh.unique_visitors],
+        ["github.clones", gh.clones], ["github.forks", gh.forks],
+        ["researchgate.total_reads", rg.total_reads],
+        ["researchgate.total_recommendations", rg.total_recommendations],
+        ["zenodo.total_views", zn.total_views], ["zenodo.total_downloads", zn.total_downloads],
+        ["osf.views", osf.views], ["osf.downloads", osf.downloads],
+        ["validation.citations", val.citations],
+        ["validation.independent_replications", val.independent_replications]
+      ];
+      const missing = required.filter(([, v]) => num(v) === null);
+      if (missing.length) throw new Error("Missing numeric fields: " + missing.map(x => x[0]).join(", "));
     }
 
-    /* ── 2. Display metrics ─────────────────────────────── */
+    function calculateMetrics(data) {
+      const gh  = data.github.totals;
+      const rg  = data.researchgate;
+      const zn  = data.zenodo.totals;
+      const osf = data.osf.totals;
+      const val = data.validation;
+
+      return {
+        reach: gh.views + rg.total_reads + zn.total_views + osf.views,
+        engagement: gh.unique_visitors + rg.total_recommendations,
+        researchActions: gh.clones + gh.forks + zn.total_downloads + osf.downloads,
+        academicAttention: val.citations + val.independent_replications
+      };
+    }
+
     function displayMetrics(m) {
-      set("reach-value",           fmt(m.reach));
-      set("engagement-value",      fmt(m.engagement));
-      set("research-actions-value",fmt(m.researchActions));
-      set("validation-value",      fmt(m.academicAttention));
+      set("reach-value", fmt(m.reach));
+      set("engagement-value", fmt(m.engagement));
+      set("research-actions-value", fmt(m.researchActions));
+      set("validation-value", fmt(m.academicAttention));
+      set("reach-count", fmt(m.reach));
+      set("engagement-count", fmt(m.engagement));
+      set("research-actions-count", fmt(m.researchActions));
+      set("validation-count", fmt(m.academicAttention));
 
-      set("reach-count",           fmt(m.reach));
-      set("engagement-count",      fmt(m.engagement));
-      set("research-actions-count",fmt(m.researchActions));
-      set("validation-count",      fmt(m.academicAttention));
-
-      /* Funnel bars: normalised against max value (prevents divide-by-zero) */
       const maxVal = Math.max(m.reach, m.engagement, m.researchActions, m.academicAttention, 1);
-      setW("reach-fill",            m.reach            / maxVal * 100);
-      setW("engagement-fill",       m.engagement       / maxVal * 100);
-      setW("research-actions-fill", m.researchActions  / maxVal * 100);
-      setW("validation-fill",       m.academicAttention / maxVal * 100);
-
-      /* Remove loading state */
+      setW("reach-fill", m.reach / maxVal * 100);
+      setW("engagement-fill", m.engagement / maxVal * 100);
+      setW("research-actions-fill", m.researchActions / maxVal * 100);
+      setW("validation-fill", m.academicAttention / maxVal * 100);
       document.querySelectorAll(".metric-value").forEach(el => el.removeAttribute("aria-busy"));
     }
 
-    /* ── 3. Audit: cross-check computed vs stored totals ─ */
     function auditMetrics(data, m) {
       const stored = data.attention || {};
       const checks = {
-        reach:      num(stored.reach_events)              === m.reach,
-        engagement: num(stored.engagement_events)         === m.engagement,
-        actions:    num(stored.research_action_events)    === m.researchActions,
-        validation: num(stored.academic_attention_events ?? stored.validation_events) === m.academicAttention
+        reach: Number(stored.reach_events) === m.reach,
+        engagement: Number(stored.engagement_events) === m.engagement,
+        actions: Number(stored.research_action_events) === m.researchActions,
+        validation: Number(stored.academic_attention_events ?? stored.validation_events) === m.academicAttention
       };
       const passed = Object.values(checks).every(Boolean);
-
       const statusEl = document.getElementById("audit-status");
       if (statusEl) {
         statusEl.textContent = passed ? "Passed" : "Warning";
@@ -1363,21 +1457,18 @@
         statusEl.classList.add(passed ? "pass" : "warn");
       }
       set("audit-details", passed
-        ? "Source-level metrics agree with all stored attention totals."
-        : "One or more stored attention totals do not match the source-level metrics. Display values are calculated from source-level records."
+        ? "Source-level metrics agree with the stored attention totals."
+        : "Stored totals do not agree with source-level metrics. The dashboard displays recalculated source-level values."
       );
     }
 
-    /* ── 4. Update candidate metadata ──────────────────── */
     function updateCandidate(data) {
       const c = data.candidate || {};
-      if (c.name)   set("candidate-name",   c.name);
+      if (c.name) set("candidate-name", c.name);
       if (c.status) set("candidate-status", c.status);
       if (c.claim_level) set("claim-level", c.claim_level);
       if (c.description) set("candidate-description", c.description);
-      if (c.number) {
-        set("candidate-number", "n* = " + String(c.number).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-      }
+      if (c.number) set("candidate-number", "n* = " + String(c.number).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
       const oeisEl = document.getElementById("candidate-oeis");
       if (oeisEl && c.oeis) {
         oeisEl.textContent = c.oeis;
@@ -1385,73 +1476,72 @@
       }
     }
 
-    /* ── 5. Update evidence classification ──────────────── */
     function updateEvidence(data) {
       const ev = data.evidence || {};
       const stateMap = {
-        "proof-state":       ev.mathematical_proof,
-        "audit-state":       ev.computational_audit,
+        "proof-state": ev.mathematical_proof,
+        "audit-state": ev.computational_audit,
         "replication-state": ev.independent_replication,
-        "peer-state":        ev.peer_validation
+        "peer-state": ev.peer_validation
       };
-      Object.entries(stateMap).forEach(([id, val]) => {
-        if (val) set(id, val);
-      });
+      Object.entries(stateMap).forEach(([id, val]) => { if (val) set(id, val); });
     }
 
-    /* ── 6. Update footer ───────────────────────────────── */
-    function updateFooter(data) {
-      const updated = data.updated || data.data_quality?.last_check || "Unknown";
-      set("data-footer", "Data source: data/attention.json · Last verified: " + updated);
-      localStorage.setItem("attention_last_loaded", updated);
+    function updateSnapshots(data) {
+      const rg = data.researchgate;
+      const gh = data.github.totals;
+      const zn = data.zenodo.totals;
+      const dq = data.data_quality || {};
+      set("rg-ris", rg.research_interest_score ?? "—");
+      set("rg-reads", fmt(rg.total_reads));
+      set("rg-recs", fmt(rg.total_recommendations));
+      set("rg-citations", fmt(rg.citations));
+      set("rg-hindex", rg.h_index ?? "—");
+      set("rg-snapshot-meta", "Snapshot: " + (rg.snapshot_date || data.updated || "—"));
+      set("gh-views", fmt(gh.views));
+      set("gh-uniques", fmt(gh.unique_visitors));
+      set("gh-clones", fmt(gh.clones));
+      set("gh-stars", fmt(gh.stars));
+      set("zn-views", fmt(zn.total_views));
+      set("zn-downloads", fmt(zn.total_downloads));
+      set("data-schema", data.schema_version);
+      set("data-verified", data.last_verified || dq.last_checked || data.updated || "—");
+      set("data-updater", data.update_engine?.name || "GitHub Actions");
+    }
 
-      /* Staleness warning: >30 days */
+    function updateFooter(data) {
+      const updated = data.updated || data.last_verified || data.data_quality?.last_checked || "Unknown";
+      set("data-footer", "Data source: " + DATA_URL + " · Last verified: " + updated);
+      localStorage.setItem("attention_last_loaded", updated);
       const updDate = new Date(updated);
-      const days = Number.isNaN(updDate.getTime())
-        ? null
-        : Math.floor((Date.now() - updDate.getTime()) / 86400000);
+      const days = Number.isNaN(updDate.getTime()) ? null : Math.floor((Date.now() - updDate.getTime()) / 86400000);
       if (days !== null && days > 30) {
         const note = document.querySelector(".attention-note");
-        if (note) {
-          note.innerHTML += ` <strong style="color:var(--warning)">⚠ Data may be outdated (${days} days since last update).</strong>`;
-        }
+        if (note) note.innerHTML += ` <strong style="color:var(--warning)">⚠ Data may be outdated (${days} days since last update).</strong>`;
       }
     }
 
-    /* ── Main loader ────────────────────────────────────── */
     async function loadResearchData() {
       try {
-        const res = await fetch(DATA_URL, { cache: "no-store" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
+        /* Cache-busting prevents GitHub Pages/CDN from serving an old JSON file. */
+        const url = DATA_URL + "?v=" + Date.now();
+        const res = await fetch(url, { cache: "no-store", headers: { "Accept": "application/json" } });
+        if (!res.ok) throw new Error("HTTP " + res.status + " for " + DATA_URL);
         const data = await res.json();
-
+        validateData(data);
         const metrics = calculateMetrics(data);
         displayMetrics(metrics);
         auditMetrics(data, metrics);
         updateCandidate(data);
         updateEvidence(data);
+        updateSnapshots(data);
         updateFooter(data);
-
       } catch (err) {
-        /*
-         * IMPORTANT: Do NOT display fabricated numbers
-         * when the data file is unavailable.
-         */
-        ["reach-value","engagement-value","research-actions-value","validation-value"].forEach(id => {
-          set(id, "Unavailable");
-        });
-        ["reach-count","engagement-count","research-actions-count","validation-count"].forEach(id => {
-          set(id, "—");
-        });
-
-        const last = localStorage.getItem("attention_last_loaded");
-        set("audit-details",
-          "Research telemetry could not be loaded. No fallback values are displayed." +
-          (last ? " Last successful load: " + last : "")
-        );
+        ["reach-value","engagement-value","research-actions-value","validation-value"].forEach(id => set(id, "Unavailable"));
+        ["reach-count","engagement-count","research-actions-count","validation-count"].forEach(id => set(id, "—"));
+        set("audit-details", "Research telemetry could not be loaded or failed schema validation. No zero-value fallback is used. " + err.message);
         const statusEl = document.getElementById("audit-status");
-        if (statusEl) { statusEl.textContent = "Unavailable"; statusEl.classList.add("warn"); }
-
+        if (statusEl) { statusEl.textContent = "Unavailable"; statusEl.classList.remove("pass"); statusEl.classList.add("warn"); }
         document.querySelectorAll(".metric-value").forEach(el => el.removeAttribute("aria-busy"));
         console.error("Research telemetry unavailable:", err);
       }

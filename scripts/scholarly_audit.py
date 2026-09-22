@@ -39,12 +39,12 @@ HTTP_TIMEOUT = 20
 # User-Agent sent to external APIs
 USER_AGENT_CROSSREF = (
     "ScholarlyAudit/1.0 "
-    "(https://github.com/scottsun; "
-    "mailto:contact@scottsun.com)"
+    "(https://github.com/suns1232023; "
+    "mailto:suns1232023@hotmail.com)"
 )
 USER_AGENT_OPENALEX = (
     "ScholarlyAudit/1.0 "
-    "(mailto:contact@scottsun.com)"
+    "(mailto:suns1232023@hotmail.com)"
 )
 
 

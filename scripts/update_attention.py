@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-09-21",
-  "last_verified": "2026-09-21",
+  "updated": "2026-09-22",
+  "last_verified": "2026-09-22",
 
   "data_quality": {
     "attention_totals_verified": true,
@@ -41,7 +41,7 @@
     "repositories": [
       {
         "name": "suns-2468-binomial-representation",
-        "url": "https://github.com/suns1232023/suns-2468-binomial-representation",
+        "url": "https://github.com/suns1232023/sun-2468-conjecture",
         "traffic": {
           "views": 55,
           "unique_visitors": 1,
@@ -102,7 +102,7 @@
   "researchgate": {
     "total_reads": 142,
     "total_recommendations": 3,
-    "profile_url": "https://www.researchgate.net/profile/Scott-Sun"
+    "profile_url": "https://www.researchgate.net/profile/Scott-Sun-3"
   },
 
   "google_scholar": {

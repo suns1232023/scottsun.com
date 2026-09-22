@@ -153,7 +153,7 @@
     },
     {
       "id": "sun-time-spectral-dimension",
-      "title": "Time as Irreversible Spectral-Dimension Flow",
+      "title": "A Phenomenological Framework for Short-Range Gravitational Signatures from Spectral Dimension Flow",
       "authors": [
         {
           "name": "Scott Sun",
@@ -166,7 +166,7 @@
       "status": "theoretical-framework",
       "peer_reviewed": false,
       "evidence_level": "exploratory",
-      "doi": "10.5281/zenodo.21524285",
+      "doi": "10.5281/zenodo.22052109",
       "topics": [
         "spectral dimension",
         "irreversibility",
@@ -203,7 +203,7 @@
         "information geometry"
       ],
       "links": {
-        "zenodo": "https://doi.org/10.5281/zenodo.20300824"
+        "zenodo": "https://doi.org/10.5281/zenodo.22064416"
       }
     }
   ]

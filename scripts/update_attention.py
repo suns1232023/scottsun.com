@@ -44,7 +44,7 @@
         "url": "https://github.com/suns1232023/sun-2468-conjecture",
         "traffic": {
           "views": 55,
-          "unique_visitors": 1,
+          "unique_visitors": 2,
           "clones": 0,
           "unique_cloners": 0
         },
@@ -56,7 +56,7 @@
     ],
     "totals": {
       "views": 55,
-      "unique_visitors": 1,
+      "unique_visitors": 2,
       "clones": 0,
       "unique_cloners": 0,
       "forks": 0,

@@ -1,125 +1,213 @@
-{
-  "_schema_version": "3.0",
-  "updated": "2026-09-23",
-  "last_verified": "2026-09-23",
+#!/usr/bin/env python3
+"""
+scripts/update_attention.py
+Automated Telemetry Fetcher for scottsun.com (Schema v3.0)
 
-  "data_quality": {
-    "attention_totals_verified": true,
-    "staleness_threshold_days": 30,
-    "last_checked": "2026-09-23",
-    "source": "GitHub / Zenodo / OpenAlex / Google Scholar APIs plus manually audited metrics"
-  },
+Polls GitHub REST API and Zenodo REST API to automatically update
+`data/attention.json` metrics and recalculate aggregate attention events.
+"""
 
-  "audit_control": {
-    "status": "Passed"
-  },
+import json
+import os
+import sys
+import datetime
+import requests
 
-  "candidate": {
-    "name": "Sun's (2,4,6,8) Conjecture",
-    "number": 896315812331399,
-    "oeis": "A306477",
-    "status": "Computational Counterexample Candidate",
-    "claim_level": "Unconfirmed computational candidate",
-    "version": "V23.4",
-    "description": "Computational counterexample candidate — independent replication pending"
-  },
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "attention.json")
 
-  "evidence": {
-    "mathematical_proof": "Not established",
-    "computational_audit": "Completed (V23.4)",
-    "independent_replication": "Pending",
-    "peer_validation": "Pending",
+def fetch_zenodo_metrics(record_id: str) -> dict | None:
+    """Fetch record stats from Zenodo REST API."""
+    url = f"https://zenodo.org/api/records/{record_id}"
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            stats = response.json().get("stats", {})
+            return {
+                "total_views": stats.get("views", 0),
+                "unique_views": stats.get("unique_views", 0),
+                "total_downloads": stats.get("downloads", 0),
+                "unique_downloads": stats.get("unique_downloads", 0)
+            }
+        else:
+            print(f"[Warning] Zenodo API returned status code {response.status_code} for record {record_id}")
+    except Exception as e:
+        print(f"[Warning] Failed to connect to Zenodo API: {e}")
+    return None
 
-    "mathematical_proof_description": "No complete mathematical proof has been established.",
-    "computational_audit_description": "Exhaustive computational verification completed within the mathematically bounded search domain.",
-    "independent_replication_description": "Independent replication has not yet been documented.",
-    "peer_validation_description": "External peer validation has not yet been documented."
-  },
 
-  "github": {
-    "data_window": "rolling_14_days",
-    "repositories": [
-      {
-        "name": "suns-2468-binomial-representation",
-        "url": "https://github.com/suns1232023/sun-2468-conjecture",
-        "traffic": {
-          "views": 55,
-          "unique_visitors": 2,
-          "clones": 0,
-          "unique_cloners": 0
-        },
-        "engagement": {
-          "forks": 0,
-          "stars": 0
-        }
-      }
-    ],
-    "totals": {
-      "views": 55,
-      "unique_visitors": 2,
-      "clones": 0,
-      "unique_cloners": 0,
-      "forks": 0,
-      "stars": 0
+def fetch_github_metrics(repo_url: str, token: str) -> dict | None:
+    """Fetch engagement and traffic metrics from GitHub REST API."""
+    # Extract owner and repo name from URL (e.g., https://github.com/suns1232023/sun-2468-conjecture)
+    parts = repo_url.rstrip("/").split("/")
+    if len(parts) < 2:
+        return None
+    owner, repo = parts[-2], parts[-1]
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}",
+        "X-GitHub-Api-Version": "2022-11-28"
     }
-  },
 
-  "zenodo": {
-    "totals": {
-      "total_views": 385,
-      "unique_views": 385,
-      "total_downloads": 84,
-      "unique_downloads": 84
-    },
-    "records": [
-      {
-        "id": "22139197",
-        "doi": "10.5281/zenodo.22139197",
-        "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture — V23.4",
-        "total_views": 385,
-        "unique_views": 385,
-        "total_downloads": 84,
-        "unique_downloads": 84
-      }
-    ]
-  },
-
-  "osf": {
-    "totals": {
-      "views": 0,
-      "downloads": 0
-    },
-    "projects": [
-      {
-        "doi": "10.17605/OSF.IO/CAQXH",
-        "title": "Sun's (2,4,6,8) Conjecture — OSF Hub",
+    metrics = {
+        "stars": 0,
+        "forks": 0,
         "views": 0,
-        "downloads": 0
-      }
-    ]
-  },
+        "unique_visitors": 0,
+        "clones": 0,
+        "unique_cloners": 0
+    }
 
-  "researchgate": {
-    "total_reads": 142,
-    "total_recommendations": 3,
-    "profile_url": "https://www.researchgate.net/profile/Scott-Sun-3"
-  },
+    # 1. Fetch Repository General Info (Stars, Forks)
+    repo_api_url = f"https://api.github.com/repos/{owner}/{repo}"
+    try:
+        res = requests.get(repo_api_url, headers=headers, timeout=10)
+        if res.status_code == 200:
+            repo_data = res.json()
+            metrics["stars"] = repo_data.get("stargazers_count", 0)
+            metrics["forks"] = repo_data.get("forks_count", 0)
+        else:
+            print(f"[Warning] GitHub Repo API returned status {res.status_code} for {owner}/{repo}")
+    except Exception as e:
+        print(f"[Warning] Failed to fetch GitHub repo info for {owner}/{repo}: {e}")
 
-  "google_scholar": {
-    "citations_total": 1
-  },
+    # 2. Fetch Traffic Views (Rolling 14 Days)
+    views_api_url = f"https://api.github.com/repos/{owner}/{repo}/traffic/views"
+    try:
+        res = requests.get(views_api_url, headers=headers, timeout=10)
+        if res.status_code == 200:
+            views_data = res.json()
+            metrics["views"] = views_data.get("count", 0)
+            metrics["unique_visitors"] = views_data.get("uniques", 0)
+    except Exception as e:
+        print(f"[Warning] Failed to fetch GitHub traffic views for {owner}/{repo}: {e}")
 
-  "validation": {
-    "citations": 1,
-    "independent_replications": 0,
-    "notes": "No independent replication or peer validation recorded."
-  },
+    # 3. Fetch Traffic Clones (Rolling 14 Days)
+    clones_api_url = f"https://api.github.com/repos/{owner}/{repo}/traffic/clones"
+    try:
+        res = requests.get(clones_api_url, headers=headers, timeout=10)
+        if res.status_code == 200:
+            clones_data = res.json()
+            metrics["clones"] = clones_data.get("count", 0)
+            metrics["unique_cloners"] = clones_data.get("uniques", 0)
+    except Exception as e:
+        print(f"[Warning] Failed to fetch GitHub traffic clones for {owner}/{repo}: {e}")
 
-  "attention": {
-    "_note": "Pre-aggregated for cross-checking. JS recomputes from source-level fields and flags discrepancies.",
-    "reach_events": 582,
-    "engagement_events": 4,
-    "research_action_events": 84,
-    "academic_attention_events": 1
-  }
-}
+    return metrics
+
+
+def main():
+    data_path = os.path.abspath(DATA_PATH)
+    if not os.path.exists(data_path):
+        print(f"[Error] Target dataset file not found at: {data_path}")
+        sys.exit(1)
+
+    with open(data_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    github_token = os.environ.get("GITHUB_TOKEN", "")
+
+    # -------------------------------------------------------------
+    # 1. Update Zenodo Metrics
+    # -------------------------------------------------------------
+    zenodo_records = data.get("zenodo", {}).get("records", [])
+    total_z_views = 0
+    total_z_uviews = 0
+    total_z_downloads = 0
+    total_z_udownloads = 0
+
+    for rec in zenodo_records:
+        rec_id = rec.get("id")
+        if rec_id:
+            z_stats = fetch_zenodo_metrics(rec_id)
+            if z_stats:
+                rec["total_views"] = z_stats["total_views"]
+                rec["unique_views"] = z_stats["unique_views"]
+                rec["total_downloads"] = z_stats["total_downloads"]
+                rec["unique_downloads"] = z_stats["unique_downloads"]
+
+        total_z_views += rec.get("total_views", 0)
+        total_z_uviews += rec.get("unique_views", 0)
+        total_z_downloads += rec.get("total_downloads", 0)
+        total_z_udownloads += rec.get("unique_downloads", 0)
+
+    data["zenodo"]["totals"] = {
+        "total_views": total_z_views,
+        "unique_views": total_z_uviews,
+        "total_downloads": total_z_downloads,
+        "unique_downloads": total_z_udownloads
+    }
+
+    # -------------------------------------------------------------
+    # 2. Update GitHub Metrics (If Token Available)
+    # -------------------------------------------------------------
+    gh_repos = data.get("github", {}).get("repositories", [])
+    total_gh_views = 0
+    total_gh_uvisitors = 0
+    total_gh_clones = 0
+    total_gh_ucloners = 0
+    total_gh_forks = 0
+    total_gh_stars = 0
+
+    for repo in gh_repos:
+        repo_url = repo.get("url")
+        if github_token and repo_url:
+            gh_stats = fetch_github_metrics(repo_url, github_token)
+            if gh_stats:
+                repo["traffic"]["views"] = gh_stats["views"]
+                repo["traffic"]["unique_visitors"] = gh_stats["unique_visitors"]
+                repo["traffic"]["clones"] = gh_stats["clones"]
+                repo["traffic"]["unique_cloners"] = gh_stats["unique_cloners"]
+                repo["engagement"]["forks"] = gh_stats["forks"]
+                repo["engagement"]["stars"] = gh_stats["stars"]
+
+        total_gh_views += repo.get("traffic", {}).get("views", 0)
+        total_gh_uvisitors += repo.get("traffic", {}).get("unique_visitors", 0)
+        total_gh_clones += repo.get("traffic", {}).get("clones", 0)
+        total_gh_ucloners += repo.get("traffic", {}).get("unique_cloners", 0)
+        total_gh_forks += repo.get("engagement", {}).get("forks", 0)
+        total_gh_stars += repo.get("engagement", {}).get("stars", 0)
+
+    data["github"]["totals"] = {
+        "views": total_gh_views,
+        "unique_visitors": total_gh_uvisitors,
+        "clones": total_gh_clones,
+        "unique_cloners": total_gh_ucloners,
+        "forks": total_gh_forks,
+        "stars": total_gh_stars
+    }
+
+    # -------------------------------------------------------------
+    # 3. Recalculate Aggregate Attention Events (Single Source of Truth)
+    # -------------------------------------------------------------
+    rg_reads = data.get("researchgate", {}).get("total_reads", 0)
+    rg_recs = data.get("researchgate", {}).get("total_recommendations", 0)
+    citations = data.get("google_scholar", {}).get("citations_total", 0)
+
+    reach = total_gh_views + total_z_views + rg_reads
+    engagement = total_gh_stars + total_gh_forks + rg_recs + citations
+    research_actions = total_z_downloads + total_gh_clones
+    academic_attention = citations
+
+    data["attention"]["reach_events"] = reach
+    data["attention"]["engagement_events"] = engagement
+    data["attention"]["research_action_events"] = research_actions
+    data["attention"]["academic_attention_events"] = academic_attention
+
+    # -------------------------------------------------------------
+    # 4. Update Audit Metadata & Write Back
+    # -------------------------------------------------------------
+    data["updated"] = today
+    data["last_verified"] = today
+    data["data_quality"]["last_checked"] = today
+
+    with open(data_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
+    print(f"[Success] Telemetry metrics successfully updated and saved to {DATA_PATH} ({today})")
+
+
+if __name__ == "__main__":
+    main()

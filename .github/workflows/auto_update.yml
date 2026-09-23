@@ -2,7 +2,8 @@ name: Auto Update Attention Telemetry
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    # 每日 UTC 18:00 (北京时间 02:00) 运行，避开 00:00 UTC 高峰期
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -11,6 +12,7 @@ concurrency:
 
 jobs:
   update-json:
+    name: Fetch Telemetry & Update Schema v3.0
     runs-on: ubuntu-latest
 
     permissions:
@@ -19,39 +21,38 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Set up Python
+      - name: Set up Python Environment
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
           cache: "pip"
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests pydantic pygithub; fi
 
-      - name: Run Telemetry Updater
+      - name: Run Telemetry Fetcher & Updater
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python scripts/update_attention.py
 
-      - name: Validate JSON
+      - name: Validate JSON Syntax
         run: |
           python -m json.tool data/attention.json > /dev/null
 
-      - name: Commit and Push if Changed
+      - name: Run Scholarly Schema Audit (Smoke Test)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f scripts/scholarly_audit.py ]; then python scripts/scholarly_audit.py; fi
 
-          git add data/attention.json
-
-          if git diff --cached --quiet; then
-            echo "No telemetry changes to commit."
-          else
-            git commit -m "chore: auto-update attention telemetry"
-            git push
-          fi
+      - name: Commit and Push if Changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update attention telemetry (Schema v3.0) [skip ci]"
+          file_pattern: "data/attention.json"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"

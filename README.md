@@ -1,37 +1,45 @@
-# Scott Sun
+# Scott Sun — Academic Homepage & Research Telemetry
 
-Independent Researcher
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0002--1095--6228-green?logo=orcid&logoColor=white)](https://orcid.org/0009-0002-1095-6228)
+[![Google Scholar](https://img.shields.io/badge/Google_Scholar-Scott_Sun-blue?logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=bmVEc3wAAAAJ)
+[![OSF Hub](https://img.shields.io/badge/OSF_Hub-10.17605%2FOSF.IO%2FCAQXH-blue?logo=open-science-framework&logoColor=white)](https://doi.org/10.17605/OSF.IO/CAQXH)
+[![Zenodo Community](https://img.shields.io/badge/Zenodo-ifg--htsie-navy?logo=zenodo&logoColor=white)](https://zenodo.org/communities/ifg-htsie/records)
+[![Schema Version](https://img.shields.io/badge/Schema-v3.0_Aligned-brightgreen)](#-repository-architecture--data-flow)
+[![Metadata Audit](https://img.shields.io/badge/Scholarly_Audit-Passing-success)](#-data-pipeline--telemetry-lifecycle)
 
-Research interests include Information Theory, Complex Systems, Econophysics, Foundations of Physics, Emergence, and Quantum Gravity.
+> **Independent Researcher**  
+> *Information Theory · Complex Systems · Emergent Geometry · Additive Combinatorics · Foundations of Physics*
 
-Current work explores the relationships between information, entropy, geometry, and complex adaptive systems, with particular interest in structural information evolution, emergent causal structures, and spectral-dimension dynamics.
+This repository source-controls the personal academic portal for Scott Sun ([scottsun.com](https://www.scottsun.com/)), hosting formal preprints, computational audit suites, open-science datasets, and an automated research telemetry engine.
 
-## Research Areas
+---
 
-* Information Theory
-* Complex Systems
-* Econophysics
-* Foundations of Physics
-* Emergence
-* Quantum Gravity
-* AI Governance
+## 🔬 Research Focus & Theoretical Frameworks
 
-## Academic Profiles & Repositories
+My research explores how structural information, pre-geometric constraints, computation, and collective dynamics generate higher-level mathematical and physical emergence:
 
-* **ORCID:** [0009-0002-1095-6228](https://orcid.org/0009-0002-1095-6228)
-* **Lens.org:** [Scott Sun Profile](https://www.lens.org/lens/profile/scott-sun)
-* **Google Scholar:** [Scott Sun Citation Profile](https://scholar.google.com/citations?user=bmVEc3wAAAAJ)
-* **OSF Open Research Hub:** [OSF Project Repository](https://doi.org/10.17605/OSF.IO/8BR43)
-* **GitHub Research Site:** [suns1232023.github.io](https://suns1232023.github.io/scottsun.com/) 
+* **Structural Information Evolution (HTSIE)**: Higher-order information dynamics, structural constraints, and non-equilibrium state evolution.
+* **Emergent Geometry & Causality**: Pre-geometric spacetime descriptions, Lorentzian quotients, light-cone algebra, and null pin holonomy.
+* **Spectral-Dimension Flow & Irreversible Time**: Scale-dependent geometric flow, fractal horizon defects, and the arrow of time.
+* **Additive Combinatorics & Computational Audits**: Exhaustive verification, modular radar algorithms, gap geometry, and Cantor-Pascal diagnostics for mathematical representation problems (e.g., Sun's Binomial Representation Program).
+* **Mechanistic Interpretability in AI**: Mapping mathematical indices (DFFI, EDI) to Sparse Autoencoders (SAE) and scaling law limits in Large Language Models.
 
-## Selected Research Topics
+---
 
-* Structural Information Evolution (HTSIE)
-* Emergent Causality and Information Structures
-* Spectral-Dimension Flow and the Arrow of Time
-* Information-Theoretic Models of Financial Systems
-* Fractal and Geometric Approaches to Complex Systems
+## 🛠️ Repository Architecture & Data Flow
 
-## Open Science
+This repository is built as an automated, self-auditing academic data node. It decouples research metadata, live telemetry, and automated CI/CD validation from the frontend rendering engine.
 
-This GitHub profile hosts research-related materials, academic websites, preprints, open-science resources, and supporting documentation associated with ongoing research activities.
+```text
+[scottsun.com/](https://scottsun.com/)
+├── .github/
+│   └── workflows/
+│       ├── auto_update_attention.yml  # 🤖 Auto-sync: Scheduled API fetch & attention.json backwrite
+│       └── scholarly_audit.yml        # 🛡️ CI Guard: PR & commit metadata validation (Crossref/OpenAlex)
+├── data/
+│   ├── attention.json                 # 📊 Telemetry Store: Single Source of Truth (Schema v3.0)
+│   └── publications.json              # 📜 Research Assets: Standardized publication metadata
+├── scripts/
+│   ├── scholarly_audit.py             # 🔍 Audit Engine: Crossref/OpenAlex DOI & title consistency check
+│   └── fetch_telemetry.py             # ⚡ Telemetry Fetcher: Aggregates GitHub, Zenodo & Scholar metrics
+└── index.html                         # 💻 Frontend Engine: Data-driven static dashboard

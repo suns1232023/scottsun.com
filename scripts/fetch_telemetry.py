@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-fetch_telemetry.py — Scholarly Metrics & Telemetry Harvester
-------------------------------------------------------------
+fetch_telemetry.py — Scholarly Metrics & Attention Telemetry Engine
+---------------------------------------------------------------------
 Author: Scott Sun
-Description: Fetches real-time telemetry (Zenodo views/downloads, DOI metadata,
-             and optional GitHub repository stats) based on scholarly/publications.json.
-Output: reports/telemetry.json
+Description: Reads data/publications.json, fetches live statistics from Zenodo API,
+             and backwrites aggregated metrics to data/attention.json (Schema v3.0).
 """
 
 import os
@@ -15,7 +14,6 @@ from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 import requests
 
-# Set up logging
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] [%(levelname)s] %(message)s",
@@ -23,17 +21,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger("fetch_telemetry")
 
-# File paths
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PUBLICATIONS_JSON = os.path.join(ROOT_DIR, "scholarly", "publications.json")
-OUTPUT_TELEMETRY_JSON = os.path.join(ROOT_DIR, "reports", "telemetry.json")
+PUBLICATIONS_JSON = os.path.join(ROOT_DIR, "data", "publications.json")
+ATTENTION_JSON = os.path.join(ROOT_DIR, "data", "attention.json")
 
-# Endpoint URLs
 ZENODO_API_URL = "https://zenodo.org/api/records/"
 
 
 def load_publications() -> Dict[str, Any]:
-    """Loads publication metadata from scholarly/publications.json."""
     if not os.path.exists(PUBLICATIONS_JSON):
         logger.error(f"File not found: {PUBLICATIONS_JSON}")
         raise FileNotFoundError(f"Missing {PUBLICATIONS_JSON}")
@@ -43,10 +38,8 @@ def load_publications() -> Dict[str, Any]:
 
 
 def extract_zenodo_id(doi_or_url: str) -> Optional[str]:
-    """Extracts Zenodo record ID from DOI string or Zenodo URL."""
     if not doi_or_url:
         return None
-    # Handles "10.5281/zenodo.22139197" or "https://zenodo.org/record/22139197"
     parts = doi_or_url.rstrip("/").split(".")
     if len(parts) > 0 and parts[-1].isdigit():
         return parts[-1]
@@ -59,15 +52,12 @@ def extract_zenodo_id(doi_or_url: str) -> Optional[str]:
 
 
 def fetch_zenodo_metrics(record_id: str) -> Dict[str, Any]:
-    """Fetches stats (views, downloads, version info) from Zenodo REST API."""
     url = f"{ZENODO_API_URL}{record_id}"
     metrics = {
         "record_id": record_id,
         "views": 0,
         "downloads": 0,
         "version": None,
-        "created": None,
-        "conceptrecid": None,
         "status": "success"
     }
 
@@ -79,36 +69,31 @@ def fetch_zenodo_metrics(record_id: str) -> Dict[str, Any]:
             metrics["views"] = stats.get("views", 0)
             metrics["downloads"] = stats.get("downloads", 0)
             metrics["version"] = data.get("metadata", {}).get("version")
-            metrics["created"] = data.get("created")
-            metrics["conceptrecid"] = data.get("conceptrecid")
-            logger.info(f"Successfully fetched Zenodo Record {record_id}: {metrics['views']} views, {metrics['downloads']} downloads.")
+            logger.info(f"Fetched Zenodo Record {record_id}: {metrics['views']} views, {metrics['downloads']} downloads.")
         else:
-            logger.warning(f"Failed to fetch Zenodo Record {record_id}: HTTP {response.status_code}")
             metrics["status"] = f"error_http_{response.status_code}"
     except Exception as e:
-        logger.error(f"Exception while querying Zenodo API for record {record_id}: {str(e)}")
         metrics["status"] = f"exception_{type(e).__name__}"
 
     return metrics
 
 
 def main():
-    logger.info("Starting scholarly telemetry collection...")
+    logger.info("Initializing telemetry update for data/attention.json...")
     pubs_data = load_publications()
     publications = pubs_data.get("publications", [])
 
-    telemetry_report = {
-        "metadata": {
-            "generated_at": datetime.now(timezone.utc).isoformat(),
-            "total_publications_audited": len(publications),
-            "source_schema_version": pubs_data.get("_schema_version", "2.0")
-        },
-        "aggregate_stats": {
+    attention_data = {
+        "_comment": "Scott Sun — Scholarly Attention & Telemetry Store | data/attention.json",
+        "_schema_version": "3.0",
+        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "author": pubs_data.get("author", {"name": "Scott Sun", "orcid": "0009-0002-1095-6228"}),
+        "summary": {
+            "total_publications": len(publications),
             "total_views": 0,
-            "total_downloads": 0,
-            "successful_queries": 0
+            "total_downloads": 0
         },
-        "records": []
+        "publications": []
     }
 
     for pub in publications:
@@ -116,38 +101,35 @@ def main():
         doi = pub.get("doi", "")
         record_id = extract_zenodo_id(doi)
 
-        record_telemetry = {
+        zenodo_stats = fetch_zenodo_metrics(record_id) if record_id else {"views": 0, "downloads": 0, "status": "no_record_id"}
+
+        if zenodo_stats.get("status") == "success":
+            attention_data["summary"]["total_views"] += zenodo_stats["views"]
+            attention_data["summary"]["total_downloads"] += zenodo_stats["downloads"]
+
+        record_entry = {
             "id": pub_id,
-            "doi": doi,
-            "zenodo_record_id": record_id,
             "title": pub.get("title"),
+            "doi": doi,
+            "year": pub.get("year"),
+            "version": pub.get("version"),
             "type": pub.get("type"),
+            "status": pub.get("status"),
             "evidence_level": pub.get("evidence_level"),
-            "metrics": {}
+            "telemetry": {
+                "zenodo_views": zenodo_stats.get("views", 0),
+                "zenodo_downloads": zenodo_stats.get("downloads", 0),
+                "status": zenodo_stats.get("status")
+            },
+            "links": pub.get("links", {})
         }
+        attention_data["publications"].append(record_entry)
 
-        if record_id:
-            zenodo_stats = fetch_zenodo_metrics(record_id)
-            record_telemetry["metrics"] = zenodo_stats
+    os.makedirs(os.path.dirname(ATTENTION_JSON), exist_ok=True)
+    with open(ATTENTION_JSON, "w", encoding="utf-8") as f:
+        json.dump(attention_data, f, indent=2, ensure_ascii=False)
 
-            if zenodo_stats["status"] == "success":
-                telemetry_report["aggregate_stats"]["total_views"] += zenodo_stats["views"]
-                telemetry_report["aggregate_stats"]["total_downloads"] += zenodo_stats["downloads"]
-                telemetry_report["aggregate_stats"]["successful_queries"] += 1
-        else:
-            logger.warning(f"No valid Zenodo ID extracted for publication ID '{pub_id}' (DOI: '{doi}').")
-            record_telemetry["metrics"]["status"] = "missing_record_id"
-
-        telemetry_report["records"].append(record_telemetry)
-
-    # Ensure output directory exists
-    os.makedirs(os.path.dirname(OUTPUT_TELEMETRY_JSON), exist_ok=True)
-    
-    with open(OUTPUT_TELEMETRY_JSON, "w", encoding="utf-8") as f:
-        json.dump(telemetry_report, f, indent=2, ensure_ascii=False)
-
-    logger.info(f"Telemetry harvesting complete! Summary: {telemetry_report['aggregate_stats']}")
-    logger.info(f"Report exported to: {OUTPUT_TELEMETRY_JSON}")
+    logger.info(f"Successfully updated {ATTENTION_JSON} (Schema v3.0)!")
 
 
 if __name__ == "__main__":

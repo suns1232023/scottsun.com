@@ -37,7 +37,6 @@ def fetch_zenodo_metrics(record_id: str) -> dict | None:
 
 def fetch_github_metrics(repo_url: str, token: str) -> dict | None:
     """Fetch engagement and traffic metrics from GitHub REST API."""
-    # Extract owner and repo name from URL (e.g., https://github.com/suns1232023/sun-2468-conjecture)
     parts = repo_url.rstrip("/").split("/")
     if len(parts) < 2:
         return None
@@ -109,6 +108,16 @@ def main():
     github_token = os.environ.get("GITHUB_TOKEN", "")
 
     # -------------------------------------------------------------
+    # 0. Defensive Key Initialisation
+    # -------------------------------------------------------------
+    if "zenodo" not in data:
+        data["zenodo"] = {}
+    if "github" not in data:
+        data["github"] = {}
+    if "attention" not in data:
+        data["attention"] = {}
+
+    # -------------------------------------------------------------
     # 1. Update Zenodo Metrics
     # -------------------------------------------------------------
     zenodo_records = data.get("zenodo", {}).get("records", [])
@@ -132,11 +141,13 @@ def main():
         total_z_downloads += rec.get("total_downloads", 0)
         total_z_udownloads += rec.get("unique_downloads", 0)
 
+    # 如果没有 records 明细，保留现有 totals 的打底数据
+    existing_z_totals = data.get("zenodo", {}).get("totals", {})
     data["zenodo"]["totals"] = {
-        "total_views": total_z_views,
-        "unique_views": total_z_uviews,
-        "total_downloads": total_z_downloads,
-        "unique_downloads": total_z_udownloads
+        "total_views": max(total_z_views, existing_z_totals.get("total_views", 0)),
+        "unique_views": max(total_z_uviews, existing_z_totals.get("unique_views", 0)),
+        "total_downloads": max(total_z_downloads, existing_z_totals.get("total_downloads", 0)),
+        "unique_downloads": max(total_z_udownloads, existing_z_totals.get("unique_downloads", 0))
     }
 
     # -------------------------------------------------------------
@@ -155,6 +166,8 @@ def main():
         if github_token and repo_url:
             gh_stats = fetch_github_metrics(repo_url, github_token)
             if gh_stats:
+                repo.setdefault("traffic", {})
+                repo.setdefault("engagement", {})
                 repo["traffic"]["views"] = gh_stats["views"]
                 repo["traffic"]["unique_visitors"] = gh_stats["unique_visitors"]
                 repo["traffic"]["clones"] = gh_stats["clones"]
@@ -169,25 +182,33 @@ def main():
         total_gh_forks += repo.get("engagement", {}).get("forks", 0)
         total_gh_stars += repo.get("engagement", {}).get("stars", 0)
 
+    existing_gh_totals = data.get("github", {}).get("totals", {})
     data["github"]["totals"] = {
-        "views": total_gh_views,
-        "unique_visitors": total_gh_uvisitors,
-        "clones": total_gh_clones,
-        "unique_cloners": total_gh_ucloners,
-        "forks": total_gh_forks,
-        "stars": total_gh_stars
+        "views": max(total_gh_views, existing_gh_totals.get("views", 0)),
+        "unique_visitors": max(total_gh_uvisitors, existing_gh_totals.get("unique_visitors", 0)),
+        "clones": max(total_gh_clones, existing_gh_totals.get("clones", 0)),
+        "unique_cloners": max(total_gh_ucloners, existing_gh_totals.get("unique_cloners", 0)),
+        "forks": max(total_gh_forks, existing_gh_totals.get("forks", 0)),
+        "stars": max(total_gh_stars, existing_gh_totals.get("stars", 0))
     }
 
     # -------------------------------------------------------------
-    # 3. Recalculate Aggregate Attention Events (Single Source of Truth)
+    # 3. Recalculate Aggregate Attention Events
     # -------------------------------------------------------------
     rg_reads = data.get("researchgate", {}).get("total_reads", 0)
     rg_recs = data.get("researchgate", {}).get("total_recommendations", 0)
     citations = data.get("google_scholar", {}).get("citations_total", 0)
 
-    reach = total_gh_views + total_z_views + rg_reads
-    engagement = total_gh_stars + total_gh_forks + rg_recs + citations
-    research_actions = total_z_downloads + total_gh_clones
+    z_tot_views = data["zenodo"]["totals"]["total_views"]
+    z_tot_downloads = data["zenodo"]["totals"]["total_downloads"]
+    gh_tot_views = data["github"]["totals"]["views"]
+    gh_tot_stars = data["github"]["totals"]["stars"]
+    gh_tot_forks = data["github"]["totals"]["forks"]
+    gh_tot_clones = data["github"]["totals"]["clones"]
+
+    reach = gh_tot_views + z_tot_views + rg_reads
+    engagement = gh_tot_stars + gh_tot_forks + rg_recs + citations
+    research_actions = z_tot_downloads + gh_tot_clones
     academic_attention = citations
 
     data["attention"]["reach_events"] = reach
@@ -196,10 +217,13 @@ def main():
     data["attention"]["academic_attention_events"] = academic_attention
 
     # -------------------------------------------------------------
-    # 4. Update Audit Metadata & Write Back
+    # 4. Update Audit Metadata (With KeyError Guards)
     # -------------------------------------------------------------
     data["updated"] = today
     data["last_verified"] = today
+    
+    if "data_quality" not in data:
+        data["data_quality"] = {}
     data["data_quality"]["last_checked"] = today
 
     with open(data_path, "w", encoding="utf-8") as f:

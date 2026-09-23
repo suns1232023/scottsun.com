@@ -1,4 +1,4 @@
-# Scott Sun — Academic Homepage & Research Telemetry
+# Scott Sun — Academic Homepage & Research Telemetry Node
 
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0002--1095--6228-green?logo=orcid&logoColor=white)](https://orcid.org/0009-0002-1095-6228)
 [![Google Scholar](https://img.shields.io/badge/Google_Scholar-Scott_Sun-blue?logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=bmVEc3wAAAAJ)
@@ -34,12 +34,16 @@ This repository is built as an automated, self-auditing academic data node. It d
 [scottsun.com/](https://scottsun.com/)
 ├── .github/
 │   └── workflows/
-│       ├── auto_update_attention.yml  # 🤖 Auto-sync: Scheduled API fetch & attention.json backwrite
-│       └── scholarly_audit.yml        # 🛡️ CI Guard: PR & commit metadata validation (Crossref/OpenAlex)
+│       ├── auto_update.yml            # 🤖 Auto-sync: Daily scheduled API fetch & attention.json backwrite
+│       └── scholarly_audit.yml        # 🛡️ CI Guard: PR & commit metadata validation (Crossref/OpenAlex/CFF)
 ├── data/
-│   ├── attention.json                 # 📊 Telemetry Store: Single Source of Truth (Schema v3.0)
-│   └── publications.json              # 📜 Research Assets: Standardized publication metadata
+│   └── attention.json                 # 📊 Telemetry Store: Single Source of Truth (Schema v3.0)
+├── scholarly/
+│   └── publications.json              # 📜 Research Assets: Standardized publication metadata (Schema v2.0)
 ├── scripts/
 │   ├── scholarly_audit.py             # 🔍 Audit Engine: Crossref/OpenAlex DOI & title consistency check
-│   └── fetch_telemetry.py             # ⚡ Telemetry Fetcher: Aggregates GitHub, Zenodo & Scholar metrics
+│   ├── fetch_telemetry.py             # ⚡ Telemetry Fetcher: Fetches real-time Zenodo & GitHub metrics
+│   └── update_attention.py            # 🔄 State Updater: Re-aggregates telemetry into data/attention.json
+├── reports/
+│   └── scholarly-audit.json           # 📋 Generated Audit Output Report
 └── index.html                         # 💻 Frontend Engine: Data-driven static dashboard

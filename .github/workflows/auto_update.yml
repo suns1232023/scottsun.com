@@ -33,13 +33,14 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests pydantic pygithub; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests pydantic pygithub pyyaml; fi
 
       - name: Run Telemetry Fetcher & Updater
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
+          if [ -f scripts/fetch_telemetry.py ]; then python scripts/fetch_telemetry.py; fi
           python scripts/update_attention.py
 
       - name: Validate JSON Syntax
@@ -54,5 +55,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: auto-update attention telemetry (Schema v3.0) [skip ci]"
-          file_pattern: "data/attention.json"
+          file_pattern: "data/attention.json reports/*"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"

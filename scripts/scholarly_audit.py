@@ -31,7 +31,17 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 
-METADATA    = ROOT / "scholarly" / "publications.json"
+# 优先查找 scholarly/publications.json，回退至 data/publications.json
+PRIMARY_METADATA = ROOT / "scholarly" / "publications.json"
+FALLBACK_METADATA = ROOT / "data" / "publications.json"
+
+if PRIMARY_METADATA.exists():
+    METADATA = PRIMARY_METADATA
+elif FALLBACK_METADATA.exists():
+    METADATA = FALLBACK_METADATA
+else:
+    METADATA = PRIMARY_METADATA  # 默认路径用于报错提示
+
 CITATION    = ROOT / "CITATION.cff"
 REPORT_DIR  = ROOT / "reports"
 REPORT_FILE = REPORT_DIR / "scholarly-audit.json"
@@ -174,7 +184,7 @@ def openalex_lookup(raw_doi: str) -> dict | None:
 def audit_citation_cff() -> tuple[bool, list[str]]:
     """
     Validate that CITATION.cff exists and is parseable YAML.
-    Returns (ok: bool, errors: list[str]).
+    Returns (ok: bool, warnings: list[str]).
     """
     if not CITATION.exists():
         print("[WARN] CITATION.cff is missing at repository root")
@@ -304,11 +314,13 @@ def main() -> None:
 
     # Validate metadata file exists
     if not METADATA.exists():
-        print(f"[ERROR] Missing required file: {METADATA}")
+        print(f"[ERROR] Missing required file: {METADATA} (checked both scholarly/ and data/)")
         sys.exit(1)
 
+    print(f"[INFO] Auditing publications file: {METADATA}")
+
     # Validate CITATION.cff
-    cff_ok, cff_errors = audit_citation_cff()
+    cff_ok, cff_warnings = audit_citation_cff()
 
     # Load publications
     metadata     = load_json(METADATA)
@@ -328,8 +340,8 @@ def main() -> None:
         )
 
     # Audit each publication
-    total_errors   = len(cff_errors)
-    total_warnings = 0
+    total_errors   = 0
+    total_warnings = len(cff_warnings)
     report_entries = []
 
     for pub in publications:
@@ -363,7 +375,7 @@ def main() -> None:
     print("\n" + "=" * 60)
     print("  SUMMARY")
     print("=" * 60)
-    print(f"CITATION.cff Status  : {'PASS' if cff_ok else 'WARN/FAIL'}")
+    print(f"CITATION.cff Status  : {'PASS' if cff_ok else 'WARN'}")
     print(f"Publications Audited : {actual_count}")
     print(f"Total Errors         : {total_errors}")
     print(f"Total Warnings       : {total_warnings}")

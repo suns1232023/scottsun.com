@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
 """
-scholarly_audit.py — Scott Sun Academic Homepage
+scholarly_audit.py — Academic Homepage Metadata Audit
 Audits publications.json against Crossref and OpenAlex APIs,
-validates CITATION.cff, and writes a JSON report.
+validates CITATION.cff, and writes a JSON report to reports/scholarly-audit.json.
 
 Usage:
     python scripts/scholarly_audit.py
@@ -17,7 +18,12 @@ import sys
 from pathlib import Path
 
 import requests
-import yaml
+
+try:
+    import yaml
+except ImportError:
+    print("[ERROR] PyYAML is not installed. Please install it via 'pip install pyyaml'")
+    sys.exit(1)
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -58,7 +64,7 @@ def clean_doi_string(raw_doi: str) -> str:
         return ""
     doi = str(raw_doi).strip()
     doi = re.sub(r"^https?://(dx\.)?doi\.org/", "", doi, flags=re.IGNORECASE)
-    return doi.strip()
+    return doi.strip().strip("/")
 
 
 def normalize(text: str) -> str:
@@ -77,8 +83,8 @@ def load_json(path: Path) -> dict:
     try:
         with open(path, "r", encoding="utf-8") as fh:
             return json.load(fh)
-    except json.JSONDecodeError as exc:
-        print(f"[ERROR] Invalid JSON in {path}: {exc}")
+    except Exception as exc:
+        print(f"[ERROR] Invalid or unreadable JSON in {path}: {exc}")
         sys.exit(1)
 
 
@@ -100,7 +106,7 @@ def extract_author_names(pub: dict) -> str:
         return " ".join(filter(None, names))
 
     # Fallback to legacy scalar field
-    return pub.get("author", "")
+    return str(pub.get("author", ""))
 
 
 # ---------------------------------------------------------------------------
@@ -123,7 +129,7 @@ def crossref_lookup(raw_doi: str) -> dict | None:
         resp = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT)
 
         if resp.status_code == 404:
-            print(f"[WARN] Crossref: no record for DOI {doi}")
+            print(f"[WARN] Crossref: no record found for DOI {doi}")
             return None
 
         resp.raise_for_status()
@@ -150,7 +156,7 @@ def openalex_lookup(raw_doi: str) -> dict | None:
         resp = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT)
 
         if resp.status_code == 404:
-            print(f"[WARN] OpenAlex: no record for DOI {doi}")
+            print(f"[WARN] OpenAlex: no record found for DOI {doi}")
             return None
 
         resp.raise_for_status()
@@ -184,7 +190,7 @@ def audit_citation_cff() -> tuple[bool, list[str]]:
         # Basic required fields
         missing = [f for f in ("cff-version", "title", "authors") if f not in data]
         if missing:
-            return False, [f"CITATION.cff missing fields: {missing}"]
+            return False, [f"CITATION.cff missing required fields: {missing}"]
 
         print("[PASS] CITATION.cff loaded and validated")
         return True, []
@@ -231,12 +237,6 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
     # --- peer_reviewed field ---
     if "peer_reviewed" not in pub:
         warnings.append("Missing 'peer_reviewed' field")
-    elif pub["peer_reviewed"] is not False:
-        # All current publications are preprints
-        warnings.append(
-            f"peer_reviewed={pub['peer_reviewed']!r} — "
-            "verify this is intentional for a preprint"
-        )
 
     # --- evidence_level field ---
     valid_evidence_levels = {

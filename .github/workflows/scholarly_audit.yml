@@ -5,6 +5,7 @@ on:
     branches: [ main, master ]
     paths:
       - 'scholarly/publications.json'
+      - 'data/publications.json'
       - 'CITATION.cff'
       - 'scripts/scholarly_audit.py'
       - '.github/workflows/scholarly_audit.yml'
@@ -12,6 +13,7 @@ on:
     branches: [ main, master ]
     paths:
       - 'scholarly/publications.json'
+      - 'data/publications.json'
       - 'CITATION.cff'
       - 'scripts/scholarly_audit.py'
   workflow_dispatch:
@@ -29,7 +31,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -46,4 +47,4 @@ jobs:
         with:
           name: scholarly-audit-report
           path: reports/scholarly-audit.json
-          retire-days: 30
+          retention-days: 30

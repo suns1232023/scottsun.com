@@ -10,7 +10,7 @@
 > **Independent Researcher**  
 > *Information Theory · Complex Systems · Emergent Geometry · Additive Combinatorics · Foundations of Physics*
 
-This repository source-controls the personal academic portal for Scott Sun ([scottsun.com](https://www.scottsun.com/)), hosting formal preprints, computational audit suites, open-science datasets, and an automated research telemetry engine.
+This repository source-controls the personal academic data node for Scott Sun ([scottsun.com](https://www.scottsun.com/)), hosting formal preprints, computational audit suites, open-science datasets, and an automated research telemetry engine.
 
 ---
 
@@ -28,22 +28,19 @@ My research explores how structural information, pre-geometric constraints, comp
 
 ## 🛠️ Repository Architecture & Data Flow
 
-This repository is built as an automated, self-auditing academic data node. It decouples research metadata, live telemetry, and automated CI/CD validation from the frontend rendering engine.
+This repository is built as an automated, self-auditing academic data node. It decouples research metadata, live telemetry, and automated CI/CD validation.
 
 ```text
 [scottsun.com/](https://scottsun.com/)
 ├── .github/
 │   └── workflows/
-│       ├── auto_update.yml            # 🤖 Auto-sync: Daily scheduled API fetch & attention.json backwrite
+│       ├── auto_update.yml            # 🤖 Auto-sync: Scheduled API fetch & attention.json backwrite
 │       └── scholarly_audit.yml        # 🛡️ CI Guard: PR & commit metadata validation (Crossref/OpenAlex/CFF)
 ├── data/
-│   └── attention.json                 # 📊 Telemetry Store: Single Source of Truth (Schema v3.0)
+│   └── attention.json                 # 📊 Telemetry Store: Live Metrics & Attention Data (Schema v3.0)
 ├── scholarly/
-│   └── publications.json              # 📜 Research Assets: Standardized publication metadata (Schema v2.0)
-├── scripts/
-│   ├── scholarly_audit.py             # 🔍 Audit Engine: Crossref/OpenAlex DOI & title consistency check
-│   ├── fetch_telemetry.py             # ⚡ Telemetry Fetcher: Fetches real-time Zenodo & GitHub metrics
-│   └── update_attention.py            # 🔄 State Updater: Re-aggregates telemetry into data/attention.json
-├── reports/
-│   └── scholarly-audit.json           # 📋 Generated Audit Output Report
-└── index.html                         # 💻 Frontend Engine: Data-driven static dashboard
+│   └── publications.json              # 📜 Publication Assets: Static publication metadata (Schema v2.0)
+└── scripts/
+    ├── fetch_telemetry.py             # ⚡ Telemetry Fetcher: Aggregates Zenodo & GitHub metrics
+    ├── scholarly_audit.py             # 🔍 Audit Engine: Crossref/OpenAlex DOI & title consistency check
+    └── update_attention.py            # 🔄 Attention Updater: Writes aggregated metrics back to attention.json

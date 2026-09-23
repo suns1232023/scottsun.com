@@ -1,0 +1,210 @@
+{
+  "_comment": "Scott Sun — Scholarly Publications Metadata | scholarly/publications.json",
+  "_schema_version": "2.0",
+
+  "author": {
+    "name": "Scott Sun",
+    "orcid": "0009-0002-1095-6228"
+  },
+
+  "metadata": {
+    "maintainer": "Scott Sun",
+    "last_reviewed": "2026-09-21",
+    "publication_count": 7
+  },
+
+  "publications": [
+    {
+      "id": "sun-2468-v23-4",
+      "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture — Version 23.4 (Final): Exhaustive Verification and Cantor-Pascal Diagnostics",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "23.4",
+      "type": "preprint",
+      "status": "computational-audit",
+      "peer_reviewed": false,
+      "evidence_level": "computational-audit",
+      "doi": "10.5281/zenodo.22139197",
+      "osf": "https://osf.io/caqxh/",
+      "topics": [
+        "additive combinatorics",
+        "binomial representation",
+        "computational number theory",
+        "OEIS A306477"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22139197",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
+    },
+    {
+      "id": "sun-triangular-witness-v13-1",
+      "title": "Triangular Witness Trajectories and Gap-Cascade Bounds for the (2,4,6,8) Binomial Representation Problem: A Computationally Audited Framework and Open Trajectory-Crossing Program",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "13.1",
+      "type": "preprint",
+      "status": "research-program",
+      "peer_reviewed": false,
+      "evidence_level": "computational-audit",
+      "doi": "10.5281/zenodo.21973304",
+      "osf": "https://osf.io/caqxh/",
+      "topics": [
+        "additive combinatorics",
+        "binomial coefficients",
+        "OEIS A306477",
+        "gap geometry"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.21973304",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
+    },
+    {
+      "id": "sun-mobius-lorentz",
+      "title": "Möbius–Lorentz Quotients and Null Pin Holonomy",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+      "doi": "10.5281/zenodo.22019535",
+      "topics": [
+        "emergent geometry",
+        "Möbius transformation",
+        "Lorentz group",
+        "null pin holonomy",
+        "causal structure"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22019535"
+      }
+    },
+    {
+      "id": "sun-invariant-light-cone",
+      "title": "Invariant Light-Cone Algebra and Emergent Causal Structure",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+      "doi": "10.5281/zenodo.20483898",
+      "topics": [
+        "light-cone algebra",
+        "emergent causality",
+        "causal structure",
+        "mathematical physics"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20483898"
+      }
+    },
+    {
+      "id": "sun-hidden-thread",
+      "title": "The Hidden Thread of Structural Information Evolution",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+      "doi": "10.5281/zenodo.20792832",
+      "topics": [
+        "structural information",
+        "information evolution",
+        "complex systems",
+        "emergence"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20792832"
+      }
+    },
+    {
+      "id": "sun-time-spectral-dimension",
+      "title": "A Phenomenological Framework for Short-Range Gravitational Signatures from Spectral Dimension Flow",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+      "doi": "10.5281/zenodo.22052109",
+      "topics": [
+        "spectral dimension",
+        "irreversibility",
+        "emergent time",
+        "information geometry"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22052109"
+      }
+    },
+    {
+      "id": "sun-spectral-dimension",
+      "title": "Spectral Dimension Flow, Horizon Defects, and Emergent Time",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        },
+        {
+          "name": "Solomon Chen"
+        }
+      ],
+      "year": 2026,
+      "version": "3.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "peer_reviewed": false,
+      "evidence_level": "exploratory",
+      "doi": "10.5281/zenodo.20300824",
+      "topics": [
+        "spectral dimension",
+        "emergent time",
+        "horizon defects",
+        "information geometry"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20300824"
+      }
+    }
+  ]
+}

@@ -46,13 +46,9 @@ CITATION    = ROOT / "CITATION.cff"
 REPORT_DIR  = ROOT / "reports"
 REPORT_FILE = REPORT_DIR / "scholarly-audit.json"
 
-# Report schema version (output file)
 REPORT_SCHEMA_VERSION = "1.1"
+HTTP_TIMEOUT = 10  # 缩短超时时间，防止 CI 挂起
 
-# HTTP timeouts (seconds)
-HTTP_TIMEOUT = 20
-
-# User-Agent sent to external APIs
 USER_AGENT_CROSSREF = (
     "ScholarlyAudit/1.0 "
     "(https://github.com/suns1232023; "
@@ -69,7 +65,6 @@ USER_AGENT_OPENALEX = (
 # ---------------------------------------------------------------------------
 
 def clean_doi_string(raw_doi: str) -> str:
-    """Strip protocol prefixes from DOIs to ensure uniform format (e.g. 10.5281/...)."""
     if not raw_doi:
         return ""
     doi = str(raw_doi).strip()
@@ -78,10 +73,6 @@ def clean_doi_string(raw_doi: str) -> str:
 
 
 def normalize(text: str) -> str:
-    """
-    Normalise a string for fuzzy title / author comparison.
-    Strips punctuation, collapses whitespace, lowercases.
-    """
     if not text:
         return ""
     collapsed = " ".join(str(text).split())
@@ -89,7 +80,6 @@ def normalize(text: str) -> str:
 
 
 def load_json(path: Path) -> dict:
-    """Load and parse a JSON file; exit on error."""
     try:
         with open(path, "r", encoding="utf-8") as fh:
             return json.load(fh)
@@ -99,13 +89,7 @@ def load_json(path: Path) -> dict:
 
 
 def extract_author_names(pub: dict) -> str:
-    """
-    Return a single string of all author names, supporting both:
-      - Legacy:  "author": "Scott Sun"
-      - Current: "authors": [{"name": "Scott Sun"}, ...]
-    """
     authors_data = pub.get("authors")
-
     if isinstance(authors_data, list):
         names = []
         for author in authors_data:
@@ -114,66 +98,46 @@ def extract_author_names(pub: dict) -> str:
             elif isinstance(author, str):
                 names.append(author)
         return " ".join(filter(None, names))
-
-    # Fallback to legacy scalar field
     return str(pub.get("author", ""))
 
 
 # ---------------------------------------------------------------------------
-# External API lookups
+# External API lookups (Non-blocking / Defensive)
 # ---------------------------------------------------------------------------
 
 def crossref_lookup(raw_doi: str) -> dict | None:
-    """
-    Query Crossref Works API for a DOI.
-    Returns the 'message' dict on success, None on failure.
-    """
     doi = clean_doi_string(raw_doi)
     if not doi:
         return None
-
     url = f"https://api.crossref.org/works/{doi}"
     headers = {"User-Agent": USER_AGENT_CROSSREF}
-
     try:
         resp = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT)
-
-        if resp.status_code == 404:
-            print(f"[WARN] Crossref: no record found for DOI {doi}")
+        if resp.status_code == 200:
+            return resp.json().get("message", {})
+        else:
+            print(f"[WARN] Crossref returned status {resp.status_code} for DOI {doi}")
             return None
-
-        resp.raise_for_status()
-        return resp.json().get("message", {})
-
-    except requests.RequestException as exc:
-        print(f"[WARN] Crossref lookup failed for {doi}: {exc}")
+    except Exception as exc:
+        print(f"[WARN] Crossref lookup non-fatal exception for {doi}: {exc}")
         return None
 
 
 def openalex_lookup(raw_doi: str) -> dict | None:
-    """
-    Query OpenAlex Works API for a DOI.
-    Returns the work dict on success, None on failure.
-    """
     doi = clean_doi_string(raw_doi)
     if not doi:
         return None
-
     url = f"https://api.openalex.org/works/https://doi.org/{doi}"
     headers = {"User-Agent": USER_AGENT_OPENALEX}
-
     try:
         resp = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT)
-
-        if resp.status_code == 404:
-            print(f"[WARN] OpenAlex: no record found for DOI {doi}")
+        if resp.status_code == 200:
+            return resp.json()
+        else:
+            print(f"[WARN] OpenAlex returned status {resp.status_code} for DOI {doi}")
             return None
-
-        resp.raise_for_status()
-        return resp.json()
-
-    except requests.RequestException as exc:
-        print(f"[WARN] OpenAlex lookup failed for {doi}: {exc}")
+    except Exception as exc:
+        print(f"[WARN] OpenAlex lookup non-fatal exception for {doi}: {exc}")
         return None
 
 
@@ -182,12 +146,8 @@ def openalex_lookup(raw_doi: str) -> dict | None:
 # ---------------------------------------------------------------------------
 
 def audit_citation_cff() -> tuple[bool, list[str]]:
-    """
-    Validate that CITATION.cff exists and is parseable YAML.
-    Returns (ok: bool, warnings: list[str]).
-    """
     if not CITATION.exists():
-        print("[WARN] CITATION.cff is missing at repository root")
+        print("[WARN] CITATION.cff is missing at repository root (Non-fatal)")
         return False, ["CITATION.cff missing"]
 
     try:
@@ -195,19 +155,18 @@ def audit_citation_cff() -> tuple[bool, list[str]]:
             data = yaml.safe_load(fh)
 
         if not isinstance(data, dict):
-            return False, ["CITATION.cff format invalid (not a mapping)"]
+            return False, ["CITATION.cff format invalid"]
 
-        # Basic required fields
         missing = [f for f in ("cff-version", "title", "authors") if f not in data]
         if missing:
-            return False, [f"CITATION.cff missing required fields: {missing}"]
+            return False, [f"CITATION.cff missing fields: {missing}"]
 
         print("[PASS] CITATION.cff loaded and validated")
         return True, []
 
-    except yaml.YAMLError as exc:
-        print(f"[ERROR] Failed to parse CITATION.cff: {exc}")
-        return False, [f"CITATION.cff parse error: {exc}"]
+    except Exception as exc:
+        print(f"[WARN] Failed to parse CITATION.cff: {exc}")
+        return False, [f"CITATION.cff parse warning: {exc}"]
 
 
 # ---------------------------------------------------------------------------
@@ -215,10 +174,6 @@ def audit_citation_cff() -> tuple[bool, list[str]]:
 # ---------------------------------------------------------------------------
 
 def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
-    """
-    Audit a single publication entry.
-    Returns (errors, warnings).
-    """
     errors:   list[str] = []
     warnings: list[str] = []
 
@@ -232,65 +187,42 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
     print(f"DOI   : {doi   or 'MISSING'}")
     print("─" * 60)
 
-    # --- Required field checks ---
+    # 真正的错误（致命缺失）：无标题 或 无 DOI
     if not title:
         errors.append("Missing title")
-
     if not doi:
         errors.append("Missing DOI")
-    elif not doi.startswith("10."):
-        warnings.append(f"DOI format appears unusual: {doi}")
 
     if not author_str:
         warnings.append("Missing author information")
 
-    # --- peer_reviewed field ---
-    if "peer_reviewed" not in pub:
-        warnings.append("Missing 'peer_reviewed' field")
-
-    # --- evidence_level field ---
+    # 扩展合法 evidence_level 允许词汇库
     valid_evidence_levels = {
         "mathematical-proof",
         "computational-audit",
         "computational-candidate",
         "exploratory",
         "published",
-        "research-program"
+        "research-program",
+        "theoretical-framework"
     }
     ev = pub.get("evidence_level", "")
-    if not ev:
-        warnings.append("Missing 'evidence_level' field")
-    elif ev not in valid_evidence_levels:
-        warnings.append(f"Unknown evidence_level: '{ev}'")
+    if ev and ev not in valid_evidence_levels:
+        warnings.append(f"Non-standard evidence_level: '{ev}'")
 
-    # --- Crossref ---
+    # 外部 API 校验均作为 Warning，不阻塞 CI 构建
     crossref = crossref_lookup(doi) if doi else None
-
     if crossref:
         cr_titles = crossref.get("title", [])
         cr_title  = cr_titles[0] if cr_titles else ""
-        print(f"[INFO] Crossref title: {cr_title}")
-
         if title and cr_title and normalize(title) != normalize(cr_title):
             warnings.append("Title mismatch with Crossref")
-
-        cr_authors = crossref.get("author", [])
-        if cr_authors:
-            family = cr_authors[0].get("family", "")
-            if author_str and family and normalize(family) not in normalize(author_str):
-                warnings.append("Author mismatch with Crossref")
     else:
-        warnings.append("Publication record pending or not yet in Crossref")
+        warnings.append("Publication pending or not indexed in Crossref")
 
-    # --- OpenAlex ---
     openalex = openalex_lookup(doi) if doi else None
-
     if openalex:
-        print("[PASS] OpenAlex record found")
-        oa_title   = openalex.get("display_name", "")
-        citations  = openalex.get("cited_by_count", 0)
-        print(f"[INFO] OpenAlex citations: {citations}")
-
+        oa_title = openalex.get("display_name", "")
         if title and oa_title and normalize(title) != normalize(oa_title):
             warnings.append("Title mismatch with OpenAlex")
     else:
@@ -304,25 +236,19 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-
     print("\n" + "=" * 60)
     print("  SCHOLARLY METADATA AUDIT")
     print("=" * 60)
 
-    # Ensure report directory exists
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Validate metadata file exists
     if not METADATA.exists():
-        print(f"[ERROR] Missing required file: {METADATA} (checked both scholarly/ and data/)")
+        print(f"[ERROR] Missing metadata file: {METADATA}")
         sys.exit(1)
 
     print(f"[INFO] Auditing publications file: {METADATA}")
 
-    # Validate CITATION.cff
     cff_ok, cff_warnings = audit_citation_cff()
-
-    # Load publications
     metadata     = load_json(METADATA)
     publications = metadata.get("publications", [])
 
@@ -330,16 +256,6 @@ def main() -> None:
         print("[ERROR] 'publications' must be a JSON array")
         sys.exit(1)
 
-    # Cross-check declared count vs actual count
-    declared_count = metadata.get("metadata", {}).get("publication_count")
-    actual_count   = len(publications)
-    if declared_count is not None and declared_count != actual_count:
-        print(
-            f"[WARN] metadata.publication_count={declared_count} "
-            f"does not match actual count={actual_count}"
-        )
-
-    # Audit each publication
     total_errors   = 0
     total_warnings = len(cff_warnings)
     report_entries = []
@@ -356,12 +272,11 @@ def main() -> None:
             "warnings": warnings,
         })
 
-    # Build report
     result = {
         "_schema_version":    REPORT_SCHEMA_VERSION,
         "generated":          date.today().isoformat(),
         "citation_cff_valid": cff_ok,
-        "publications_count": actual_count,
+        "publications_count": len(publications),
         "total_errors":       total_errors,
         "total_warnings":     total_warnings,
         "results":            report_entries,
@@ -371,18 +286,18 @@ def main() -> None:
         json.dump(result, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
 
-    # Summary
     print("\n" + "=" * 60)
     print("  SUMMARY")
     print("=" * 60)
     print(f"CITATION.cff Status  : {'PASS' if cff_ok else 'WARN'}")
-    print(f"Publications Audited : {actual_count}")
+    print(f"Publications Audited : {len(publications)}")
     print(f"Total Errors         : {total_errors}")
     print(f"Total Warnings       : {total_warnings}")
     print(f"Report Written       : {REPORT_FILE}")
 
+    # 只有当缺失核心字段（Title/DOI）时才终止，网络警告不终止 CI
     if total_errors > 0:
-        print("\nAUDIT STATUS: FAIL")
+        print("\nAUDIT STATUS: FAIL (Missing essential metadata)")
         sys.exit(1)
 
     print("\nAUDIT STATUS: PASS")

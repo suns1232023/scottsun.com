@@ -1,12 +1,12 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-09-22",
-  "last_verified": "2026-09-22",
+  "updated": "2026-09-23",
+  "last_verified": "2026-09-23",
 
   "data_quality": {
     "attention_totals_verified": true,
     "staleness_threshold_days": 30,
-    "last_checked": "2026-09-21",
+    "last_checked": "2026-09-23",
     "source": "GitHub / Zenodo / OpenAlex / Google Scholar APIs plus manually audited metrics"
   },
 

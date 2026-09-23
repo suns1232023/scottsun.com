@@ -1,6 +1,6 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-09-21",
+  "updated": "2026-09-21T00:00:00Z",
   "last_verified": "2026-09-21",
   "github": {
     "totals": {
@@ -32,5 +32,49 @@
     "engagement_events": 4,
     "research_action_events": 84,
     "academic_attention_events": 1
-  }
+  },
+  "publications": [
+    {
+      "id": "sun-2468-v23-4",
+      "doi": "10.5281/zenodo.22139197",
+      "zenodo_views": 120,
+      "zenodo_downloads": 35
+    },
+    {
+      "id": "sun-triangular-witness-v13-1",
+      "doi": "10.5281/zenodo.21973304",
+      "zenodo_views": 85,
+      "zenodo_downloads": 20
+    },
+    {
+      "id": "sun-mobius-lorentz",
+      "doi": "10.5281/zenodo.22019535",
+      "zenodo_views": 45,
+      "zenodo_downloads": 10
+    },
+    {
+      "id": "sun-invariant-light-cone",
+      "doi": "10.5281/zenodo.20483898",
+      "zenodo_views": 35,
+      "zenodo_downloads": 5
+    },
+    {
+      "id": "sun-hidden-thread",
+      "doi": "10.5281/zenodo.20792832",
+      "zenodo_views": 30,
+      "zenodo_downloads": 4
+    },
+    {
+      "id": "sun-time-spectral-dimension",
+      "doi": "10.5281/zenodo.22052109",
+      "zenodo_views": 40,
+      "zenodo_downloads": 6
+    },
+    {
+      "id": "sun-spectral-dimension",
+      "doi": "10.5281/zenodo.20300824",
+      "zenodo_views": 30,
+      "zenodo_downloads": 4
+    }
+  ]
 }

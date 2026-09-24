@@ -1,0 +1,4 @@
+requests
+pydantic
+pygithub
+pyyaml

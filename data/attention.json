@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-09-21T00:00:00Z",
-  "last_verified": "2026-09-21",
+  "updated": "2026-09-24",
+  "last_verified": "2026-09-24",
   "github": {
     "totals": {
       "views": 55,
@@ -14,9 +14,9 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 385,
+      "total_views": 780,
       "unique_views": 385,
-      "total_downloads": 84,
+      "total_downloads": 162,
       "unique_downloads": 84
     }
   },
@@ -28,53 +28,144 @@
     "citations_total": 1
   },
   "attention": {
-    "reach_events": 582,
+    "reach_events": 977,
     "engagement_events": 4,
-    "research_action_events": 84,
+    "research_action_events": 162,
     "academic_attention_events": 1
   },
   "publications": [
     {
       "id": "sun-2468-v23-4",
+      "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture — Version 23.4 (Final): Exhaustive Verification and Cantor-Pascal Diagnostics",
       "doi": "10.5281/zenodo.22139197",
-      "zenodo_views": 120,
-      "zenodo_downloads": 35
+      "year": 2026,
+      "version": "23.4",
+      "type": "preprint",
+      "status": "computational-audit",
+      "evidence_level": "computational-audit",
+      "telemetry": {
+        "zenodo_views": 192,
+        "zenodo_downloads": 20,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22139197",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
     },
     {
       "id": "sun-triangular-witness-v13-1",
+      "title": "Triangular Witness Trajectories and Gap-Cascade Bounds for the (2,4,6,8) Binomial Representation Problem: A Computationally Audited Framework and Open Trajectory-Crossing Program",
       "doi": "10.5281/zenodo.21973304",
-      "zenodo_views": 85,
-      "zenodo_downloads": 20
+      "year": 2026,
+      "version": "13.1",
+      "type": "preprint",
+      "status": "research-program",
+      "evidence_level": "computational-audit",
+      "telemetry": {
+        "zenodo_views": 192,
+        "zenodo_downloads": 20,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.21973304",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
     },
     {
       "id": "sun-mobius-lorentz",
+      "title": "Möbius–Lorentz Quotients and Null Pin Holonomy",
       "doi": "10.5281/zenodo.22019535",
-      "zenodo_views": 45,
-      "zenodo_downloads": 10
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "evidence_level": "exploratory",
+      "telemetry": {
+        "zenodo_views": 59,
+        "zenodo_downloads": 7,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22019535"
+      }
     },
     {
       "id": "sun-invariant-light-cone",
+      "title": "Invariant Light-Cone Algebra and Emergent Causal Structure",
       "doi": "10.5281/zenodo.20483898",
-      "zenodo_views": 35,
-      "zenodo_downloads": 5
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "evidence_level": "exploratory",
+      "telemetry": {
+        "zenodo_views": 75,
+        "zenodo_downloads": 28,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20483898"
+      }
     },
     {
       "id": "sun-hidden-thread",
+      "title": "The Hidden Thread of Structural Information Evolution",
       "doi": "10.5281/zenodo.20792832",
-      "zenodo_views": 30,
-      "zenodo_downloads": 4
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "evidence_level": "exploratory",
+      "telemetry": {
+        "zenodo_views": 72,
+        "zenodo_downloads": 12,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20792832"
+      }
     },
     {
       "id": "sun-time-spectral-dimension",
+      "title": "A Phenomenological Framework for Short-Range Gravitational Signatures from Spectral Dimension Flow",
       "doi": "10.5281/zenodo.22052109",
-      "zenodo_views": 40,
-      "zenodo_downloads": 6
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "evidence_level": "exploratory",
+      "telemetry": {
+        "zenodo_views": 105,
+        "zenodo_downloads": 46,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.22052109"
+      }
     },
     {
       "id": "sun-spectral-dimension",
+      "title": "Spectral Dimension Flow, Horizon Defects, and Emergent Time",
       "doi": "10.5281/zenodo.20300824",
-      "zenodo_views": 30,
-      "zenodo_downloads": 4
+      "year": 2026,
+      "version": "3.0",
+      "type": "preprint",
+      "status": "theoretical-framework",
+      "evidence_level": "exploratory",
+      "telemetry": {
+        "zenodo_views": 85,
+        "zenodo_downloads": 29,
+        "status": "success"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.20300824"
+      }
     }
-  ]
+  ],
+  "data_quality": {
+    "last_checked": "2026-09-24"
+  }
 }

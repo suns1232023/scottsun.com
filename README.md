@@ -34,13 +34,15 @@ This repository is built as an automated, self-auditing academic data node. It d
 [scottsun.com/](https://scottsun.com/)
 ├── .github/
 │   └── workflows/
-│       ├── auto_update.yml            # 🤖 Auto-sync: Scheduled API fetch & attention.json backwrite
-│       └── scholarly_audit.yml        # 🛡️ CI Guard: PR & commit metadata validation (Crossref/OpenAlex/CFF)
+│       ├── auto_update.yml         # 🤖 Scheduled Telemetry Sync (Runs daily at 02:00 UTC)
+│       └── scholarly_audit.yml     # 🛡️ CI/CD Guard (PR & Push DOI / CFF Validation)
 ├── data/
-│   └── attention.json                 # 📊 Telemetry Store: Live Metrics & Attention Data (Schema v3.0)
+│   └── attention.json              # 📊 Telemetry Store: Metrics & Aggregate Attention (Schema v3.0)
 ├── scholarly/
-│   └── publications.json              # 📜 Publication Assets: Static publication metadata (Schema v2.0)
-└── scripts/
-    ├── fetch_telemetry.py             # ⚡ Telemetry Fetcher: Aggregates Zenodo & GitHub metrics
-    ├── scholarly_audit.py             # 🔍 Audit Engine: Crossref/OpenAlex DOI & title consistency check
-    └── update_attention.py            # 🔄 Attention Updater: Writes aggregated metrics back to attention.json
+│   └── publications.json           # 📜 Static Publication Metadata & DOIs (Schema v2.0)
+├── scripts/
+│   ├── scholarly_audit.py          # 🔍 Audit Engine: Crossref & OpenAlex API Consistency Inspector
+│   └── update_attention.py         # 🔄 Telemetry Engine: Zenodo & GitHub Traffic Aggregator
+├── CITATION.cff                    # 🏷️ Citation Metadata File
+├── requirements.txt                # 📦 Python Runtime Dependencies
+└── README.md                       # 📖 Documentation Node

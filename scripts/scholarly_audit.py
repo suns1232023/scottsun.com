@@ -3,12 +3,6 @@
 scholarly_audit.py — Academic Homepage Metadata Audit
 Audits publications.json against Crossref and OpenAlex APIs,
 validates CITATION.cff, and writes a JSON report to reports/scholarly-audit.json.
-
-Usage:
-    python scripts/scholarly_audit.py
-
-Output:
-    reports/scholarly-audit.json
 """
 
 from datetime import date
@@ -31,7 +25,6 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# 优先查找 scholarly/publications.json，回退至 data/publications.json
 PRIMARY_METADATA = ROOT / "scholarly" / "publications.json"
 FALLBACK_METADATA = ROOT / "data" / "publications.json"
 
@@ -40,14 +33,14 @@ if PRIMARY_METADATA.exists():
 elif FALLBACK_METADATA.exists():
     METADATA = FALLBACK_METADATA
 else:
-    METADATA = PRIMARY_METADATA  # 默认路径用于报错提示
+    METADATA = PRIMARY_METADATA
 
 CITATION    = ROOT / "CITATION.cff"
 REPORT_DIR  = ROOT / "reports"
 REPORT_FILE = REPORT_DIR / "scholarly-audit.json"
 
 REPORT_SCHEMA_VERSION = "1.1"
-HTTP_TIMEOUT = 10  # 缩短超时时间，防止 CI 挂起
+HTTP_TIMEOUT = 10
 
 USER_AGENT_CROSSREF = (
     "ScholarlyAudit/1.0 "
@@ -58,7 +51,6 @@ USER_AGENT_OPENALEX = (
     "ScholarlyAudit/1.0 "
     "(mailto:suns1232023@hotmail.com)"
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -102,7 +94,7 @@ def extract_author_names(pub: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
-# External API lookups (Non-blocking / Defensive)
+# External API lookups
 # ---------------------------------------------------------------------------
 
 def crossref_lookup(raw_doi: str) -> dict | None:
@@ -187,7 +179,6 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
     print(f"DOI   : {doi   or 'MISSING'}")
     print("─" * 60)
 
-    # 真正的错误（致命缺失）：无标题 或 无 DOI
     if not title:
         errors.append("Missing title")
     if not doi:
@@ -196,7 +187,6 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
     if not author_str:
         warnings.append("Missing author information")
 
-    # 扩展合法 evidence_level 允许词汇库
     valid_evidence_levels = {
         "mathematical-proof",
         "computational-audit",
@@ -210,7 +200,6 @@ def audit_publication(pub: dict) -> tuple[list[str], list[str]]:
     if ev and ev not in valid_evidence_levels:
         warnings.append(f"Non-standard evidence_level: '{ev}'")
 
-    # 外部 API 校验均作为 Warning，不阻塞 CI 构建
     crossref = crossref_lookup(doi) if doi else None
     if crossref:
         cr_titles = crossref.get("title", [])
@@ -295,7 +284,6 @@ def main() -> None:
     print(f"Total Warnings       : {total_warnings}")
     print(f"Report Written       : {REPORT_FILE}")
 
-    # 只有当缺失核心字段（Title/DOI）时才终止，网络警告不终止 CI
     if total_errors > 0:
         print("\nAUDIT STATUS: FAIL (Missing essential metadata)")
         sys.exit(1)

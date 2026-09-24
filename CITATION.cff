@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use or reference this academic data node or code, please cite it as below."
+type: dataset
+title: "Scott Sun — Academic Homepage & Research Telemetry Node"
+authors:
+  - family-names: "Sun"
+    given-names: "Scott"
+    orcid: "https://orcid.org/0009-0002-1095-6228"
+version: "3.0.0"
+date-released: 2026-09-24
+doi: "10.17605/OSF.IO/CAQXH"
+url: "https://scottsun.com/"
+repository-code: "https://github.com/suns1232023/scottsun.com"
+keywords:
+  - "information theory"
+  - "complex systems"
+  - "emergent geometry"
+  - "additive combinatorics"
+  - "research telemetry"
+license: MIT

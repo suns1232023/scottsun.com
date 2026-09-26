@@ -14,7 +14,7 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 821,
+      "total_views": 1206,
       "unique_views": 385,
       "total_downloads": 164,
       "unique_downloads": 84
@@ -28,7 +28,7 @@
     "citations_total": 1
   },
   "attention": {
-    "reach_events": 1018,
+    "reach_events": 1403,
     "engagement_events": 4,
     "research_action_events": 164,
     "academic_attention_events": 1
@@ -44,7 +44,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 212,
+        "zenodo_views": 228,
         "zenodo_downloads": 21,
         "status": "success"
       },
@@ -65,9 +65,9 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 0,
-        "zenodo_downloads": 0,
-        "status": "pending_sync"
+        "zenodo_views": 228,
+        "zenodo_downloads": 21,
+        "status": "success"
       },
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.21544303",
@@ -85,9 +85,9 @@
       "status": "research-program",
       "evidence_level": "theoretical-framework",
       "telemetry": {
-        "zenodo_views": 0,
-        "zenodo_downloads": 0,
-        "status": "pending_sync"
+        "zenodo_views": 228,
+        "zenodo_downloads": 21,
+        "status": "success"
       },
       "links": {
         "researchgate": "https://www.researchgate.net/publication/383501142_Additive_Representations_by_Mixed-Degree_Binomial_Coefficient_Sequences",
@@ -105,7 +105,7 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 212,
+        "zenodo_views": 229,
         "zenodo_downloads": 21,
         "status": "success"
       },
@@ -126,7 +126,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 59,
+        "zenodo_views": 60,
         "zenodo_downloads": 7,
         "status": "success"
       },
@@ -168,24 +168,6 @@
       },
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.20792832"
-      }
-    },
-    {
-      "id": "sun-time-spectral-dimension",
-      "title": "A Phenomenological Framework for Short-Range Gravitational Signatures from Spectral Dimension Flow",
-      "doi": "10.5281/zenodo.22052109",
-      "year": 2026,
-      "version": "1.0",
-      "type": "preprint",
-      "status": "theoretical-framework",
-      "evidence_level": "exploratory",
-      "telemetry": {
-        "zenodo_views": 105,
-        "zenodo_downloads": 46,
-        "status": "success"
-      },
-      "links": {
-        "zenodo": "https://doi.org/10.5281/zenodo.22052109"
       }
     },
     {

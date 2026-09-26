@@ -1,15 +1,35 @@
 {
   "_schema_version": "1.1",
-  "generated": "2026-09-25",
+  "generated": "2026-09-26",
   "citation_cff_valid": true,
-  "publications_count": 7,
+  "publications_count": 8,
   "total_errors": 0,
-  "total_warnings": 11,
+  "total_warnings": 14,
   "results": [
     {
       "id": "sun-2468-v23-4",
       "title": "A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjecture — Version 23.4 (Final): Exhaustive Verification and Cantor-Pascal Diagnostics",
       "doi": "10.5281/zenodo.22139197",
+      "errors": [],
+      "warnings": [
+        "Publication pending or not indexed in Crossref",
+        "Title mismatch with OpenAlex"
+      ]
+    },
+    {
+      "id": "sun-2468-v40-3",
+      "title": "Sun's (2,4,6,8) Binomial Representation Program: Multi-Kernel Computational Verification, Modular Radar Audits, and Chunk-Level Lean 4 Formalization",
+      "doi": "10.5281/zenodo.21544303",
+      "errors": [],
+      "warnings": [
+        "Publication pending or not indexed in Crossref",
+        "Title mismatch with OpenAlex"
+      ]
+    },
+    {
+      "id": "sun-mixed-degree-binomial",
+      "title": "Additive Representations by Mixed-Degree Binomial Coefficient Sequences: Local Modular Constraints and Structural Surjectivity",
+      "doi": "10.5281/zenodo.21544303",
       "errors": [],
       "warnings": [
         "Publication pending or not indexed in Crossref",
@@ -52,15 +72,6 @@
       "warnings": [
         "Publication pending or not indexed in Crossref",
         "Title mismatch with OpenAlex"
-      ]
-    },
-    {
-      "id": "sun-time-spectral-dimension",
-      "title": "A Phenomenological Framework for Short-Range Gravitational Signatures from Spectral Dimension Flow",
-      "doi": "10.5281/zenodo.22052109",
-      "errors": [],
-      "warnings": [
-        "Publication pending or not indexed in Crossref"
       ]
     },
     {

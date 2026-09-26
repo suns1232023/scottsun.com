@@ -9,8 +9,8 @@
 
   "metadata": {
     "maintainer": "Scott Sun",
-    "last_reviewed": "2026-09-21",
-    "publication_count": 7
+    "last_reviewed": "2026-09-26",
+    "publication_count": 8
   },
 
   "publications": [
@@ -40,7 +40,65 @@
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.22139197",
         "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl",
         "osf": "https://osf.io/caqxh/"
+      }
+    },
+    {
+      "id": "sun-2468-v40-3",
+      "title": "Sun's (2,4,6,8) Binomial Representation Program: Multi-Kernel Computational Verification, Modular Radar Audits, and Chunk-Level Lean 4 Formalization",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "40.3",
+      "type": "preprint",
+      "status": "computational-audit",
+      "peer_reviewed": false,
+      "evidence_level": "computational-audit",
+      "doi": "10.5281/zenodo.21544303",
+      "osf": "https://osf.io/caqxh/",
+      "topics": [
+        "additive combinatorics",
+        "binomial representation",
+        "lean 4 formalization",
+        "OEIS A306477"
+      ],
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.21544303",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
+    },
+    {
+      "id": "sun-mixed-degree-binomial",
+      "title": "Additive Representations by Mixed-Degree Binomial Coefficient Sequences: Local Modular Constraints and Structural Surjectivity",
+      "authors": [
+        {
+          "name": "Scott Sun",
+          "orcid": "0009-0002-1095-6228"
+        }
+      ],
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "research-program",
+      "peer_reviewed": false,
+      "evidence_level": "theoretical-framework",
+      "doi": "10.5281/zenodo.21544303",
+      "topics": [
+        "additive combinatorics",
+        "modular surjectivity",
+        "binomial coefficients",
+        "OEIS A306477"
+      ],
+      "links": {
+        "researchgate": "https://www.researchgate.net/publication/383501142_Additive_Representations_by_Mixed-Degree_Binomial_Coefficient_Sequences",
+        "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl"
       }
     },
     {
@@ -69,6 +127,7 @@
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.21973304",
         "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl",
         "osf": "https://osf.io/caqxh/"
       }
     },
@@ -149,32 +208,6 @@
       ],
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.20792832"
-      }
-    },
-    {
-      "id": "sun-time-spectral-dimension",
-      "title": "A Phenomenological Framework for Short-Range Gravitational Signatures from Spectral Dimension Flow",
-      "authors": [
-        {
-          "name": "Scott Sun",
-          "orcid": "0009-0002-1095-6228"
-        }
-      ],
-      "year": 2026,
-      "version": "1.0",
-      "type": "preprint",
-      "status": "theoretical-framework",
-      "peer_reviewed": false,
-      "evidence_level": "exploratory",
-      "doi": "10.5281/zenodo.22052109",
-      "topics": [
-        "spectral dimension",
-        "irreversibility",
-        "emergent time",
-        "information geometry"
-      ],
-      "links": {
-        "zenodo": "https://doi.org/10.5281/zenodo.22052109"
       }
     },
     {

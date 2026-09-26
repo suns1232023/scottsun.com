@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-09-25",
-  "last_verified": "2026-09-25",
+  "updated": "2026-09-26",
+  "last_verified": "2026-09-26",
   "github": {
     "totals": {
       "views": 55,
@@ -51,7 +51,48 @@
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.22139197",
         "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl",
         "osf": "https://osf.io/caqxh/"
+      }
+    },
+    {
+      "id": "sun-2468-v40-3",
+      "title": "Sun's (2,4,6,8) Binomial Representation Program: Multi-Kernel Computational Verification, Modular Radar Audits, and Chunk-Level Lean 4 Formalization",
+      "doi": "10.5281/zenodo.21544303",
+      "year": 2026,
+      "version": "40.3",
+      "type": "preprint",
+      "status": "computational-audit",
+      "evidence_level": "computational-audit",
+      "telemetry": {
+        "zenodo_views": 0,
+        "zenodo_downloads": 0,
+        "status": "pending_sync"
+      },
+      "links": {
+        "zenodo": "https://doi.org/10.5281/zenodo.21544303",
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
+      }
+    },
+    {
+      "id": "sun-mixed-degree-binomial",
+      "title": "Additive Representations by Mixed-Degree Binomial Coefficient Sequences: Local Modular Constraints and Structural Surjectivity",
+      "doi": "10.5281/zenodo.21544303",
+      "year": 2026,
+      "version": "1.0",
+      "type": "preprint",
+      "status": "research-program",
+      "evidence_level": "theoretical-framework",
+      "telemetry": {
+        "zenodo_views": 0,
+        "zenodo_downloads": 0,
+        "status": "pending_sync"
+      },
+      "links": {
+        "researchgate": "https://www.researchgate.net/publication/383501142_Additive_Representations_by_Mixed-Degree_Binomial_Coefficient_Sequences",
+        "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl"
       }
     },
     {
@@ -71,6 +112,7 @@
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.21973304",
         "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl",
         "osf": "https://osf.io/caqxh/"
       }
     },
@@ -166,6 +208,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-09-25"
+    "last_checked": "2026-09-26"
   }
 }

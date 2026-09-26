@@ -27,7 +27,7 @@ jobs:
       - name: Set up Python Environment
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
           cache: "pip"
 
       - name: Install Dependencies
@@ -55,5 +55,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: auto-update attention telemetry (Schema v3.0) [skip ci]"
-          file_pattern: "data/attention.json reports/*"
+          file_pattern: "data/attention.json scholarly/publications.json reports/*"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"

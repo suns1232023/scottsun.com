@@ -5,7 +5,7 @@
   "github": {
     "totals": {
       "views": 55,
-      "unique_visitors": 1,
+      "unique_visitors": 2,
       "clones": 0,
       "unique_cloners": 0,
       "forks": 0,
@@ -21,8 +21,8 @@
     }
   },
   "researchgate": {
-    "total_reads": 142,
-    "total_recommendations": 3
+    "total_reads": 153,
+    "total_recommendations": 4
   },
   "google_scholar": {
     "citations_total": 1
@@ -31,7 +31,7 @@
     "reach_events": 1437,
     "engagement_events": 4,
     "research_action_events": 171,
-    "academic_attention_events": 1
+    "academic_attention_events": 2
   },
   "publications": [
     {

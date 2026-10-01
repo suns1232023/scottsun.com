@@ -1,7 +1,8 @@
+
 {
   "_schema_version": "3.0",
-  "updated": "2026-09-30",
-  "last_verified": "2026-09-30",
+  "updated": "2026-10-01",
+  "last_verified": "2026-10-01",
   "github": {
     "totals": {
       "views": 55,
@@ -29,7 +30,7 @@
   },
   "attention": {
     "reach_events": 1465,
-    "engagement_events": 5,
+    "engagement_events": 6,
     "research_action_events": 189,
     "academic_attention_events": 1
   },
@@ -49,10 +50,10 @@
         "status": "success"
       },
       "links": {
-        "zenodo": "https://doi.org/10.5281/zenodo.22139197",
-        "oeis": "https://oeis.org/A306477",
+        "zenodo":    "https://doi.org/10.5281/zenodo.22139197",
+        "oeis":      "https://oeis.org/A306477",
         "oeis_wiki": "https://oeis.org/wiki/CiteSl",
-        "osf": "https://osf.io/caqxh/"
+        "osf":       "https://osf.io/caqxh/"
       }
     },
     {
@@ -71,28 +72,28 @@
       },
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.21544303",
-        "oeis": "https://oeis.org/A306477",
-        "osf": "https://osf.io/caqxh/"
+        "oeis":   "https://oeis.org/A306477",
+        "osf":    "https://osf.io/caqxh/"
       }
     },
     {
       "id": "sun-mixed-degree-binomial",
       "title": "Additive Representations by Mixed-Degree Binomial Coefficient Sequences: Local Modular Constraints and Structural Surjectivity",
-      "doi": "10.5281/zenodo.21544303",
+      "doi": null,
       "year": 2026,
       "version": "1.0",
       "type": "preprint",
       "status": "research-program",
       "evidence_level": "theoretical-framework",
       "telemetry": {
-        "zenodo_views": 239,
-        "zenodo_downloads": 27,
-        "status": "success"
+        "zenodo_views": 0,
+        "zenodo_downloads": 0,
+        "status": "no_doi"
       },
       "links": {
         "researchgate": "https://www.researchgate.net/publication/383501142_Additive_Representations_by_Mixed-Degree_Binomial_Coefficient_Sequences",
-        "oeis": "https://oeis.org/A306477",
-        "oeis_wiki": "https://oeis.org/wiki/CiteSl"
+        "oeis":         "https://oeis.org/A306477",
+        "oeis_wiki":    "https://oeis.org/wiki/CiteSl"
       }
     },
     {
@@ -110,10 +111,10 @@
         "status": "success"
       },
       "links": {
-        "zenodo": "https://doi.org/10.5281/zenodo.21973304",
-        "oeis": "https://oeis.org/A306477",
+        "zenodo":    "https://doi.org/10.5281/zenodo.21973304",
+        "oeis":      "https://oeis.org/A306477",
         "oeis_wiki": "https://oeis.org/wiki/CiteSl",
-        "osf": "https://osf.io/caqxh/"
+        "osf":       "https://osf.io/caqxh/"
       }
     },
     {
@@ -190,6 +191,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-09-30"
+    "last_checked": "2026-10-01"
   }
 }

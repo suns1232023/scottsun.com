@@ -1351,7 +1351,7 @@
       set("tbl-zen-dl",    m.zenDl    !== null ? m.zenDl    + " downloads" : null);
       set("tbl-rg-reads",  m.rgReads  !== null ? m.rgReads  + " reads" : null);
       set("tbl-rg-recs",   m.rgRecs   !== null ? m.rgRecs   + " recommendations" : null);
-      set("tbl-gs-cit",    m.gsCit    !== null ? m.gsCit    + " citation" + (m.gsCit === 2 ? "" : "s") : null);
+      set("tbl-gs-cit",    m.gsCit    !== null ? m.gsCit    + " citation" + (m.gsCit === 1 ? "" : "s") : null);
 
       document.querySelectorAll(".metric-value").forEach(el => el.removeAttribute("aria-busy"));
     }

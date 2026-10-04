@@ -1,8 +1,7 @@
-
 {
   "_schema_version": "3.0",
-  "updated": "2026-10-01",
-  "last_verified": "2026-10-01",
+  "updated": "2026-10-04",
+  "last_verified": "2026-10-04",
   "github": {
     "totals": {
       "views": 55,
@@ -45,15 +44,15 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 239,
-        "zenodo_downloads": 27,
+        "zenodo_views": 249,
+        "zenodo_downloads": 29,
         "status": "success"
       },
       "links": {
-        "zenodo":    "https://doi.org/10.5281/zenodo.22139197",
-        "oeis":      "https://oeis.org/A306477",
+        "zenodo": "https://doi.org/10.5281/zenodo.22139197",
+        "oeis": "https://oeis.org/A306477",
         "oeis_wiki": "https://oeis.org/wiki/CiteSl",
-        "osf":       "https://osf.io/caqxh/"
+        "osf": "https://osf.io/caqxh/"
       }
     },
     {
@@ -66,14 +65,14 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 239,
-        "zenodo_downloads": 27,
+        "zenodo_views": 249,
+        "zenodo_downloads": 29,
         "status": "success"
       },
       "links": {
         "zenodo": "https://doi.org/10.5281/zenodo.21544303",
-        "oeis":   "https://oeis.org/A306477",
-        "osf":    "https://osf.io/caqxh/"
+        "oeis": "https://oeis.org/A306477",
+        "osf": "https://osf.io/caqxh/"
       }
     },
     {
@@ -92,8 +91,8 @@
       },
       "links": {
         "researchgate": "https://www.researchgate.net/publication/383501142_Additive_Representations_by_Mixed-Degree_Binomial_Coefficient_Sequences",
-        "oeis":         "https://oeis.org/A306477",
-        "oeis_wiki":    "https://oeis.org/wiki/CiteSl"
+        "oeis": "https://oeis.org/A306477",
+        "oeis_wiki": "https://oeis.org/wiki/CiteSl"
       }
     },
     {
@@ -106,15 +105,15 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 239,
-        "zenodo_downloads": 27,
+        "zenodo_views": 249,
+        "zenodo_downloads": 29,
         "status": "success"
       },
       "links": {
-        "zenodo":    "https://doi.org/10.5281/zenodo.21973304",
-        "oeis":      "https://oeis.org/A306477",
+        "zenodo": "https://doi.org/10.5281/zenodo.21973304",
+        "oeis": "https://oeis.org/A306477",
         "oeis_wiki": "https://oeis.org/wiki/CiteSl",
-        "osf":       "https://osf.io/caqxh/"
+        "osf": "https://osf.io/caqxh/"
       }
     },
     {
@@ -127,8 +126,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 64,
-        "zenodo_downloads": 9,
+        "zenodo_views": 71,
+        "zenodo_downloads": 14,
         "status": "success"
       },
       "links": {
@@ -145,8 +144,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 75,
-        "zenodo_downloads": 28,
+        "zenodo_views": 76,
+        "zenodo_downloads": 29,
         "status": "success"
       },
       "links": {
@@ -163,8 +162,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 74,
-        "zenodo_downloads": 13,
+        "zenodo_views": 79,
+        "zenodo_downloads": 15,
         "status": "success"
       },
       "links": {
@@ -181,8 +180,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 88,
-        "zenodo_downloads": 31,
+        "zenodo_views": 89,
+        "zenodo_downloads": 32,
         "status": "success"
       },
       "links": {
@@ -191,6 +190,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-10-01"
+    "last_checked": "2026-10-04"
   }
 }

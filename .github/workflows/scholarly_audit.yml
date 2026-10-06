@@ -16,7 +16,11 @@ on:
       - 'data/publications.json'
       - 'CITATION.cff'
       - 'scripts/scholarly_audit.py'
+      - '.github/workflows/scholarly_audit.yml'   # ← 补充
   workflow_dispatch:
+
+permissions:                                        # ← 新增
+  contents: read
 
 jobs:
   audit:
@@ -30,7 +34,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'                   # ← 3.11 → 3.12
 
       - name: Install dependencies
         run: |

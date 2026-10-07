@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-10-06",
-  "last_verified": "2026-10-06",
+  "updated": "2026-10-07",
+  "last_verified": "2026-10-07",
   "github": {
     "totals": {
       "views": 55,
@@ -53,7 +53,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 261,
+        "zenodo_views": 263,
         "zenodo_downloads": 29,
         "status": "success"
       },
@@ -74,7 +74,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 261,
+        "zenodo_views": 263,
         "zenodo_downloads": 29,
         "status": "success"
       },
@@ -114,7 +114,7 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 261,
+        "zenodo_views": 263,
         "zenodo_downloads": 29,
         "status": "success"
       },
@@ -171,7 +171,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 81,
+        "zenodo_views": 84,
         "zenodo_downloads": 15,
         "status": "success"
       },
@@ -199,6 +199,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-10-06"
+    "last_checked": "2026-10-07"
   }
 }

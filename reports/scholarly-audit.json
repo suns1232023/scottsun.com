@@ -1,10 +1,10 @@
 {
   "_schema_version": "1.2",
-  "generated": "2026-10-07",
+  "generated": "2026-10-08",
   "citation_cff_valid": true,
   "publications_count": 8,
   "total_errors": 0,
-  "total_warnings": 11,
+  "total_warnings": 7,
   "results": [
     {
       "id": "sun-2468-v23-4",
@@ -12,8 +12,7 @@
       "doi": "10.5281/zenodo.22139197",
       "errors": [],
       "warnings": [
-        "Title mismatch with DataCite: 'A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjectur'",
-        "Title mismatch with OpenAlex"
+        "Title mismatch with DataCite: 'A Computational Audit of a Candidate Counterexample to Sun's (2,4,6,8) Conjectur'"
       ]
     },
     {
@@ -48,8 +47,7 @@
       "doi": "10.5281/zenodo.22019535",
       "errors": [],
       "warnings": [
-        "Title mismatch with DataCite: 'Möbius–Lorentz Quotients and Null Pin Holonomy: Affine Normal Forms, Null-Displa'",
-        "Title mismatch with OpenAlex"
+        "Title mismatch with DataCite: 'Möbius–Lorentz Quotients and Null Pin Holonomy: Affine Normal Forms, Null-Displa'"
       ]
     },
     {
@@ -65,8 +63,7 @@
       "doi": "10.5281/zenodo.20792832",
       "errors": [],
       "warnings": [
-        "Title mismatch with DataCite: 'The Hidden Thread of Structural Information Evolution: A Comparative Study of Co'",
-        "Title mismatch with OpenAlex"
+        "Title mismatch with DataCite: 'The Hidden Thread of Structural Information Evolution: A Comparative Study of Co'"
       ]
     },
     {
@@ -75,8 +72,7 @@
       "doi": "10.5281/zenodo.20300824",
       "errors": [],
       "warnings": [
-        "Title mismatch with DataCite: 'Spectral Dimension Flow, Localized Non-Orientable Horizon Defects, and Emergent '",
-        "Title mismatch with OpenAlex"
+        "Title mismatch with DataCite: 'Spectral Dimension Flow, Localized Non-Orientable Horizon Defects, and Emergent '"
       ]
     }
   ]

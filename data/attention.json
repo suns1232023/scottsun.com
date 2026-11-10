@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-11-08",
-  "last_verified": "2026-11-08",
+  "updated": "2026-11-10",
+  "last_verified": "2026-11-10",
   "github": {
     "totals": {
       "views": 55,
@@ -14,9 +14,9 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 1615,
+      "total_views": 1649,
       "unique_views": 385,
-      "total_downloads": 249,
+      "total_downloads": 251,
       "unique_downloads": 84
     }
   },
@@ -37,9 +37,9 @@
     "_source": "manual_snapshot"
   },
   "attention": {
-    "reach_events": 1828,
+    "reach_events": 1862,
     "engagement_events": 7,
-    "research_action_events": 249,
+    "research_action_events": 251,
     "academic_attention_events": 2
   },
   "publications": [
@@ -53,7 +53,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 385,
+        "zenodo_views": 393,
         "zenodo_downloads": 46,
         "status": "success"
       },
@@ -74,7 +74,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 385,
+        "zenodo_views": 393,
         "zenodo_downloads": 46,
         "status": "success"
       },
@@ -114,7 +114,7 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 385,
+        "zenodo_views": 393,
         "zenodo_downloads": 46,
         "status": "success"
       },
@@ -135,7 +135,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 111,
+        "zenodo_views": 112,
         "zenodo_downloads": 19,
         "status": "success"
       },
@@ -153,8 +153,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 97,
-        "zenodo_downloads": 36,
+        "zenodo_views": 99,
+        "zenodo_downloads": 37,
         "status": "success"
       },
       "links": {
@@ -171,8 +171,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 107,
-        "zenodo_downloads": 19,
+        "zenodo_views": 109,
+        "zenodo_downloads": 20,
         "status": "success"
       },
       "links": {
@@ -189,7 +189,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 145,
+        "zenodo_views": 150,
         "zenodo_downloads": 37,
         "status": "success"
       },
@@ -199,6 +199,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-11-08"
+    "last_checked": "2026-11-10"
   }
 }

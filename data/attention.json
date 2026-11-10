@@ -14,9 +14,9 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 1649,
+      "total_views": 1655,
       "unique_views": 385,
-      "total_downloads": 251,
+      "total_downloads": 252,
       "unique_downloads": 84
     }
   },
@@ -37,9 +37,9 @@
     "_source": "manual_snapshot"
   },
   "attention": {
-    "reach_events": 1862,
+    "reach_events": 1868,
     "engagement_events": 7,
-    "research_action_events": 251,
+    "research_action_events": 252,
     "academic_attention_events": 2
   },
   "publications": [
@@ -153,7 +153,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 99,
+        "zenodo_views": 100,
         "zenodo_downloads": 37,
         "status": "success"
       },
@@ -171,7 +171,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 109,
+        "zenodo_views": 110,
         "zenodo_downloads": 20,
         "status": "success"
       },
@@ -189,8 +189,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 150,
-        "zenodo_downloads": 37,
+        "zenodo_views": 154,
+        "zenodo_downloads": 38,
         "status": "success"
       },
       "links": {

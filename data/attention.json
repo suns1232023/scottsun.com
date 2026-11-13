@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-11-12",
-  "last_verified": "2026-11-12",
+  "updated": "2026-11-13",
+  "last_verified": "2026-11-13",
   "github": {
     "totals": {
       "views": 55,
@@ -14,9 +14,9 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 1678,
+      "total_views": 1687,
       "unique_views": 385,
-      "total_downloads": 259,
+      "total_downloads": 262,
       "unique_downloads": 84
     }
   },
@@ -37,9 +37,9 @@
     "_source": "manual_snapshot"
   },
   "attention": {
-    "reach_events": 1891,
+    "reach_events": 1900,
     "engagement_events": 7,
-    "research_action_events": 259,
+    "research_action_events": 262,
     "academic_attention_events": 2
   },
   "publications": [
@@ -53,7 +53,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 400,
+        "zenodo_views": 402,
         "zenodo_downloads": 47,
         "status": "success"
       },
@@ -74,7 +74,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 400,
+        "zenodo_views": 402,
         "zenodo_downloads": 47,
         "status": "success"
       },
@@ -114,7 +114,7 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 400,
+        "zenodo_views": 402,
         "zenodo_downloads": 47,
         "status": "success"
       },
@@ -135,8 +135,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 113,
-        "zenodo_downloads": 22,
+        "zenodo_views": 114,
+        "zenodo_downloads": 23,
         "status": "success"
       },
       "links": {
@@ -189,8 +189,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 155,
-        "zenodo_downloads": 39,
+        "zenodo_views": 157,
+        "zenodo_downloads": 41,
         "status": "success"
       },
       "links": {
@@ -199,6 +199,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-11-12"
+    "last_checked": "2026-11-13"
   }
 }

@@ -14,9 +14,9 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 1738,
+      "total_views": 1756,
       "unique_views": 385,
-      "total_downloads": 272,
+      "total_downloads": 277,
       "unique_downloads": 84
     }
   },
@@ -37,9 +37,9 @@
     "_source": "manual_snapshot"
   },
   "attention": {
-    "reach_events": 1951,
+    "reach_events": 1969,
     "engagement_events": 7,
-    "research_action_events": 272,
+    "research_action_events": 277,
     "academic_attention_events": 2
   },
   "publications": [
@@ -53,8 +53,8 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 417,
-        "zenodo_downloads": 50,
+        "zenodo_views": 422,
+        "zenodo_downloads": 51,
         "status": "success"
       },
       "links": {
@@ -74,8 +74,8 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 417,
-        "zenodo_downloads": 50,
+        "zenodo_views": 422,
+        "zenodo_downloads": 51,
         "status": "success"
       },
       "links": {
@@ -114,8 +114,8 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 417,
-        "zenodo_downloads": 50,
+        "zenodo_views": 422,
+        "zenodo_downloads": 51,
         "status": "success"
       },
       "links": {
@@ -136,7 +136,7 @@
       "evidence_level": "exploratory",
       "telemetry": {
         "zenodo_views": 116,
-        "zenodo_downloads": 23,
+        "zenodo_downloads": 24,
         "status": "success"
       },
       "links": {
@@ -171,7 +171,7 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 111,
+        "zenodo_views": 112,
         "zenodo_downloads": 20,
         "status": "success"
       },
@@ -189,8 +189,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 158,
-        "zenodo_downloads": 41,
+        "zenodo_views": 160,
+        "zenodo_downloads": 42,
         "status": "success"
       },
       "links": {

@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-11-25",
-  "last_verified": "2026-11-25",
+  "updated": "2026-11-26",
+  "last_verified": "2026-11-26",
   "github": {
     "totals": {
       "views": 55,
@@ -14,9 +14,9 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 1833,
+      "total_views": 1849,
       "unique_views": 385,
-      "total_downloads": 302,
+      "total_downloads": 313,
       "unique_downloads": 84
     }
   },
@@ -37,9 +37,9 @@
     "_source": "manual_snapshot"
   },
   "attention": {
-    "reach_events": 2046,
+    "reach_events": 2062,
     "engagement_events": 7,
-    "research_action_events": 302,
+    "research_action_events": 313,
     "academic_attention_events": 2
   },
   "publications": [
@@ -53,8 +53,8 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 443,
-        "zenodo_downloads": 57,
+        "zenodo_views": 448,
+        "zenodo_downloads": 60,
         "status": "success"
       },
       "links": {
@@ -74,8 +74,8 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 443,
-        "zenodo_downloads": 57,
+        "zenodo_views": 448,
+        "zenodo_downloads": 60,
         "status": "success"
       },
       "links": {
@@ -114,8 +114,8 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 443,
-        "zenodo_downloads": 57,
+        "zenodo_views": 448,
+        "zenodo_downloads": 60,
         "status": "success"
       },
       "links": {
@@ -189,8 +189,8 @@
       "status": "theoretical-framework",
       "evidence_level": "exploratory",
       "telemetry": {
-        "zenodo_views": 165,
-        "zenodo_downloads": 42,
+        "zenodo_views": 166,
+        "zenodo_downloads": 44,
         "status": "success"
       },
       "links": {
@@ -199,6 +199,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-11-25"
+    "last_checked": "2026-11-26"
   }
 }

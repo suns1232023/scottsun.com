@@ -1,7 +1,7 @@
 {
   "_schema_version": "3.0",
-  "updated": "2026-11-27",
-  "last_verified": "2026-11-27",
+  "updated": "2026-11-28",
+  "last_verified": "2026-11-28",
   "github": {
     "totals": {
       "views": 55,
@@ -14,7 +14,7 @@
   },
   "zenodo": {
     "totals": {
-      "total_views": 1855,
+      "total_views": 1861,
       "unique_views": 385,
       "total_downloads": 313,
       "unique_downloads": 84
@@ -37,7 +37,7 @@
     "_source": "manual_snapshot"
   },
   "attention": {
-    "reach_events": 2068,
+    "reach_events": 2074,
     "engagement_events": 7,
     "research_action_events": 313,
     "academic_attention_events": 2
@@ -53,7 +53,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 450,
+        "zenodo_views": 452,
         "zenodo_downloads": 60,
         "status": "success"
       },
@@ -74,7 +74,7 @@
       "status": "computational-audit",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 450,
+        "zenodo_views": 452,
         "zenodo_downloads": 60,
         "status": "success"
       },
@@ -114,7 +114,7 @@
       "status": "research-program",
       "evidence_level": "computational-audit",
       "telemetry": {
-        "zenodo_views": 450,
+        "zenodo_views": 452,
         "zenodo_downloads": 60,
         "status": "success"
       },
@@ -199,6 +199,6 @@
     }
   ],
   "data_quality": {
-    "last_checked": "2026-11-27"
+    "last_checked": "2026-11-28"
   }
 }
